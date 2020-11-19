@@ -13,6 +13,7 @@ component {
 	property name="scheduledExportHeartBeat"      inject="scheduledExportHeartBeat";
 	property name="healthcheckService"            inject="healthcheckService";
 	property name="permissionService"             inject="permissionService";
+	property name="presideSocketIoWrapper"        inject="presideSocketIoWrapper";
 	property name="emailQueueConcurrency"         inject="coldbox:setting:email.queueConcurrency";
 	property name="assetQueueConcurrency"         inject="coldbox:setting:assetManager.queue.concurrency";
 	property name="presideObjectService"          inject="delayedInjector:presideObjectService";
@@ -211,6 +212,8 @@ component {
 		if ( Len( Trim( request.DefaultLocaleFromCookie ?: "" ) ) ) {
 			i18n.setFwLocale( request.DefaultLocaleFromCookie );
 		}
+
+		presideSocketIoWrapper.start();
 	}
 
 	private void function _startHeartbeats() {

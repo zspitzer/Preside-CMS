@@ -1,5 +1,7 @@
 <cfscript>
+	logId = rc.id ?: "";
 	log = prc.log ?: {};
+	socketEndpoint = prc.socketEndpoint ?: "";
 	canRunTasks = hasCmsPermission( "taskmanager.run" );
 </cfscript>
 
@@ -14,7 +16,7 @@
 	</cfif>
 
 
-	<div class="task-log">
+	<div class="task-log"<cfif IsFalse( log.complete)> data-socket="#socketEndpoint#" data-id="#logId#"</cfif>>
 		<pre id="taskmanager-log">#log.log#</pre>
 	</div>
 	<div class="pull-right log-actions">
@@ -34,4 +36,23 @@
 			</cfif>
 		</span>
 	</div>
+
+
+	<script src="https://cdn.socket.io/socket.io-2.3.1.js"></script>
+    <script>
+    	var socket = io( "127.0.0.1:3000/taskmanagerlogger", {
+    		query : "taskRunId=#logId#"
+    	} );
+
+    	socket.on( "currentlogs", function( data ){
+    		console.log( "currentlogs", data );
+    		if ( data.complete ) {
+    			socket.disconnect();
+    		}
+    	} );
+
+    	socket.on( "logmessage", function( data ) {
+    		console.log( "logmessage", data );
+    	} );
+    </script>
 </cfoutput>

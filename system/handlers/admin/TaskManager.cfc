@@ -248,6 +248,8 @@ component extends="preside.system.base.AdminHandler" {
 			});
 		}
 
+		taskManagerService.ensureSocketIoIsListening();
+
 	}
 
 	public void function ajaxLogUpdate( event, rc, prc ) {

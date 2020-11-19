@@ -29,6 +29,7 @@ component displayName="Preside Super Class" {
 	 * @i18n.inject                       delayedInjector:i18n
 	 * @htmlHelper.inject                 delayedInjector:HTMLHelper@coldbox
 	 * @healthcheckService.inject         delayedInjector:healthcheckService
+	 * @presideSocketIoWrapper.inject     delayedInjector:presideSocketIoWrapper
 	 * @presideHelperClass.inject         presideHelperClass
 	 *
 	 */
@@ -54,6 +55,7 @@ component displayName="Preside Super Class" {
 		, required any i18n
 		, required any htmlHelper
 		, required any healthcheckService
+		, required any presideSocketIoWrapper
 		, required any presideHelperClass
 	) {
 		$presideObjectService       = arguments.presideObjectService;
@@ -77,6 +79,7 @@ component displayName="Preside Super Class" {
 		$i18n                       = arguments.i18n;
 		$htmlHelper                 = arguments.htmlHelper;
 		$healthcheckService         = arguments.healthcheckService;
+		$socketIoWrapper            = arguments.presideSocketIoWrapper;
 
 		this.$helpers = arguments.presideHelperClass;
 
@@ -957,5 +960,15 @@ component displayName="Preside Super Class" {
 		return !$healthcheckService.isUp( argumentCollection=arguments );
 	}
 
+
+	/**
+	 * Returns our embedded SocketIoServer object
+	 *
+	 * @autodoc true
+	 */
+	public any function $getSocketIoServer() {
+		// not a typo!
+		return $socketIoWrapper.get().get();
+	}
 
 }

@@ -736,6 +736,45 @@ component displayName="Task Manager Service" {
 		}
 	}
 
+	public void function ensureSocketIoIsListening() {
+		variables._socketSetup = variables._socketSetup ?: false;
+		if ( variables._socketSetup ) {
+			return;
+		}
+
+		$getSocketIoServer().of( "/taskmanagerlogger" ).on( "connect", function( socket ){
+			var params = socket.getHttpRequest().getRequestParams();
+			var taskRunId = params.taskRunId ?: "";
+
+			if ( Len( taskRunId ) ) {
+				var log = _getTaskHistoryDao().selectData(
+					  id           = taskRunId
+					, selectFields = [ "task_key", "success", "time_taken", "complete", "log", "datecreated" ]
+					, useCache     = false
+				);
+
+				if ( log.recordCount ) {
+					var complete = $helpers.isTrue( log.complete );
+					var timeTaken = complete ? log.time_taken : DateDiff( 's', log.datecreated, Now() ) * 1000;
+
+					socket.emit( "currentlogs", {
+						  logs      = ListToArray( log.log, Chr( 10 ) )
+						, complete  = complete
+						, timeTaken = $renderContent( renderer="TaskTimeTaken", data=timeTaken, context=[ "accurate" ] )
+					} );
+
+					socket.joinRoom( taskRunId );
+				} else {
+					socket.emit( "error", { id="run.not.found" } );
+				}
+			} else {
+				socket.emit( "error", { id="invalid.params" } );
+			}
+		});
+
+		variables._socketSetup = true;
+	}
+
 // PRIVATE HELPERS
 	private any function _createJodaTimeObject( required date cfmlDateTime ) {
 		return CreateObject( "java", "org.joda.time.DateTime", _getLib() ).init( cfmlDateTime );
@@ -850,6 +889,7 @@ component displayName="Task Manager Service" {
 			  logboxLogger   = _logger
 			, taskRunId      = taskRunId
 			, taskHistoryDao = _getTaskHistoryDao()
+			, ioNamespace    = $getSocketIoServer().of( "/taskmanagerlogger" )
 		);
 	}
 	private void function _setLogger( required any logger ) {

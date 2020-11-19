@@ -440,6 +440,7 @@ component {
 			, assetQueueHeartBeat      = { enabled=true , siteTemplates=[ "*" ] }
 			, assetQueue               = { enabled=false , siteTemplates=[ "*" ] }
 			, queryCachePerObject      = { enabled=false, siteTemplates=[ "*" ] }
+			, socketio                 = { enabled=false, siteTemplates=[ "*" ] }
 			, sslInternalHttpCalls     = { enabled=_luceeGreaterThanFour(), siteTemplates=[ "*" ] }
 			, sslInternalHttpCalls     = { enabled=_luceeGreaterThanFour(), siteTemplates=[ "*" ] }
 			, presideSessionManagement = { enabled=_usePresideSessionManagement(), siteTemplates=[ "*" ] }
@@ -580,6 +581,11 @@ component {
 
 		settings.heartbeats.taskmanager.poolSize  = Val( settings.env.TASKMANAGER_POOL_SIZE  ?: 0 );
 		settings.heartbeats.adhocTask.poolSize    = Val( settings.env.ADHOCTASK_POOL_SIZE    ?: 0 );
+
+		settings.socketio = {
+			  host = "127.0.0.1"
+			, port = 3000
+		};
 
 
 		_loadConfigurationFromExtensions();

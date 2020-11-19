@@ -9,10 +9,11 @@
 component displayName="TaskManager Logger Wrapper" {
 
 // CONSTRUCTOR
-	public any function init( required any logboxLogger, required string taskRunId, required any taskHistoryDao ) {
+	public any function init( required any logboxLogger, required string taskRunId, required any taskHistoryDao, required any ioNamespace ) {
 		_setLogboxLogger( arguments.logboxLogger );
 		_setTaskRunId( arguments.taskRunId );
 		_setTaskHistoryDao( arguments.taskHistoryDao );
+		_setIoNamespace( arguments.ioNamespace );
 
 		return this;
 	}
@@ -27,6 +28,14 @@ component displayName="TaskManager Logger Wrapper" {
 				  message   = arguments.methodArgs[1] ?: ( arguments.methodArgs.message   ?: "" )
 				, extraInfo = arguments.methodArgs[2] ?: ( arguments.methodArgs.extraInfo ?: {} )
 			};
+
+			// for socket.io listeners
+			_getIoNamespace().emit(
+				  event = "logmessage"
+				, args  = [ { message=args.message, level=UCase( arguments.methodName ) } ]
+				, rooms = [ _getTaskRunId() ]
+			);
+
 			args.extraInfo.taskRunId      = _getTaskRunId();
 			args.extraInfo.taskHistoryDao = _getTaskHistoryDao();
 
@@ -59,5 +68,12 @@ component displayName="TaskManager Logger Wrapper" {
 	}
 	private void function _setTaskHistoryDao( required any taskHistoryDao ) {
 		_taskHistoryDao = arguments.taskHistoryDao;
+	}
+
+	private any function _getIoNamespace() {
+	    return _ioNamespace;
+	}
+	private void function _setIoNamespace( required any ioNamespace ) {
+	    _ioNamespace = arguments.ioNamespace;
 	}
 }
