@@ -2,6 +2,26 @@
 	reporter  = url.reporter  ?: "simple";
 	scope     = url.scope     ?: "full";
 	directory = url.directory ?: "";
+
+	ssystemoutput("", true);
+	systemoutput("--------- Directories -------", true);
+	q_ext = extensionList();
+	loop list="{lucee-web},{lucee-server},{lucee-config},{temp-directory},{home-directory},{web-root-directory},{system-directory},{web-context-hash},{web-context-label}"
+		item="dir" {
+		systemoutput("#dir#, #expandPath(dir)#", true);
+	}
+
+	systemoutput("", true);
+	systemoutput("--------- context cfcs -------", true);
+
+	cfcs = directoryList(path=expandPath("{lucee-server}"), recurse=true, filter="*.cfc");
+	for (c in cfcs){
+		systemoutput(c, true);
+	}
+
+	systemoutput("", true);
+	abort;
+
 	testbox   = new testbox.system.TestBox( options={}, reporter=reporter, directory={
 		  recurse  = true
 		, mapping  = Len( directory ) ? "integration.api.#directory#" : "integration"
