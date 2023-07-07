@@ -21,11 +21,23 @@
 
 	debug.append("");
 
-	cfg = fileRead(expandPath("{lucee-server}/.CFConfig.json"));
-	debug.append(cfg);
-	debug.append("");
-	debug.append(getApplicationSettings().mappings.toJson());
+	if (fileExists(expandPath("{lucee-server}/logs/out.log"))){
+		cfg = fileRead(expandPath("{lucee-server}/logs/out.log"));
+		debug.append(cfg);
+	} else {
+		debug.append("out.log missing");
+	}
+	if (fileExists(expandPath("{lucee-server}/logs/err.log"))){
+		cfg = fileRead(expandPath("{lucee-server}/logs/err.log"));
+		debug.append(cfg);
+	} else {
+		debug.append("err.log missing");
+	}
+	//debug.append("");
+	//debug.append(getApplicationSettings().mappings.toJson());
 	
+	echo("<pre>" & debug.toList(chr(10)))
+		flush;
 
 	fileWrite( server.system.environment.GITHUB_STEP_SUMMARY, debug.toList(chr(10)) );
 
