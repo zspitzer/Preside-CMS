@@ -3,23 +3,26 @@
 	scope     = url.scope     ?: "full";
 	directory = url.directory ?: "";
 
-	systemoutput("", true);
-	systemoutput("--------- Directories -------", true);
+	debug = [];
+	debug.append("--------- Directories -------", true);
 	q_ext = extensionList();
 	loop list="{lucee-web},{lucee-server},{lucee-config},{temp-directory},{home-directory},{web-root-directory},{system-directory},{web-context-hash},{web-context-label}"
 		item="dir" {
-		systemoutput("#dir#, #expandPath(dir)#", true);
+		debug.append("#dir#, #expandPath(dir)#");
 	}
 
-	systemoutput("", true);
-	systemoutput("--------- context cfcs -------", true);
+	debug.append("");
+	debug.append("--------- context cfcs -------");
 
 	cfcs = directoryList(path=expandPath("{lucee-server}"), recurse=true, filter="*.cfc");
 	for (c in cfcs){
-		systemoutput(c, true);
+		debug.append(c);
 	}
 
-	systemoutput("", true);
+	debug.append("");
+
+	fileWrite( server.system.environment.GITHUB_STEP_SUMMARY, debug.toList(chr(10)) );
+
 	abort;
 
 	testbox   = new testbox.system.TestBox( options={}, reporter=reporter, directory={
