@@ -2,8 +2,8 @@
     "name":"presidetests",
     "openbrowser":false,
     "trayEnable":false,
-    "app": {
-        "cfengine": "lucee@be",
+    "app":{
+        "cfengine":"lucee@6.0.0-SNAPSHOT-485"
     },
     "web":{
         "webroot":"./",
