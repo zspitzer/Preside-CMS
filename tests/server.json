@@ -3,7 +3,7 @@
     "openbrowser":false,
     "trayEnable":false,
     "app":{
-        "cfengine":"lucee@6.0.0-SNAPSHOT+494"
+        "cfengine":"lucee@6.0.0-SNAPSHOT+493"
     },
     "web":{
         "webroot":"./",
