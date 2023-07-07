@@ -2,7 +2,9 @@
     "name":"presidetests",
     "openbrowser":false,
     "trayEnable":false,
-    "cfengine": "lucee@be",
+    "app": {
+        "cfengine": "lucee@be",
+    },
     "web":{
         "webroot":"./",
         "http":{
