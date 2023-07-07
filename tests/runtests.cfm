@@ -3,7 +3,7 @@
 	scope     = url.scope     ?: "full";
 	directory = url.directory ?: "";
 
-	ssystemoutput("", true);
+	systemoutput("", true);
 	systemoutput("--------- Directories -------", true);
 	q_ext = extensionList();
 	loop list="{lucee-web},{lucee-server},{lucee-config},{temp-directory},{home-directory},{web-root-directory},{system-directory},{web-context-hash},{web-context-label}"
