@@ -21,6 +21,12 @@
 
 	debug.append("");
 
+	cfg = fileRead(expandPath("{lucee-server}/CFConfig.json"));
+	debug.append(cfg);
+	debug.append("");
+	debug.append(getApplicationSettings().mappings.toJson());
+	
+
 	fileWrite( server.system.environment.GITHUB_STEP_SUMMARY, debug.toList(chr(10)) );
 
 	abort;
