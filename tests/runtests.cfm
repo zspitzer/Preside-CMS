@@ -33,6 +33,8 @@
 	} else {
 		debug.append("err.log missing");
 	}
+
+	a = new Query();
 	//debug.append("");
 	//debug.append(getApplicationSettings().mappings.toJson());
 	
