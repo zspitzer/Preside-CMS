@@ -2,6 +2,9 @@
     "name":"presidetests",
     "openbrowser":false,
     "trayEnable":false,
+    "app":{
+        "cfengine":"lucee@5.4.3-SNAPSHOT+8"
+    },
     "web":{
         "webroot":"./",
         "http":{
