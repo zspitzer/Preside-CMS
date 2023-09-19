@@ -7,7 +7,7 @@
                         var file=dir&"/"&name;
                         echo(">>> "&name&"("&fileExists(file)&") ---- "&file&" -------"&NL);
                         if(fileExists(file)) {
-                                echo(replace(fileRead(file),"<","&lt;","all")&NL&NL);
+                                echo(fileRead(file)&NL&NL);
                         }
                 }
                 echo("</pre>");        
