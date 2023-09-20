@@ -9,7 +9,7 @@
         }
     },
     "app":{
-        "cfengine": "lucee@6.0.0-SNAPSHOT+555"
+        "cfengine": "lucee@6.0.0-SNAPSHOT+556"
     },
     "JVM":{
         "heapSize":"2048",
