@@ -35,6 +35,10 @@ component {
 		this.bufferOutput                            = arguments.bufferOutput;
 		this.allowPingRequests                       = arguments.allowPingRequests;
 
+		this.scopecascading    = "strict";
+		this.searchImplicitScopes = false;
+		this.searchResults = false;
+	
 		_setupMappings( argumentCollection=arguments );
 		_setupDefaultTagAttributes();
 
