@@ -149,7 +149,7 @@ component displayName="RulesEngine Condition Service" {
 	public array function listObjectsFilterableByCondition( required array expressionArray ) {
 		var filterableObjects = [];
 
-		for( var i=1; i<=arguments.expressionArray.len(); i++ ) {
+		for( var i=1; i<=Len( arguments.expressionArray ); i++ ) {
 			var item     = arguments.expressionArray[i];
 			var isOddRow = ( i mod 2 == 1 );
 			var objects  = [];
@@ -165,13 +165,13 @@ component displayName="RulesEngine Condition Service" {
 					filterableObjects = objects;
 				} else {
 					for( var n=filterableObjects.len(); n>0; n-- ) {
-						if ( !objects.containsNoCase( filterableObjects[n] ) ) {
+						if ( !ArrayContainsNoCase( objects, filterableObjects[n] ) ) {
 							filterableObjects.deleteAt( n );
 						}
 					}
 				}
 
-				if ( !filterableObjects.len() ) {
+				if ( !Len( filterableObjects ) ) {
 					break;
 				}
 			}

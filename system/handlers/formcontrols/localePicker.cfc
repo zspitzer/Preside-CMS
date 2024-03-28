@@ -17,9 +17,9 @@ component output="false" displayname=""  {
 			args.labels       = [];
 
 			locales.append( defaultLocale );
-			if ( adminLocales && adminLanguages.len() ) {
+			if ( adminLocales && Len( adminLanguages ) ) {
 				for( var i=locales.len(); i>0; i-- ) {
-					if ( !adminLanguages.containsNoCase( locales[ i ] ) ) {
+					if ( !ArrayContainsNoCase( adminLanguages, locales[ i ] ) ) {
 						locales.deleteAt( i );
 					}
 				}

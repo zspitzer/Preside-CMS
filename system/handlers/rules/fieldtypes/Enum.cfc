@@ -7,12 +7,12 @@ component {
 	property name="enumService" inject="enumService";
 
 	private string function renderConfiguredField( string value="", struct config={} ) {
-		var values = arguments.value.listToArray();
+		var values = ListToArray( arguments.value );
 		var labels = [];
 		var items = enumService.listItems( config.enum ?: "" );
 
 		for( var item in items ) {
-			if ( values.containsNoCase( item.id ) ) {
+			if ( ArrayContainsNoCase(values, item.id ) ) {
 				labels.append( item.label );
 			}
 		}

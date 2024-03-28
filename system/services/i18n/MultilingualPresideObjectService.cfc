@@ -100,11 +100,11 @@ component displayName="Multilingual Preside Object Service" {
 			if ( !validProperties.containsNoCase( propertyName ) ) {
 				StructDelete( translationProperties, propertyName );
 
-				if ( dbFieldList.containsNoCase( propertyName ) ) {
-					ArrayDeleteAt( dbFieldList, dbFieldList.containsNoCase( propertyName )  );
+				if ( ArrayContainsNoCase(dbFieldList, propertyName ) ) {
+					ArrayDeleteAt( dbFieldList, ArrayContainsNoCase( dbFieldList, propertyName )  );
 				}
-				if ( propertyNames.containsNoCase( propertyName ) ) {
-					ArrayDeleteAt( propertyNames, propertyNames.containsNoCase( propertyName )  );
+				if ( ArrayContainsNoCase( propertyNames, propertyName ) ) {
+					ArrayDeleteAt( propertyNames, ArrayContainsNoCase( propertyNames, propertyName )  );
 				}
 
 				continue;
@@ -172,7 +172,7 @@ component displayName="Multilingual Preside Object Service" {
 		translationObject.indexes       = translationObject.indexes ?: {};
 		for( var indexName in translationObject.indexes ) {
 			for( var indexField in translationObject.indexes[ indexName ].fields.listToArray() ) {
-				if ( !dbFieldList.containsNoCase( indexField ) ) {
+				if ( !ArrayContainsNoCase( dbFieldList, indexField ) ) {
 					translationObject.indexes.delete( indexName );
 					break;
 				}
@@ -524,7 +524,7 @@ component displayName="Multilingual Preside Object Service" {
 			var multilingualSettings = $getPresideCategorySettings( "multilingual" );
 			var configuredLanguages  = ListToArray( ListAppend( multilingualSettings.additional_languages ?: "", multilingualSettings.default_language ?: "" ) );
 
-			return configuredLanguages.containsNoCase( lang.id ) ? lang : QueryNew( 'id,slug' );
+			return ArrayContainsNoCase( configuredLanguages, lang.id ) ? lang : QueryNew( 'id,slug' );
 		}
 
 		if ( Len( Trim( arguments.localeSlug ) ) ) {

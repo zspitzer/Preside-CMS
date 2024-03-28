@@ -69,7 +69,7 @@ component singleton=true autodoc=true displayName="Feature service" {
 		for( var featureName in features ) {
 			var widgets = features[ featureName ].widgets ?: [];
 
-			if ( IsArray( widgets ) && widgets.containsNoCase( arguments.widget ) ) {
+			if ( IsArray( widgets ) && ArrayContainsNoCase( widgets, arguments.widget ) ) {
 				return featureName;
 			}
 		}

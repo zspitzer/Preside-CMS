@@ -41,7 +41,7 @@ component displayName="Environment Variables Reader" {
 		var config     = {};
 
 		for( var key in env ) {
-			if ( key.reFindNoCase( "^PRESIDE_" ) && !ignoreKeys.containsNoCase( key ) ) {
+			if ( key.reFindNoCase( "^PRESIDE_" ) && !ArrayContainsNoCase( ignoreKeys, key ) ) {
 				config[ LCase( key.reReplaceNoCase( "^PRESIDE_", "" ) ) ] = env[ key ];
 			}
 		}

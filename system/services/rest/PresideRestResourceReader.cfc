@@ -126,9 +126,9 @@ component displayName="Preside REST Resource Reader" {
 			for( var func in functions ) {
 				var verb = "";
 
-				if ( verbs.containsNoCase( func.name ?: "" ) ) {
+				if ( ArrayContainsNoCase( verbs, func.name ?: "" ) ) {
 					verb = func.name;
-				} else if ( verbs.containsNoCase( func.restVerb ?: "" ) ) {
+				} else if ( ArrayContainsNoCase( verbs, func.restVerb ?: "" ) ) {
 					verb = func.restVerb;
 				}
 				if ( Len( verb ) ) {
@@ -139,7 +139,7 @@ component displayName="Preside REST Resource Reader" {
 						if ( isBoolean( param.required ?: "" ) && param.required ) {
 							readMeta.requiredParameters[ verb ].append( param.name );
 						}
-						if ( validatableParameterTypes.containsNoCase( param.type ?: "" ) ) {
+						if ( ArrayContainsNoCase( validatableParameterTypes, param.type ?: "" ) ) {
 							readMeta.parameterTypes[ verb ][ param.name ] = param.type;
 						}
 					}

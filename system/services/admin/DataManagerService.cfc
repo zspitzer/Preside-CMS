@@ -184,7 +184,7 @@ component {
 		var dao                  = _getPresideObjectService().getObject( objectName );
 		var forbiddenFields      = [ dao.getIdField(), dao.getLabelField(), dao.getDateCreatedField(), dao.getDateModifiedField(), dao.getFlagField() ];
 		var isFieldBatchEditable = function( propertyName, attributes ) {
-			if ( forbiddenFields.containsNoCase( propertyName ) ) {
+			if ( ArrayContainsNoCase( forbiddenFields, propertyName ) ) {
 				return false
 			}
 			if ( attributes.relationship == "one-to-many" ) {
@@ -226,7 +226,7 @@ component {
 			return IsBoolean( result ?: "" ) && result;
 		}
 
-		return getAllowedOperationsForObject( arguments.objectName ).containsNoCase( arguments.operation );
+		return ArrayContainsNoCase( getAllowedOperationsForObject( arguments.objectName ) , arguments.operation );
 	}
 
 	public array function getAllowedOperationsForObject( required string objectName ) {
@@ -238,7 +238,7 @@ component {
 			disallowedOperations = ListToArray( disallowedOperations );
 
 			for( var disallowedOp in disallowedOperations ) {
-				var index = operations.containsNoCase( disallowedOp );
+				var index = ArrayContainsNoCase( operations, disallowedOp );
 				if ( index ) { operations.deleteAt( index ); }
 			}
 
@@ -974,13 +974,13 @@ component {
 			sqlFields.append( replacedLabelField );
 		}
 
-		if ( dateCreatedField != "datecreated" && sqlFields.containsNoCase( "dateCreated" ) ) {
-			sqlFields.deleteAt( sqlFields.containsNoCase( "datecreated" ) );
+		if ( dateCreatedField != "datecreated" && ArrayContainsNoCase( sqlFields, "dateCreated" ) ) {
+			sqlFields.deleteAt( ArrayContainsNoCase( sqlFields, "datecreated" ) );
 			sqlFields.append( "#objName#.#dateCreatedField# as datecreated" );
 		}
 
-		if ( dateModifiedField != "dateModified" && sqlFields.containsNoCase( "dateModified" ) ) {
-			sqlFields.deleteAt( sqlFields.containsNoCase( "datemodified" ) );
+		if ( dateModifiedField != "dateModified" && ArrayContainsNoCase( sqlFields, "dateModified" ) ) {
+			sqlFields.deleteAt( ArrayContainsNoCase( sqlFields, "datemodified" ) );
 			sqlFields.append( "#objName#.#dateModifiedField# as datemodified" );
 		}
 
@@ -998,7 +998,7 @@ component {
 		];
 		for( i=ArrayLen( sqlFields ); i gt 0; i-- ){
 			field = sqlFields[i];
-			if ( ignore.containsNoCase( field ) ) {
+			if ( ArrayContainsNoCase( ignore, field ) ) {
 				continue;
 			}
 			if ( !StructKeyExists( props, field ) ) {

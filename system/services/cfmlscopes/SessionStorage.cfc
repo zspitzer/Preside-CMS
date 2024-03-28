@@ -236,10 +236,10 @@ component extends="preside.system.modules.cbstorages.models.SessionStorage" outp
 		var sessionIsUsed        = false;
 
 		for( var key in arguments.sess ) {
-			if ( ignoreKeys.containsNoCase( key ) ) {
+			if ( ArrayContainsNoCase( ignoreKeys, key ) ) {
 				continue;
 			}
-			if ( keysToBeEmptyStructs.containsNoCase( key ) && IsStruct( arguments.sess[ key ] ) && arguments.sess[ key ].isEmpty() ) {
+			if ( ArrayContainsNoCase( keysToBeEmptyStructs, key ) && IsStruct( arguments.sess[ key ] ) && IsEmpty( arguments.sess[ key ] ) ) {
 				continue;
 			}
 

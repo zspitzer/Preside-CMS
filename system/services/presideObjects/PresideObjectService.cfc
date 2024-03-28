@@ -1517,7 +1517,7 @@ component displayName="Preside Object Service" {
 		var manyToManyData = {};
 
 		for( var prop in props ) {
-			if ( ( !Len( arguments.selectFields ) || arguments.selectFields.containsNoCase( prop ) ) ) {
+			if ( ( !Len( arguments.selectFields ) || ArrayContainsNoCase( arguments.selectFields, prop ) ) ) {
 				if ( isManyToManyProperty( arguments.objectName, prop ) ) {
 
 					var idField        = getIdField( props[ prop ].relatedTo ?: "" );
@@ -3285,7 +3285,7 @@ component displayName="Preside Object Service" {
 		for( var r in fAndRResult ){
 			replaced = replaced.replace( r.fullMatch, r.replaceWith, "all" );
 		}
-		if ( addAsAlias && Len(fAndRResult) && !plainString.containsNoCase( " as " ) ) {
+		if ( addAsAlias && Len(fAndRResult) && !FindNoCase( plainString, " as " ) ) {
 			replaced &= " as " & fAndRResult[1].aliasProperty;
 		}
 
@@ -3950,7 +3950,7 @@ component displayName="Preside Object Service" {
 		for( var propName in props ){
 			var prop = props[ propName ];
 
-			if ( genOps.containsNoCase( prop.generate ?: "" ) ) {
+			if ( ArrayContainsNoCase( genOps, prop.generate ?: "" ) ) {
 				if ( arguments.operation == "insert" && Len( Trim( arguments.data[ propName ] ?: "" ) ) ) {
 					continue;
 				}

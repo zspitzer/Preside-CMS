@@ -40,7 +40,7 @@ component {
 	 *
 	 */
 	public boolean function serviceExists( required string serviceId ) {
-		return listRegisteredServices().containsNoCase( arguments.serviceId );
+		return ArrayContainsNoCase( listRegisteredServices(), arguments.serviceId );
 	}
 
 	/**

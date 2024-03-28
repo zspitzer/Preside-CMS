@@ -60,7 +60,7 @@ component {
 	public struct function getActionConfig( required string action ) {
 		var configuredActions = _getConfiguredActions();
 
-		if ( configuredActions.containsNoCase( arguments.action ) ) {
+		if ( ArrayContainsNoCase( configuredActions, arguments.action ) ) {
 			return _getConventionsBasedActionConfiguration( arguments.action );
 		}
 

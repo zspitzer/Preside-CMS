@@ -26,11 +26,11 @@ component {
 		var formId          = payload.formbuilderSubmission.id   ?: "";
 		var formItem        = formBuilderService.getFormItem( arguments.fbFormField );
 		var fieldName       = formItem.configuration.name ?: "";
-		var submittedValues = ( submissionData[ fieldName ] ?: "" ).listToArray();
-		var valuesToMatch   = arguments.value.listToArray();
+		var submittedValues = ListToArray( submissionData[ fieldName ] ?: "" );
+		var valuesToMatch   = ListToArray( arguments.value );
 
 		for( var valueToMatch in valuesToMatch ) {
-			var found = submittedValues.containsNoCase( valueToMatch );
+			var found = ArrayContainsNoCase( submittedValues, valueToMatch );
 
 			if ( found && !arguments._all ) {
 				return true;

@@ -193,7 +193,7 @@ component {
 		fieldset.fields = fieldset.fields ?: [];
 
 		for( var key in arguments ) {
-			if ( ![ "fieldset", "tab" ].containsNoCase( key ) ) {
+			if ( !ArrayContainsNoCase([ "fieldset", "tab" ], key ) ) {
 				field[ key ] = IsSimpleValue( arguments[ key ] ) ? arguments[ key ] : Duplicate( arguments[ key ] );
 			}
 		}
@@ -240,7 +240,7 @@ component {
 		var args   = {};
 
 		for( var key in arguments ) {
-			if ( ![ "tab", "fieldset" ].containsNoCase( key ) ) {
+			if ( !ArrayContainsNoCase( [ "tab", "fieldset" ], key ) ) {
 				args[ key ] = IsSimpleValue( arguments[ key ] ) ? arguments[ key ] : Duplicate( arguments[ key ] );
 			}
 		}

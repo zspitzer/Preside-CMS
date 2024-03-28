@@ -12,7 +12,7 @@
 	<form action="#event.buildLink( linkTo='formbuilder.core.submitAction' )#" id="#args.id#" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="csrfToken" value="#event.getCsrfToken()#">
 		<cfloop collection="#args#" item="argName">
-			<cfif !( [ "id", "validationJs","renderedItems", "context", "layout" ].containsNoCase( argName ) ) && IsSimpleValue( args[ argName ] )>
+			<cfif !( ArrayContainsNoCase( [ "id", "validationJs","renderedItems", "context", "layout" ], argName ) ) && IsSimpleValue( args[ argName ] )>
 				<input type="hidden" name="#argName#" value="#HtmlEditFormat( args[ argName ] )#">
 			</cfif>
 		</cfloop>

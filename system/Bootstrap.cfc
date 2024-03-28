@@ -495,11 +495,11 @@ component {
 		var sessionsEnabled      = IsBoolean( request._sessionSettings.sessionManagement ) && request._sessionSettings.sessionManagement;
 		if ( sessionsEnabled ) {
 			for( var key in session ) {
-				if ( ignoreKeys.containsNoCase( key ) ) {
+				if ( ArrayContainsNoCase( ignoreKeys, key ) ) {
 					continue;
 				}
 
-				if ( keysToBeEmptyStructs.containsNoCase( key ) && IsStruct( session[ key ] ) && session[ key ].isEmpty() ) {
+				if ( ArrayContainsNoCase( keysToBeEmptyStructs, key ) && IsStruct( session[ key ] ) && session[ key ].isEmpty() ) {
 					continue;
 				}
 
@@ -643,7 +643,7 @@ component {
 				continue;
 			}
 
-			if ( sessionCookies.containsNoCase( cooky.listFirst( "=" ) ) ) {
+			if ( ArrayContainsNoCase( sessionCookies, ListFirst( cooky, "=" ) ) ) {
 				cooky = _stripExpiryDateFromCookieToMakeASessionCookie( cooky );
 				anyCookiesChanged = true;
 			}

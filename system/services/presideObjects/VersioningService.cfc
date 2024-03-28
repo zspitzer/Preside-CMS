@@ -344,7 +344,7 @@ component {
 		}
 
 		for( var field in arguments.newData ) {
-			if ( ignoredFields.containsNoCase( field ) || !StructKeyExists( properties, field ) ) {
+			if ( ArrayContainsNoCase( ignoredFields, field ) || !StructKeyExists( properties, field ) ) {
 				continue;
 			}
 

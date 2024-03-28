@@ -261,7 +261,7 @@ component {
 
 		for( var propName in arguments.meta.properties ){
 			var prop           = arguments.meta.properties[ propName ];
-			var isCoreProperty = corePropertyNames.containsNoCase( propName );
+			var isCoreProperty = ArrayContainsNoCase( corePropertyNames, propName );
 			var createFkIndex  = ( prop.createFkIndex ?: !dbAdapterSupportsFkIndexes );
 
 			if ( ( prop.type ?: "" ) == "any" ) {
@@ -349,7 +349,7 @@ component {
 				arguments.meta.properties[ idField ] = defaults[ "id" ];
 				ArrayPrepend( arguments.meta.propertyNames, idField );
 			}
-			if ( Len( idField ) && idField != "id" && !arguments.meta.propertyNames.containsNoCase( "id" ) ) {
+			if ( Len( idField ) && idField != "id" && !ArrayContainsNoCase( arguments.meta.propertyNames, "id" ) ) {
 				arguments.meta.properties[ idField ].aliases = ( arguments.meta.properties[ idField ].aliases ?: "" ).listAppend( "id" );
 			}
 		}
@@ -361,7 +361,7 @@ component {
 				arguments.meta.properties[ dateCreatedField ] = defaults[ "dateCreated" ];
 				ArrayAppend( arguments.meta.propertyNames, dateCreatedField );
 			}
-			if ( Len( dateCreatedField ) && dateCreatedField != "dateCreated" && !arguments.meta.propertyNames.containsNoCase( "dateCreated" ) ) {
+			if ( Len( dateCreatedField ) && dateCreatedField != "dateCreated" && !ArrayContainsNoCase( arguments.meta.propertyNames, "dateCreated" ) ) {
 				arguments.meta.properties[ dateCreatedField ].aliases = ( arguments.meta.properties[ dateCreatedField ].aliases ?: "" ).listAppend( "dateCreated" );
 			}
 		}
@@ -373,7 +373,7 @@ component {
 				arguments.meta.properties[ dateModifiedField ] = defaults[ "datemodified" ];
 				ArrayAppend( arguments.meta.propertyNames, dateModifiedField );
 			}
-			if ( Len( dateModifiedField ) && dateModifiedField != "dateModified" && !arguments.meta.propertyNames.containsNoCase( "dateModified" ) ) {
+			if ( Len( dateModifiedField ) && dateModifiedField != "dateModified" && !ArrayContainsNoCase( arguments.meta.propertyNames, "dateModified" ) ) {
 				arguments.meta.properties[ dateModifiedField ].aliases = ( arguments.meta.properties[ dateModifiedField ].aliases ?: "" ).listAppend( "dateModified" );
 			}
 		}

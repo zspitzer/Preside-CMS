@@ -164,7 +164,7 @@ component displayName="RulesEngine Expression Reader Service" {
 		var fields                 = {};
 
 		for( var param in params ) {
-			if ( !standardParamsToIgnore.containsNoCase( param.name ) ) {
+			if ( !ArrayContainsNoCase( standardParamsToIgnore, param.name ) ) {
 				fields[ param.name ] = getFieldDefinition( param );
 			}
 		}
@@ -217,7 +217,7 @@ component displayName="RulesEngine Expression Reader Service" {
 		}
 
 		for( var attribName in functionArgumentMeta ) {
-			if ( !argAttribsToIgnore.containsNoCase( attribName ) ) {
+			if ( !ArrayContainsNoCase( argAttribsToIgnore, attribName ) ) {
 				if ( attribName == "default" && functionArgumentMeta[ attribName ] == "[runtime expression]" ) {
 					definition[ attribName ] = "";
 				} else {

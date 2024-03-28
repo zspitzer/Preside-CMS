@@ -12,7 +12,7 @@ component {
 		var items         = [];
 
 		for( var v in ListToArray( arguments.value ) ) {
-			var index = values.containsNoCase( v );
+			var index = ArrayContainsNoCase( values, v );
 			if ( index ) {
 				items.append( labels[ index ] );
 			}

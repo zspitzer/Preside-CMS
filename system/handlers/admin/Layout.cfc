@@ -23,8 +23,8 @@ component {
 			var defaultLocale = i18n.getDefaultLocale();
 			var currentLocale = i18n.getfwLocale();
 
-			if ( !Len( adminLanguages ) && !args.locales.containsNoCase( "en" ) ) {
-				args.locales.append( "en" );
+			if ( !Len( adminLanguages ) && !ArrayContainsNoCase( args.locales, "en" ) ) {
+				ArrayAppend( args.locales, "en" );
 			}
 
 			if ( Len( args.locales ) > 1 ) {

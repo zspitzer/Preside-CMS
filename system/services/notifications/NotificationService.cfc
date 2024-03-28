@@ -196,7 +196,7 @@ component autodoc=true displayName="Notification Service" {
 		var sortColumn = ListFirst( arguments.orderBy, " " );
 		var sortDir    = ListLen( arguments.orderBy, " " ) > 1 ? ListRest( arguments.orderBy, " " ) : "asc";
 
-		if ( !Len( Trim( sortColumn ) ) || !sortableFields.containsNoCase( sortColumn ) ) {
+		if ( !Len( Trim( sortColumn ) ) || !ArrayContainsNoCase( sortableFields, sortColumn ) ) {
 			sortColumn = "datecreated";
 			sortDir    = "desc";
 		}
@@ -620,20 +620,20 @@ component autodoc=true displayName="Notification Service" {
 		}
 
 		for( var notificationId in notificationIds ){
-			if ( !configuredTopics.containsNoCase( notificationId ) ) {
+			if ( !ArrayContainsNoCase( configuredTopics, notificationId ) ) {
 				configuredTopics.append( notificationId );
 			}
 		}
 
 		for( var topic in existingTopics ) {
-			if ( !configuredTopics.containsNoCase( topic.topic ) ) {
+			if ( !ArrayContainsNoCase( configuredTopics, topic.topic ) ) {
 				topicsToDelete.append( topic.id );
 			}
 		}
 
 		existingTopics = ValueArray( existingTopics.topic );
 		for( var topic in configuredTopics ) {
-			if ( !existingTopics.containsNoCase( topic ) ) {
+			if ( !ArrayContainsNoCase( existingTopics, topic ) ) {
 				topicsToInsert.append( topic );
 			}
 		}

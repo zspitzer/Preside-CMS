@@ -42,7 +42,7 @@ component {
 		var disabledProviders = $getPresideSetting( "email", "disabledProviders" ).listToArray();
 
 		for( var providerId in rawProviders ) {
-			if ( arguments.includeDisabled || !disabledProviders.containsNoCase( providerId ) ) {
+			if ( arguments.includeDisabled || !ArrayContainsNoCase( disabledProviders, providerId ) ) {
 				providers.append( getProvider( providerId, arguments.includeDisabled ) );
 			}
 		}
@@ -164,7 +164,7 @@ component {
 	public boolean function isProviderEnabled( required string provider ) {
 		var disabledProviders = $getPresideSetting( "email", "disabledProviders" ).listToArray();
 
-		if ( disabledProviders.containsNoCase( arguments.provider ) ) {
+		if ( ArrayContainsNoCase( disabledProviders, arguments.provider ) ) {
 			return false;
 		}
 

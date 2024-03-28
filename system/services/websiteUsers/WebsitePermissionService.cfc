@@ -56,8 +56,7 @@ component displayName="Website permissions service" {
 	 * @filter.hint  An array of filters with which to filter permission keys
 	 *
 	 */
-	public array function listPermissionKeys( string benefit="", string user="", array filter=[] ) {
-		if ( Len( Trim( arguments.benefit ) ) ) {
+	public array function ArrayContainsNoCase( ( string benefit="", string user="", array , f ( Len( Trim( arguments.benefit ) ) ) {
 			return _getBenefitPermissions( arguments.benefit );
 
 		} else if ( Len( Trim( arguments.user ) ) ) {
@@ -120,7 +119,7 @@ component displayName="Website permissions service" {
 			}
 		}
 
-		return arguments.forceGrantByDefault || listPermissionKeys( user=arguments.userId ).containsNoCase( arguments.permissionKey );
+		return arguments.forceGrantByDefault || ArrayContainsNoCase( listPermissionKeys( user=arguments.userId ), arguments.permissionKey );
 	}
 
 	/**
@@ -151,7 +150,7 @@ component displayName="Website permissions service" {
 		do {
 			comboFound = false;
 			for( var comboBenefit in comboBenefits ){
-				if ( userBenefits.containsNoCase( comboBenefit.id ) ) {
+				if ( ArrayContainsNoCase( userBenefits, comboBenefit.id ) ) {
 					continue;
 				}
 
@@ -159,12 +158,12 @@ component displayName="Website permissions service" {
 				var hasComboBenefit = !inclusive;
 				for( var benefitId in ListToArray( comboBenefit.combined_benefits ) ){
 					if ( inclusive ) {
-						if ( userBenefits.containsNoCase( benefitId ) ) {
+						if ( ArrayContainsNoCase( userBenefits, benefitId ) ) {
 							hasComboBenefit = true;
 							break;
 						}
 					} else {
-						if ( !userBenefits.containsNoCase( benefitId ) ) {
+						if ( !ArrayContainsNoCase( userBenefits, benefitId ) ) {
 							hasComboBenefit = false;
 							break;
 						}
@@ -368,7 +367,7 @@ component displayName="Website permissions service" {
 
 			for ( var perm in benefitPerms ) {
 				if ( perm.granted ) {
-					if ( !perms.containsNoCase( perm.permission_key ) ) {
+					if ( !ArrayContainsNoCase(perms, perm.permission_key ) ) {
 						perms.append( perm.permission_key );
 					}
 				} else {
@@ -386,7 +385,7 @@ component displayName="Website permissions service" {
 
 		for ( var perm in userPerms ) {
 			if ( perm.granted ) {
-				if ( !perms.containsNoCase( perm.permission_key ) ) {
+				if ( !ArrayContainsNoCase( perms, perm.permission_key ) ) {
 					perms.append( perm.permission_key );
 				}
 			} else {
@@ -409,11 +408,11 @@ component displayName="Website permissions service" {
 
 				} else if ( permissionKey contains "*" ) {
 					( _expandWildCardPermissionKey( permissionKey ) ).each( function( expandedKey ){
-						if ( !filtered.containsNoCase( expandedKey ) ) {
+						if ( !ArrayContainsNoCase( filtered, expandedKey ) ) {
 							filtered.append( expandedKey );
 						}
 					} );
-				} else if ( allPerms.containsNoCase( permissionKey ) && !filtered.containsNoCase( permissionKey ) ) {
+				} else if ( ArrayContainsNoCase( allPerms, permissionKey ) && !ArrayContainsNoCase( filtered, permissionKey ) ) {
 					filtered.append( permissionKey );
 				}
 			}

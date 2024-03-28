@@ -39,7 +39,7 @@ component extends="coldbox.system.web.services.InterceptorService" {
 	) {
 		var loc = {};
 
-		if ( _registeringInterceptors && !_ignoreStatesDuringLoadCheck.containsNoCase( arguments.state ) ) {
+		if ( _registeringInterceptors && !ArrayContainsNoCase( _ignoreStatesDuringLoadCheck, arguments.state ) ) {
 			throw(
 				  type    = "coldbox.interceptor.panic"
 				, message = "An interception point, [#arguments.state#], was raised during the interceptor registration process and *before* all registered interceptor listeners have been instantiated. This occurred during the instatiation of the [#_currentRegisteringInterceptor#] interceptor. This is a problem because not all interceptors have been registered and setup to listen for the [#arguments.state#] event and this may lead to unexpected behaviour, including widespread changes to your database. This issue is usually caused by injecting dependencies into your interceptor with wirebox and ommitting the 'delayedInjector:' DSL from the beginning of your inject attributes. For example, in interceptors, [property name=""presideObjectService"" inject=""presideObjectService"";] should be [property name=""presideObjectService"" inject=""delayedInjector:presideObjectService"";]"

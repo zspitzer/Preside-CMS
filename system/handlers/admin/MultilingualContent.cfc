@@ -15,13 +15,13 @@ component extends="preside.system.base.AdminHandler" {
 
 		if ( !IsEmpty( rc.q ?: "" ) ) {
 			preparedLanguages = preparedLanguages.filter( function( language ){
-				return language.text.containsNoCase( rc.q );
+				return FindNoCase( language.text, rc.q );
 			} );
 		}
 
 		if ( !IsEmpty( rc.values ?: "" ) ) {
 			preparedLanguages = preparedLanguages.filter( function( language ){
-				return rc.values.listFindNoCase( language.value );
+				return listFindNoCase( rc.values, language.value );
 			} );
 		}
 

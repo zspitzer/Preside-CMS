@@ -137,7 +137,7 @@ component {
  * Please review the scripts before running.
  */" & newline & newline;
 					for( var script in scriptsToRun ) {
-						if ( !scriptsOutput.containsNoCase( script.sql ) ) {
+						if ( !ArrayContainsNoCase( scriptsOutput, script.sql ) ) {
 							sql &= script.sql & ";" & newline;
 							scriptsOutput.append( script.sql );
 						}

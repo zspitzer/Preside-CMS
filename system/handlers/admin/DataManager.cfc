@@ -1755,7 +1755,7 @@ component extends="preside.system.base.AdminHandler" {
 		var actionsWithButtons = [ "object", "viewrecord", "addrecord", "editrecord", "managefilters" ];
 		var rendered = "";
 
-		if ( actionsWithButtons.containsNoCase( action ) ) {
+		if ( ArrayContainsNoCase( actionsWithButtons, action ) ) {
 			var actions = customizationService.runCustomization(
 				  objectName     = objectName
 				, action         = "getTopRightButtonsFor#action#"
@@ -3352,7 +3352,7 @@ component extends="preside.system.base.AdminHandler" {
 			}
 		}
 
-		if ( permitted && IsTrue( prc.draftsEnabled ?: "" ) && draftOperations.containsNoCase( arguments.key ) ) {
+		if ( permitted && IsTrue( prc.draftsEnabled ?: "" ) && ArrayContainsNoCase( draftOperations, arguments.key ) ) {
 			if ( arguments.key.endsWith( "action" ) ) {
 				var isDraft = ( rc._saveaction ?: "" ) != "publish";
 				permitted = isDraft ? IsTrue( prc.canSaveDraft ?: "" ) : IsTrue( prc.canPublish ?: "" );
@@ -4179,7 +4179,7 @@ component extends="preside.system.base.AdminHandler" {
 			, "exportDataAction"
 		];
 
-		if( onlyCheckForLoginActions.containsNoCase( arguments.action ) ){
+		if( ArrayContainsNoCase( onlyCheckForLoginActions, arguments.action ) ){
 			return;
 		}
 
@@ -4224,7 +4224,7 @@ component extends="preside.system.base.AdminHandler" {
 			_checkObjectExists( argumentCollection=arguments, object=prc.objectName );
 			_checkPermission( argumentCollection=arguments, key="navigate" );
 
-			if ( !useAnyWhereActions.containsNoCase( arguments.action ) ) {
+			if ( !ArrayContainsNoCase( useAnyWhereActions, arguments.action ) ) {
 				_objectCanBeViewedInDataManager( event=event, objectName=prc.objectName, relocateIfNoAccess=true );
 			}
 
