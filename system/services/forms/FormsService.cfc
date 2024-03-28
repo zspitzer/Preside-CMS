@@ -1112,7 +1112,7 @@ component displayName="Forms service" {
 	}
 
 	private string function _getPresideObjectNameFromFormNameByConvention( required string formName ) {
-		if ( [ "page-types", "preside-objects" ].contains( ListFirst( arguments.formName, "." ) ) and ListLen( arguments.formName, "." ) gt 1 ) {
+		if ( ArrayContains( [ "page-types", "preside-objects" ], ListFirst( arguments.formName, "." ) ) and ListLen( arguments.formName, "." ) gt 1 ) {
 			return ListGetAt( arguments.formName, 2, "." );
 		}
 

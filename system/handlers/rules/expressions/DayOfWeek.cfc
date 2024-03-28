@@ -16,7 +16,7 @@ component {
 		,          boolean _is = true
 	) {
 		var currentDayOfWeek = DayOfWeek( Now() );
-		var isMatched        = arguments.days.listToArray().contains( currentDayOfWeek );
+		var isMatched        = ArrayContains( ListToArray( arguments.days, currentDayOfWeek ) );
 
 		return _is ? isMatched : !isMatched;
 	}

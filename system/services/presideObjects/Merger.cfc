@@ -14,7 +14,7 @@ component singleton=true hint="I do the logic for merging two objects to make on
 		var ignoreKeys = [ "properties", "siteTemplates", "propertyNames", "dbFieldList", "formulaFieldList", "indexes" ];
 
 		for ( var key in object2.meta ) {
-			if ( !ignoreKeys.contains( key ) ) {
+			if ( !ArrayContains( ignoreKeys, key ) ) {
 				object1.meta[ key ] = object2.meta[ key ];
 			}
 		}
@@ -42,7 +42,7 @@ component singleton=true hint="I do the logic for merging two objects to make on
 			if ( !StructKeyExists( propsA, propName ) && !( IsBoolean( propsB[ propName ].deleted ?: "" ) && propsB[ propName ].deleted ) ) {
 				var prop = propsA[ propName ] = propsB[ propName ];
 
-				if ( not objectAMeta.propertyNames.contains( propName ) ) {
+				if ( not ArrayContains( objectAMeta.propertyNames, propName ) ) {
 					ArrayAppend( objectAMeta.propertyNames, propName );
 				}
 			}

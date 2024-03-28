@@ -16,7 +16,7 @@ component {
 		,          boolean _is = true
 	) {
 		var currentMonth = Month( Now() );
-		var isMatched    = arguments.months.listToArray().contains( currentMonth );
+		var isMatched    = ArrayContains( ListToArray( arguments.months, currentMonth ) );
 
 		return _is ? isMatched : !isMatched;
 	}

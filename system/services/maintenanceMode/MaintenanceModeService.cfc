@@ -70,7 +70,7 @@ component {
 		var bypassUuid     = settings.bypassUuid ?: "";
 		var clientIp       = cgi.remote_addr;
 
-		if ( IsArray( safeIps ) && safeIps.contains( clientIp ) ) {
+		if ( IsArray( safeIps ) && ArrayContains( safeIps, clientIp ) ) {
 			return true;
 		}
 

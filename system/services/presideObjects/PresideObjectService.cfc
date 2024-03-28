@@ -1293,7 +1293,7 @@ component displayName="Preside Object Service" {
 				);
 
 				for( var record in currentRecords ) {
-					if ( newRecords.contains( record.targetId ) && ( !hasSortOrder || newRecords.contains( record.targetId ) == record[ sortOrderField ] ) ) {
+					if ( ArrayContains( newRecords, record.targetId ) && ( !hasSortOrder || ArrayContains( newRecords, record.targetId ) == record[ sortOrderField ] ) ) {
 						ArrayDelete( newAddedRecords, record.targetId );
 						ArrayAppend( existingRecords, record.targetId );
 					} else {

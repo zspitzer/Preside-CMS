@@ -2084,7 +2084,7 @@ component extends="preside.system.base.AdminHandler" {
 		var excludedArguments = [ "event", "rc", "prc", "actionsView", "useMultiActions", "isMultilingual", "object" ];
 
 		for( var argument in arguments ) {
-			if ( !excludedArguments.contains( argument ) ) {
+			if ( !ArrayContains( excludedArguments, argument ) ) {
 				getRecordsArgs[ argument ] = duplicate( arguments[ argument ] );
 			}
 		}
@@ -3340,7 +3340,7 @@ component extends="preside.system.base.AdminHandler" {
 		var draftOperations = [ "addRecord", "addRecordAction", "editRecord", "editRecordAction", "translateRecord", "translateRecordAction" ];
 		var permitted       = true;
 
-		if ( arguments.checkOperations && operations.contains( arguments.key ) && !datamanagerService.isOperationAllowed( arguments.object, arguments.key ) ) {
+		if ( arguments.checkOperations && ArrayContains( operations, arguments.key ) && !datamanagerService.isOperationAllowed( arguments.object, arguments.key ) ) {
 			permitted = false;
 		} else if ( !hasCmsPermission( permissionKey="datamanager.#arguments.key#", context="datamanager", contextKeys=[ arguments.object ] ) && (!arguments.object.len() || !hasCmsPermission( permissionKey="presideobject.#arguments.object#.#arguments.key#" ) ) ) {
 			permitted = false;
@@ -4254,7 +4254,7 @@ component extends="preside.system.base.AdminHandler" {
 			prc.useVersioning         = datamanagerService.isOperationAllowed( prc.objectName, "viewversions" ) && presideObjectService.objectIsVersioned( prc.objectName );
 			prc.canPublish            = prc.draftsEnabled && _checkPermission( argumentCollection=arguments, key="publish"  , object=prc.objectName, throwOnError=false );
 			prc.canSaveDraft          = prc.draftsEnabled && _checkPermission( argumentCollection=arguments, key="savedraft", object=prc.objectName, throwOnError=false );
-			prc.isTranslationAction   = arguments.action.contains( "translat" ) > 0;
+			prc.isTranslationAction   = Find(arguments.action, "translat" ) > 0;
 			if ( prc.isMultilingual && ( prc.isTranslationAction || arguments.action == "viewRecord" ) ) {
 				prc.translations = multilingualPresideObjectService.getTranslationStatus( prc.objectName, prc.recordId );
 			}

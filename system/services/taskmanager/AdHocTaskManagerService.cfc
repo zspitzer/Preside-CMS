@@ -632,7 +632,7 @@ component displayName="Ad-hoc Task Manager Service" {
 	private boolean function _inChildThread() {
 		var currentThreadName = CreateObject( "java", "java.lang.Thread" ).currentThread().getThreadGroup().getName();
 
-		return currentThreadName.containsNoCase( "cfthread" );
+		return FindNoCase( currentThreadName, "cfthread" );
 	}
 
 	private date function _now() {

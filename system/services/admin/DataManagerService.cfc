@@ -969,7 +969,7 @@ component {
 			sqlFields.append( "#objName#.#idField# as id" );
 		}
 
-		if ( !labelFieldIsRelationship && ListLen( labelField, "." ) < 2 && sqlFields.contains( labelField ) ) {
+		if ( !labelFieldIsRelationship && ListLen( labelField, "." ) < 2 && ArrayContains( sqlFields, labelField ) ) {
 			sqlFields.delete( labelField );
 			sqlFields.append( replacedLabelField );
 		}
@@ -1053,7 +1053,7 @@ component {
 				var foreignObjectLabelField = _getPresideObjectService().getLabelField(       objectProps[ orderByField ].relatedTo );
 
 				if ( !structKeyExists( foreignObject[ foreignObjectLabelField ], "formula" ) ) {
-					var delim = relatedLabelField.contains( "$" ) ? "$" : ".";
+					var delim = Find(relatedLabelField, "$" ) ? "$" : ".";
 
 					relatedLabelField = orderByField & delim & ListRest( relatedLabelField, delim );
 				}

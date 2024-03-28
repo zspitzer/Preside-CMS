@@ -175,7 +175,7 @@ component singleton=true {
 			}
 		}
 		for( var tableName in columns ) {
-			if ( !tablesToDelete.contains( tableName ) ) {
+			if ( !ArrayContains( tablesToDelete, tableName ) ) {
 				for( var columnName in columns[ tableName ] ) {
 					if ( !StructKeyExists( validTables, tableName ) || !ListFindNoCase( validTables[ tableName ], columnName ) ) {
 						columnsToDelete.append({ columnName=columnName, tableName=tableName });

@@ -206,7 +206,7 @@ component {
 			var exists   = false;
 			var contexts = IsArray( arguments.context ) ? arguments.context : [ arguments.context ];
 
-			if ( !contexts.contains( "default" ) ) {
+			if ( !ArrayContains( contexts, "default" ) ) {
 				contexts.append( "default" );
 			}
 

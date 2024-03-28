@@ -194,7 +194,7 @@ component {
 
 					arguments.meta.properties[ prop.name ] = _readProperty( prop, arguments.meta.properties[ prop.name ] );
 
-					if ( !arguments.meta.propertyNames.contains( prop.name ) ) {
+					if ( !ArrayContains( arguments.meta.propertyNames, prop.name ) ) {
 						arguments.meta.propertyNames.append( prop.name );
 					}
 				}
@@ -276,7 +276,7 @@ component {
 				prop.relatedTo = propName;
 			}
 
-			if ( [ "many-to-many", "one-to-many" ].contains( prop.relationship ?: "" ) ) {
+			if ( ArrayContains([ "many-to-many", "one-to-many" ], prop.relationship ?: "" ) ) {
 				prop.dbtype = "none";
 			}
 
@@ -334,7 +334,7 @@ component {
 		};
 
 		if ( labelField == "label" ) {
-			if ( arguments.meta.propertyNames.contains( "label" ) ) {
+			if ( ArrayContains( arguments.meta.propertyNames, "label" ) ) {
 				StructAppend( arguments.meta.properties.label, defaults.label, false );
 			} else if ( !arguments.meta.noLabel ) {
 				arguments.meta.properties[ "label" ] = defaults[ "label" ];
@@ -343,7 +343,7 @@ component {
 		}
 
 		if ( !arguments.meta.noId ) {
-			if ( arguments.meta.propertyNames.contains( idField ) ) {
+			if ( ArrayContains( arguments.meta.propertyNames, idField ) ) {
 				StructAppend( arguments.meta.properties[ idField ], defaults.id, false );
 			} else {
 				arguments.meta.properties[ idField ] = defaults[ "id" ];
@@ -355,7 +355,7 @@ component {
 		}
 
 		if ( !arguments.meta.noDateCreated ) {
-			if ( arguments.meta.propertyNames.contains( dateCreatedField ) ) {
+			if ( ArrayContains( arguments.meta.propertyNames, dateCreatedField ) ) {
 				StructAppend( arguments.meta.properties[ dateCreatedField ], defaults.dateCreated, false );
 			} else {
 				arguments.meta.properties[ dateCreatedField ] = defaults[ "dateCreated" ];
@@ -367,7 +367,7 @@ component {
 		}
 
 		if ( !arguments.meta.noDateModified ) {
-			if ( arguments.meta.propertyNames.contains( dateModifiedField ) ) {
+			if ( ArrayContains( arguments.meta.propertyNames, dateModifiedField ) ) {
 				StructAppend( arguments.meta.properties[ dateModifiedField ], defaults.datemodified, false );
 			} else {
 				arguments.meta.properties[ dateModifiedField ] = defaults[ "datemodified" ];
@@ -379,7 +379,7 @@ component {
 		}
 
 		if ( arguments.meta.flagEnabled ) {
-			if ( arguments.meta.propertyNames.contains( flagField ) ) {
+			if ( ArrayContains( arguments.meta.propertyNames, flagField ) ) {
 				StructAppend( arguments.meta.properties[ flagField ], defaults.flag, false );
 			} else {
 				arguments.meta.properties[ flagField ] = defaults[ "flag" ];

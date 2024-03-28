@@ -305,7 +305,7 @@ component {
 		var indexFields = listToArray( arguments.fields );
 
 		for( var fk in arguments.relationships ) {
-			if ( indexFields.contains( arguments.relationships[ fk ].fk_column ) ) {
+			if ( ArrayContains( indexFields, arguments.relationships[ fk ].fk_column ) ) {
 				foreignKeys.append( fk );
 			}
 		}
@@ -651,7 +651,7 @@ component {
 
 	private boolean function _shouldRecreateForeignKey( required string dbKeyName ) {
 		var fksToRecreate = _getForeignKeysToRecreate();
-		return fksToRecreate.contains( arguments.dbKeyName );
+		return ArrayContains( fksToRecreate, arguments.dbKeyName );
 	}
 
 	private void function _addForeignKeysToRecreate( required array dbKeyNames ) {

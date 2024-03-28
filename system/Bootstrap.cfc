@@ -293,7 +293,7 @@ component {
 
 	private void function _ensureCaseSensitiveStructSettingsAreActive() {
 		var check         = { sensiTivity=true };
-		var caseSensitive = check.keyArray().contains( "sensiTivity" );
+		var caseSensitive = ArrayContains( check.keyArray(), "sensiTivity" );
 
 		if ( !caseSensitive ) {
 			var luceeCompilerSettings = "";

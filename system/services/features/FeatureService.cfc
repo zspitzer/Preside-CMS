@@ -41,7 +41,7 @@ component singleton=true autodoc=true displayName="Feature service" {
 		var activeSiteTemplate   = Len( Trim( arguments.siteTemplate ) ) ? arguments.siteTemplate : "default";
 		var availableToTemplates = features[ arguments.feature ].siteTemplates ?: [ "*" ];
 
-		return !IsArray( availableToTemplates ) || availableToTemplates.contains( "*" ) || availableToTemplates.contains( activeSiteTemplate );
+		return !IsArray( availableToTemplates ) || ArrayContains( availableToTemplates, "*" ) || ArrayContains( availableToTemplates, activeSiteTemplate );
 	}
 
 	/**

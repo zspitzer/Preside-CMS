@@ -192,7 +192,7 @@ component displayName="Email service" {
 
 
 		// legacy template system
-		} else if ( _getTemplates().containsNoCase( arguments.template ) ) {
+		} else if ( ArrayContainsNoCase( _getTemplates(), arguments.template ) ) {
 			var handlerArgs = Duplicate( arguments.args  );
 			    handlerArgs.append( arguments, false );
 			    handlerArgs.delete( "template" );
