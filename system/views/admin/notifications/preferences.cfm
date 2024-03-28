@@ -25,7 +25,7 @@
 			</li>
 
 			<cfloop array="#topics#" index="i" item="topicId">
-				<cfif subscriptions.contains( topicId )>
+				<cfif ArrayContains( subscriptions, topicId )>
 					<li<cfif activeTab eq topicId> class="active"</cfif>>
 						<cfset link = activeTab eq topicId ? "##" : event.buildAdminLink( linkTo="notifications.preferences", queryString="topic=#topicId#" ) />
 						<a href="#link#">

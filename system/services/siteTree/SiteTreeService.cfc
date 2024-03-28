@@ -84,11 +84,11 @@ component {
 
 		if ( ArrayLen( arguments.selectFields ) ) {
 			args.selectFields = arguments.selectFields;
-			if ( format eq "nestedArray" and not args.selectFields.contains( "_hierarchy_depth" ) and not args.selectFields.contains( "page._hierarchy_depth" ) ) {
+			if ( format eq "nestedArray" and not ArrayContains( args.selectFields, "_hierarchy_depth" ) and not ArrayContains( args.selectFields, "page._hierarchy_depth" ) ) {
 				ArrayAppend( args.selectFields, "page._hierarchy_depth" );
 			}
 
-			if ( !args.selectFields.contains( "page._hierarchy_sort_order" ) ) {
+			if ( !ArrayContains( args.selectFields, "page._hierarchy_sort_order" ) ) {
 				args.selectFields.append( "page._hierarchy_sort_order" );
 			}
 		}
@@ -572,7 +572,7 @@ component {
 		var args = arguments;
 		var requiredSelectFields = [ "id", "title", "navigation_title", "exclude_children_from_navigation", "page_type", "exclude_from_navigation_when_restricted", "access_restriction" ];
 		for( var field in requiredSelectFields) {
-			if ( !args.selectFields.contains( field ) && !args.selectFields.contains( "page." & field ) ) {
+			if ( !ArrayContains( args.selectFields, field ) && !ArrayContains( args.selectFields, "page." & field ) ) {
 				args.selectFields.append( "page." & field );
 			}
 		}
@@ -610,7 +610,7 @@ component {
 
 				var fetchChildren = arguments.currentDepth < maxDepth;
 				    fetchChildren = fetchChildren && !Val( child.exclude_children_from_navigation );
-				    fetchChildren = fetchChildren && ( expandAllSiblings || activeTree.contains( child.id ) );
+				    fetchChildren = fetchChildren && ( expandAllSiblings || ArrayContains( activeTree, child.id ) );
 
 				if (  fetchChildren  ) {
 					child.children = getNavChildren( child.id, currentDepth+1, getManagedChildTypesForParentType( child.page_type ) );
@@ -620,7 +620,7 @@ component {
 					  id              = child.id
 					, title           = Len( Trim( child.navigation_title ?: "" ) ) ? child.navigation_title : child.title
 					, children        = child.children ?: []
-					, active          = ( activeTree.contains( child.id ) > 0 )
+					, active          = ( ArrayContains( activeTree, child.id ) > 0 )
 					, hasRestrictions = args.delayConditionalItems && hasRestrictions
 				};
 
@@ -649,7 +649,7 @@ component {
 			]
 		);
 
-		var isManagedType   = Len( Trim( page.parent_type ) ) && getManagedChildTypesForParentType( page.parent_type ).containsNoCase( page.page_type );
+		var isManagedType   = Len( Trim( page.parent_type ) ) && ArrayContains( getManagedChildTypesForParentType( page.parent_type ), page.page_type );
 		var excludedFromNav = arguments.isSubMenu ? Val( page.exclude_children_from_navigation ) : Val( page.exclude_from_navigation );
 		if ( isManagedType || excludedFromNav ) {
 			return [];
@@ -1186,7 +1186,7 @@ component {
 	public boolean function userHasPageAccess( required string pageId ) {
 		var restrictionRules = getAccessRestrictionRulesForPage( arguments.pageId );
 
-		if ( [ "none" ].contains( restrictionRules.access_restriction ) ) {
+		if ( ArrayContains([ "none" ], restrictionRules.access_restriction ) ) {
 			return true;
 		}
 
@@ -1618,7 +1618,7 @@ component {
 
 		sqlFields.delete( "id" );
 		sqlFields.append( "#objName#.id" );
-		if ( sqlFields.contains( labelField ) ) {
+		if ( ArrayContains( sqlFields, labelField ) ) {
 			sqlFields.delete( labelField );
 			sqlFields.append( replacedLabelField );
 		}

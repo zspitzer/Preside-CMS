@@ -39,7 +39,7 @@ component displayName="Multilingual Preside Object Service" {
 			return false;
 		}
 
-		return !Len( Trim( arguments.propertyName ) ) || multiLingualObjectReference[ arguments.objectName ].containsNoCase( arguments.propertyName );
+		return !Len( Trim( arguments.propertyName ) ) || FindNoCase( multiLingualObjectReference[ arguments.objectName ], arguments.propertyName );
 	}
 
 	/**
@@ -97,7 +97,7 @@ component displayName="Multilingual Preside Object Service" {
 		translationObject.isPageType   = false;
 
 		for( var propertyName in translationProperties ) {
-			if ( !validProperties.containsNoCase( propertyName ) ) {
+			if ( !ArrayContains( validProperties, propertyName ) ) {
 				StructDelete( translationProperties, propertyName );
 
 				if ( ArrayContainsNoCase(dbFieldList, propertyName ) ) {
@@ -332,7 +332,7 @@ component displayName="Multilingual Preside Object Service" {
 
 		for( var record in dbRecords ) {
 			record.default = record.id == defaultLanguage;
-			record.sortOrder = languageIds.contains( record.id );
+			record.sortOrder = ArrayContains( languageIds, record.id );
 			languages.append( record );
 		}
 

@@ -405,13 +405,13 @@ component displayName="Task Manager Service" {
 		var configuredTasks   = listTasks();
 
 		for( var task in configuredTasks ){
-			if ( !existingTasksInDb.contains( task ) ) {
+			if ( !ArrayContainsNoCase( existingTasksInDb, task ) ) {
 				addTaskToStatusDb( task );
 			}
 		}
 
 		for( var task in existingTasksInDb ) {
-			if ( !configuredTasks.contains( task ) ) {
+			if ( !ArrayContainsNoCase( configuredTasks, task ) ) {
 				removeTaskFromStatusDb( task );
 			}
 		}

@@ -330,7 +330,7 @@ component autodoc=true displayName="Notification Service" {
 
 		var userGroups = _getPermissionService().listUserGroups( arguments.userId );
 		for( var topicGroup in topicGroups ) {
-			if ( userGroups.contains( topicGroup ) ) {
+			if ( ArrayContains( userGroups, topicGroup ) ) {
 				return true;
 			}
 		}
@@ -434,7 +434,7 @@ component autodoc=true displayName="Notification Service" {
 		var subscriptionDao = _getSubscriptionDao();
 		var forDeletion     = [];
 
-		if ( arguments.topics.contains( "all" ) ) {
+		if ( ArrayContains( arguments.topics, "all" ) ) {
 			arguments.topics = listTopics();
 
 			_getUserDao().updateData( id=arguments.userId, data={ subscribed_to_all_notifications=true } );
@@ -447,7 +447,7 @@ component autodoc=true displayName="Notification Service" {
 			var currentSubscriptions = getUserSubscriptions( arguments.userId );
 
 			for( var topic in currentSubscriptions ) {
-				if ( !arguments.topics.contains( topic ) ) {
+				if ( !ArrayContains( arguments.topics, topic ) ) {
 					forDeletion.append( topic );
 				}
 			}
@@ -456,7 +456,7 @@ component autodoc=true displayName="Notification Service" {
 			}
 
 			for( var topic in arguments.topics ) {
-				if ( !currentSubscriptions.contains( topic ) ) {
+				if ( !ArrayContains( currentSubscriptions, topic ) ) {
 					subscriptionDao.insertData({
 						  security_user = arguments.userId
 						, topic         = topic
