@@ -95,7 +95,7 @@ component displayName="Ad-hoc Task Manager Service" {
 			, disable_cancel         = arguments.disableCancel
 		} );
 
-		if ( arguments.resultUrl.containsNoCase( "{taskId}" ) ) {
+		if ( arguments.resultUrl.findNoCase( "{taskId}" ) ) {
 			setResultUrl( taskId=taskId, resultUrl=arguments.resultUrl.replaceNoCase( "{taskId}", taskId, "all" ) );
 		}
 

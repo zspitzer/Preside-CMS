@@ -296,7 +296,7 @@ component {
 			}
 			expectedParams.append( _getEmailRecipientTypeService().listRecipientTypeParameters( messageTemplate.recipient_type ), true );
 			for( var param in expectedParams ) {
-				if ( param.required && !arguments.content.containsNoCase( "${#param.id#}" ) ) {
+				if ( param.required && !arguments.content.findNoCase( "${#param.id#}" ) ) {
 					missingParams.append( "${#param.id#}" );
 				}
 			}

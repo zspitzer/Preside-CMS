@@ -35,9 +35,9 @@ component displayName="RulesEngine Operator Service" {
 			case "neq":
 				return leftHandSide != rightHandSide;
 			case "contains":
-				return leftHandSide.containsNoCase( rightHandSide ) > 0;
+				return leftHandSide.findNoCase( rightHandSide ) > 0;
 			case "notcontains":
-				return !leftHandSide.containsNoCase( rightHandSide ) > 0;
+				return !leftHandSide.findNoCase( rightHandSide ) > 0;
 			case "startsWith":
 				return leftHandSide.left( rightHandSide.len() ) == rightHandSide;
 			case "notStartsWith":
