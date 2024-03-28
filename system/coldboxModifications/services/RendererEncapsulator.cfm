@@ -25,7 +25,7 @@
 
 	// view helpers ( directory + view + whatever )
 	if(
-		arguments.viewHelperPath.len() AND
+		Len( arguments.viewHelperPath ) AND
 		NOT variables.renderedHelpers.keyExists( hash( arguments.viewHelperPath.toString() ) )
 	){
 		arguments.viewHelperPath.each( function( item ){

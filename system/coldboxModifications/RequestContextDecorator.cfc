@@ -147,7 +147,7 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 	public string function buildLink( string siteId="", string queryString="", boolean forceDomain=false ) {
 		var prc = getRequestContext().getCollection( private=true );
 
-		if ( arguments.siteId.len() ) {
+		if ( Len( arguments.siteId ) ) {
 			arguments.queryString = ListPrepend( arguments.queryString, "_sid=" & arguments.siteId, "&" );
 		}
 		if ( arguments.forceDomain ) {
@@ -196,7 +196,7 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 
 		var allowedDomains = getController().getSetting( "allowedDomains" );
 
-		if ( IsArray( allowedDomains ) && allowedDomains.len() ) {
+		if ( IsArray( allowedDomains ) && Len( allowedDomains ) ) {
 			return protocol & allowedDomains[1] & port;
 		}
 
@@ -352,7 +352,7 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 		var currentUrl = getCurrentUrl();
 		var adminPath  = getAdminPath();
 
-		return currentUrl.left( adminPath.len() ) == adminPath;
+		return currentUrl.left( Len( adminPath ) ) == adminPath;
 	}
 
 	public string function getApiPath() {
@@ -815,7 +815,7 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 	}
 
 	public void function checkPageAccess() {
-		if ( !getCurrentPageId().len() ) {
+		if ( !Len( getCurrentPageId() ) ) {
 			return;
 		}
 
@@ -968,7 +968,7 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 		var crumb  = {
 			  title     = arguments.title
 			, link      = arguments.link
-			, menuTitle = arguments.menuTitle.len() ? arguments.menuTitle : arguments.title
+			, menuTitle = Len( arguments.menuTitle ) ? arguments.menuTitle : arguments.title
 		}
 
 		if ( StructKeyExists( arguments, "position" ) ) {
@@ -1110,14 +1110,14 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 			var limitPrc = fpcSettings.limitCacheDataKeys.prc ?: [];
 		}
 
-		if ( !limitData || limitRc.len() ) {
+		if ( !limitData || Len( limitRc ) ) {
 			for( var key in rc ) {
 				if ( !isNull( rc[ key ] ) && (!limitData || ArrayContains( limitRc, key ) ) && !ArrayContains( unCacheableKeys, LCase( key ) ) && isCacheable( rc[ key ] ) ) {
 					cacheableVars.rc[ key ] = Duplicate( rc[ key ] );
 				}
 			}
 		}
-		if ( !limitData || limitPrc.len() ) {
+		if ( !limitData || Len( limitPrc ) ) {
 			for( var key in prc ) {
 				if ( !isNull( prc[ key ] ) && ( !limitData || ArrayContains( limitPrc, key ) ) && isCacheable( prc[ key ] ) ) {
 					cacheableVars.prc[ key ] = Duplicate( prc[ key ] );

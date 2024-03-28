@@ -340,15 +340,15 @@ component {
 					, attributeName = attrib
 				);
 
-				if ( gridFields.len() ) {
+				if ( Len( gridFields ) ) {
 					break;
 				}
 			}
 
-			if ( !gridFields.len() ) {
+			if ( !Len( gridFields ) ) {
 				gridFields = poService.getLabelField( relatedObject );
 
-				if ( !gridFields.len() ) {
+				if ( !Len( gridFields ) ) {
 					gridFields = poService.getIdField( relatedObject );
 				}
 			}

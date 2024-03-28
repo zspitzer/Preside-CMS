@@ -81,7 +81,7 @@ component {
 		}
 
 		var validationRulesetName = formBuilderValidationService.getRulesetForFormItems( args.formItems ?: [] );
-		if ( validationRulesetName.len() ) {
+		if ( Len( validationRulesetName ) ) {
 			args.validationJs = validationEngine.getJqueryValidateJs(
 				  ruleset         = validationRulesetName
 				, jqueryReference = "jQuery"

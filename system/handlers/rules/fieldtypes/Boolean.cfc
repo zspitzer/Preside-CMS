@@ -25,7 +25,7 @@ component {
 			variety = config.variety;
 		} else if ( Len( Trim( config.variety ?: "" ) ) ) {
 			var translated = translateResource( uri=config.variety & "." & varietyKey, defaultValue="" );
-			if ( translated.len() ) {
+			if ( Len( translated ) ) {
 				return translated;
 			}
 		}

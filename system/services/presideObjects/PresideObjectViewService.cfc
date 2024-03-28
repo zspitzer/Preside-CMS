@@ -183,16 +183,16 @@ component displayName="Preside Object View Service" {
 
 		fileContent = _stripCfComments( fileContent );
 
-		for( i=1; i lte regexes.len(); i++ ) {
+		for( i=1; i lte Len(regexes ); i++ ) {
 			startPos = 1;
 			while( startPos ){
 				result = ReFindNoCase( regexes[i], fileContent, startPos, true );
-				startPos = result.pos.len() eq 2 ? result.pos[2] : 0;
+				startPos = Len( result.pos ) eq 2 ? result.pos[2] : 0;
 				if ( startPos ) {
 					match = Mid( fileContent, result.pos[1], result.len[1] );
 					alias = Mid( fileContent, result.pos[2], result.len[2] );
 					result = ReFindNoCase( fieldRegex, match, 1, true );
-					fieldName = result.pos.len() eq 2 and result.pos[2] ? Mid( match, result.pos[2], result.len[2] ) : ( objectName & "." & alias );
+					fieldName = Len( result.pos ) eq 2 and result.pos[2] ? Mid( match, result.pos[2], result.len[2] ) : ( objectName & "." & alias );
 
 					if ( fieldName != "false" ) {
 						selectDef = alias eq fieldName ? alias : "#fieldName# as #alias#";
@@ -202,7 +202,7 @@ component displayName="Preside Object View Service" {
 							result = ReFindNoCase( rendererRegex, match, 1, true );
 							fields.fieldOptions[ alias ] = {
 								  editable = ReFindNoCase( editableRegex, match ) != 0
-								, renderer = result.pos.len() eq 2 and result.pos[2] ? Mid( match, result.pos[2], result.len[2] ) : ""
+								, renderer = Len( result.pos ) eq 2 and result.pos[2] ? Mid( match, result.pos[2], result.len[2] ) : ""
 								, field    = fieldName
 							};
 						}

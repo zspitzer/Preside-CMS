@@ -43,7 +43,7 @@ component extends="preside.system.base.AdminHandler" {
 			setNextEvent( url=event.buildAdminLink( "emailcenter.queue" ) );
 		}
 
-		if ( templateId.len() ) {
+		if ( Len( templateId ) ) {
 			prc.template = emailTemplateService.getTemplate( templateId );
 
 			if ( !prc.template.count() ) {
@@ -76,7 +76,7 @@ component extends="preside.system.base.AdminHandler" {
 
 		emailTemplateService.clearQueue( templateId );
 
-		if ( templateId.len() ) {
+		if ( Len( templateId ) ) {
 			var template = emailTemplateService.getTemplate( templateId );
 			messagebox.info( translateResource( uri="cms:emailcenter.queue.cleared", data=[ template.name ] ) );
 

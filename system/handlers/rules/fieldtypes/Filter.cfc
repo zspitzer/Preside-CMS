@@ -10,11 +10,11 @@ component {
 	private string function renderConfiguredField( string value="", struct config={} ) {
 		var ids = ListToArray( Trim( value ) );
 
-		if ( !ids.len() ) {
+		if ( !Len( ids ) ) {
 			return config.defaultLabel ?: "";
 		}
 
-		if ( ids.len() == 1 ) {
+		if ( Len( ids ) == 1 ) {
 			return renderLabel( objectName="rules_engine_condition", recordId=ids[1] );
 		}
 

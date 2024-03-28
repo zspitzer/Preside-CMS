@@ -21,7 +21,7 @@ component extends="testbox.system.BaseSpec" {
 				expect( service.runTask( taskId ) ).toBe( true );
 
 				var log = mockColdbox.$callLog().runEvent;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  event          = event
 					, eventArguments = { args=args, logger=mockLogger, progress=mockProgress, task=taskDef }
@@ -51,7 +51,7 @@ component extends="testbox.system.BaseSpec" {
 				service.runTask( taskId );
 
 				log = service.$callLog().markTaskAsRunning;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( { taskId=taskId } );
 			} );
 
@@ -74,7 +74,7 @@ component extends="testbox.system.BaseSpec" {
 				service.runTask( taskId );
 
 				log = service.$callLog().completeTask;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( { taskId=taskId } );
 			} );
 
@@ -97,10 +97,10 @@ component extends="testbox.system.BaseSpec" {
 				expect( service.runTask( taskId ) ).toBe( false );
 
 				log = service.$callLog().completeTask;
-				expect( log.len() ).toBe( 0 );
+				expect( Len( log ) ).toBe( 0 );
 
 				log = service.$callLog().failTask;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( { taskId=taskId, error={} } );
 			} );
 
@@ -125,18 +125,18 @@ component extends="testbox.system.BaseSpec" {
 				expect( service.runTask( taskId ) ).toBe( false );
 
 				var log = service.$callLog().$raiseError;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1].error.type    ?: "" ).toBe( "SomeError" );
 				expect( log[1].error.message ?: "" ).toBe( "boo :(" );
 
 				log = service.$callLog().failTask;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1].taskId ).toBe( taskId );
 				expect( log[1].error.type    ?: "" ).toBe( "SomeError" );
 				expect( log[1].error.message ?: "" ).toBe( "boo :(" );
 
 				log = mockLogger.$callLog().error;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 			} );
 
 			it( "should silenty raise an error and return false when the task is already running", function(){
@@ -160,7 +160,7 @@ component extends="testbox.system.BaseSpec" {
 				expect( mockColdbox.$callLog().runEvent.len() ).toBe( 0 );
 
 				var log = service.$callLog().$raiseError;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1].error.type    ?: "" ).toBe( "AdHoTaskManagerService.task.already.running" );
 				expect( log[1].error.message ?: "" ).toBe( "Task not run. The task with ID, [#taskId#], is already running." );
 			} );
@@ -184,7 +184,7 @@ component extends="testbox.system.BaseSpec" {
 				service.runTask( taskId );
 
 				log = mockRequestContext.$callLog().setUseQueryCache;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( [ false ] );
 			} );
 
@@ -207,7 +207,7 @@ component extends="testbox.system.BaseSpec" {
 				service.runTask( taskId );
 
 				log = mockRequestContext.$callLog().setValue;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  name    = "_runningAdhocTaskId"
 					, private = true
@@ -287,7 +287,7 @@ component extends="testbox.system.BaseSpec" {
 				);
 
 				var log = service.$callLog().runTaskInThread;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( { taskId=taskId } );
 			} );
 
@@ -326,7 +326,7 @@ component extends="testbox.system.BaseSpec" {
 				);
 
 				var log = service.$callLog().setResultUrl;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  taskId    = taskId
 					, resultUrl = "https://www.mysite.com/task/result/?taskId=#taskId#&really=#taskId#"
@@ -447,7 +447,7 @@ component extends="testbox.system.BaseSpec" {
 				service.markTaskAsRunning( taskId );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( { filter="id = :id and status != :status", filterParams={ id=taskId, status="running" }, data={
 					  status              = "running"
 					, started_on          = nowish
@@ -470,7 +470,7 @@ component extends="testbox.system.BaseSpec" {
 				service.completeTask( taskId );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  id   = taskId
 					, data = { status="succeeded", finished_on=nowish }
@@ -488,10 +488,10 @@ component extends="testbox.system.BaseSpec" {
 				service.completeTask( taskId );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 0 );
+				expect( Len( log ) ).toBe( 0 );
 
 				log = service.$callLog().discardTask;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( { taskId=taskId } );
 			} );
 		} );
@@ -510,7 +510,7 @@ component extends="testbox.system.BaseSpec" {
 				service.failTask( taskId, error );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  id   = taskId
 					, data = { status="failed", last_error=SerializeJson( error ), attempt_count=nextAttempt.totalAttempts, finished_on=nowish }
@@ -531,10 +531,10 @@ component extends="testbox.system.BaseSpec" {
 				service.failTask( taskId, error );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 0 );
+				expect( Len( log ) ).toBe( 0 );
 
 				log = service.$callLog().requeueTask;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  taskId          = taskId
 					, error           = error
@@ -557,10 +557,10 @@ component extends="testbox.system.BaseSpec" {
 				service.failTask( taskId, error, forceRetry );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 0 );
+				expect( Len( log ) ).toBe( 0 );
 
 				log = service.$callLog().requeueTask;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  taskId          = taskId
 					, error           = error
@@ -588,7 +588,7 @@ component extends="testbox.system.BaseSpec" {
 				);
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  id   = taskId
 					, data = { status="requeued", last_error=SerializeJson( error ), attempt_count=attemptCount, next_attempt_date=nextAttemptDate, finished_on=nowish }
@@ -608,7 +608,7 @@ component extends="testbox.system.BaseSpec" {
 				service.setProgress( taskId, progress );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  id   = taskId
 					, data = { progress_percentage=progress }
@@ -627,7 +627,7 @@ component extends="testbox.system.BaseSpec" {
 				service.setResult( taskId, result );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  id   = taskId
 					, data = { result=SerializeJson( result ) }
@@ -647,7 +647,7 @@ component extends="testbox.system.BaseSpec" {
 				service.setResultUrl( taskId, resultUrl );
 
 				var log = mockTaskDao.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  id   = taskId
 					, data = { result_url=resultUrl }
@@ -741,7 +741,7 @@ component extends="testbox.system.BaseSpec" {
 
 				var log = mockTaskDao.$callLog().deleteData;
 
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( { id=taskId } );
 			} );
 		} );

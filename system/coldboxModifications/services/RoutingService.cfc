@@ -72,7 +72,7 @@ component extends="coldbox.system.web.services.RoutingService" accessors=true {
 		var explicitSiteId = event.getValue( name="_sid", defaultValue="" ).trim();
 		var site           = {};
 
-		if ( explicitSiteId.len() ) {
+		if ( Len( explicitSiteId ) ) {
 			site = siteService.getSite( explicitSiteId );
 		}
 
@@ -117,7 +117,7 @@ component extends="coldbox.system.web.services.RoutingService" accessors=true {
 			var site     = event.getSite();
 			var sitePath = site.path.reReplace( "/$", "" );
 
-			if ( sitePath.len() ) {
+			if ( Len( sitePath ) ) {
 				path = path.replaceNoCase( sitePath, "" );
 			}
 
@@ -176,7 +176,7 @@ component extends="coldbox.system.web.services.RoutingService" accessors=true {
 		if ( Len( Trim( languageSlug ) ) ) {
 			pathToRemove = pathToRemove & "/" & languageSlug & "/";
 		}
-		if ( pathToRemove.len() ) {
+		if ( Len( pathToRemove ) ) {
 			presidePath = fullPath.replaceNoCase( pathToRemove, "" );
 			presidePath = presidePath.reReplace( "^([^/]|$)", "/\1" );
 		} else {
@@ -254,7 +254,7 @@ component extends="coldbox.system.web.services.RoutingService" accessors=true {
 			}
 		} else {
 			var allowedDomains = controller.getSetting( "allowedDomains" );
-			var allowed = !allowedDomains.len() || allowedDomains.contains( domain );
+			var allowed = !Len( allowedDomains ) || allowedDomains.contains( domain );
 
 			if ( !allowed ) {
 				redirectUrl = controller.getSetting( "forcessl" ) ? "https" : ( ( cgi.https ?: "" ) == "on" ? "https" : "http" );
@@ -262,7 +262,7 @@ component extends="coldbox.system.web.services.RoutingService" accessors=true {
 			}
 		}
 
-		if ( redirectUrl.len() ) {
+		if ( Len( redirectUrl ) ) {
 			var path = _getCGIElement( 'path_info', event );
 			var qs   = _getCGIElement( 'query_string', event );
 			redirectUrl &= path;
@@ -289,7 +289,7 @@ component extends="coldbox.system.web.services.RoutingService" accessors=true {
 	private array function _getPresideRoutes() {
 		if ( !StructKeyExists( variables, "_presideRoutes" ) ) {
 			var presideRoutes = controller.getSetting( "presideRoutes" );
-			if ( IsArray( presideRoutes ) && presideRoutes.len() ) {
+			if ( IsArray( presideRoutes ) && Len( presideRoutes ) ) {
 				variables._presideRoutes = presideRoutes;
 			} else {
 				return [];

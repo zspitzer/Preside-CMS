@@ -16,7 +16,7 @@ component extends="coldbox.system.web.services.HandlerService" {
 		ArrayAppend( handlerMappings, { invocationPath=handlersInvocationPath, handlers=getHandlerListing( handlersPath, handlersInvocationPath ) } );
 
 		_addSiteTemplateHandlerMappings( "#appMapping#/site-templates/", "#appMappingPath#.site-templates", siteTemplateHandlerMappings );
-		for( var i=activeExtensions.len(); i>0; i-- ) {
+		for( var i=Len( activeExtensions ); i>0; i-- ) {
 			var ext = activeExtensions[ i ];
 			var extensionHandlersPath   = ExpandPath( "#appMapping#/extensions/#ext.name#/handlers" );
 			var extensionInvocationPath = "#appMappingPath#.extensions.#ext.name#.handlers";
@@ -27,7 +27,7 @@ component extends="coldbox.system.web.services.HandlerService" {
 		}
 
 		variables.registeredHandlers = {};
-		for( var i=1; i<=handlerMappings.len(); i++ ) {
+		for( var i=1; i<=Len( handlerMappings ); i++ ) {
 			for( var handlerName in _listHandlerNames( handlerMappings[i].handlers ).listToArray() ) {
 				variables.registeredHandlers[ handlerName ] = 1;
 			}
@@ -36,7 +36,7 @@ component extends="coldbox.system.web.services.HandlerService" {
 		controller.setSetting( name="RegisteredHandlers", value=variables.registeredHandlers );
 
 		ArrayAppend( handlerMappings, { invocationPath=handlersExternalLocation, handlers=getHandlerListing( HandlersExternalLocationPath, handlersExternalLocation ) } );
-		variables.registeredExternalHandlers = _listHandlerNames( handlerMappings[handlerMappings.len()].handlers );
+		variables.registeredExternalHandlers = _listHandlerNames( handlerMappings[ Len( handlerMappings ) ].handlers );
 		controller.setSetting( name="RegisteredExternalHandlers", value=variables.registeredExternalHandlers );
 
 		variables.handlerMappings             = handlerMappings;
@@ -243,7 +243,7 @@ component extends="coldbox.system.web.services.HandlerService" {
 	}
 
 	private numeric function _getHandlerIndex( required array handlers, required string handlerName, required string actionName ) {
-		for( var i=1; i <= arguments.handlers.len(); i++ ){
+		for( var i=1; i <= Len( arguments.handlers ); i++ ){
 			if ( arguments.handlers[i].name == arguments.handlerName && arguments.handlers[i].actions.containsNoCase( arguments.actionName ) ) {
 				return i;
 			}

@@ -151,11 +151,11 @@ component extends="preside.system.base.AdminHandler" {
 		announceInterception( "preRenderDataManagerObjectInfoCard", args );
 
 		for( var i=1; i<=3; i++ ) {
-			for( var n=args[ "col#i#" ].len(); n>0; n-- ) {
+			for( var n=Len( args[ "col#i#" ] ) ; n>0; n-- ) {
 				var field = args[ "col#i#" ][ n ];
 				var rendered = _render( field );
 
-				if ( rendered.trim().len() ) {
+				if ( Len( Trim( rendered ) ) {
 					args[ "col#i#" ][ n ] = rendered;
 				} else {
 					args[ "col#i#" ].deleteAt( n );
@@ -163,7 +163,7 @@ component extends="preside.system.base.AdminHandler" {
 			}
 		}
 
-		if ( args.col1.len() || args.col2.len() || args.col3.len() ) {
+		if ( Len( args.col1 ) || Len( args.col2 ) || Len( args.col3 ) ) {
 			if ( !IsArray( args.infoColSizes ?: "" ) ) {
 				if ( IsArray( variables.infoColSizes ?: "" ) && ArrayLen( variables.infoColSizes ) == 3 ) {
 					args.infoColSizes = variables.infoColSizes;
@@ -310,7 +310,7 @@ component extends="preside.system.base.AdminHandler" {
 
 		announceInterception( "preRenderDataManagerObjectTabs", args );
 
-		for( var i=1; i<=args.tabs.len(); i++ ) {
+		for( var i=1; i<=Len( args.tabs ); i++ ) {
 			var tabId = args.tabs[ i ];
 
 			args.tabs[ i ] = {
@@ -325,7 +325,7 @@ component extends="preside.system.base.AdminHandler" {
 				args.tabs[ i ].title = translateResource( uri=i18nBase & "viewtab.#tabId#.title", defaultValue=translateResource( i18nDefaultBase & "viewtab.#tabId#.title" ) );
 			}
 		}
-		for( var i=args.tabs.len(); i>0; i-- ) {
+		for( var i=Len( args.tabs ); i>0; i-- ) {
 			if ( !Len( Trim( args.tabs[ i ].content ?: "" ) ) ) {
 				args.tabs.deleteAt( i );
 			}
@@ -343,7 +343,7 @@ component extends="preside.system.base.AdminHandler" {
 		var createdBy   = args.record.created_by_plain ?: "";
 		var text        = "";
 
-		if ( createdBy.trim().len() ) {
+		if ( Len( Trim ( createdBy ) ) ) {
 			text = translateResource( uri="adminui:info.card.created", data=[ "<strong title=""#HtmlEditFormat( DateTimeFormat( dateCreated, "yyyy-mm-dd HH:nn:ss" ) )#"">" & renderContent( variables.systemDateRenderer.renderer, dateCreated, variables.systemDateRenderer.context ) & "</strong>", "<strong>" & createdBy & "</strong>" ] );
 		} else {
 			text = translateResource( uri="adminui:info.card.created.no.user", data=[ "<strong title=""#HtmlEditFormat( DateTimeFormat( dateCreated, "yyyy-mm-dd HH:nn:ss" ) )#"">" & renderContent( variables.systemDateRenderer.renderer, dateCreated, variables.systemDateRenderer.context ) & "</strong>" ] );
@@ -364,7 +364,7 @@ component extends="preside.system.base.AdminHandler" {
 		var modifiedBy = args.record.lastupdated_by_plain ?: "";
 		var text       = "";
 
-		if ( modifiedBy.trim().len() ) {
+		if ( Len( Trim( modifiedBy ) ) ) {
 			text = translateResource( uri="adminui:info.card.modified", data=[ "<strong title=""#HtmlEditFormat( DateTimeFormat( dateModified, "yyyy-mm-dd HH:nn:ss" ) )#"">" & renderContent( variables.systemDateRenderer.renderer, dateModified, variables.systemDateRenderer.context ) & "</strong>", "<strong>" & modifiedBy & "</strong>" ] );
 		} else {
 			text = translateResource( uri="adminui:info.card.modified.no.user", data=[ "<strong title=""#HtmlEditFormat( DateTimeFormat( dateModified, "yyyy-mm-dd HH:nn:ss" ) )#"">" & renderContent( variables.systemDateRenderer.renderer, dateModified, variables.systemDateRenderer.context ) & "</strong>" ] );

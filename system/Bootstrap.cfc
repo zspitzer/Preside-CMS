@@ -536,14 +536,14 @@ component {
 				}
 			}
 
-			if ( !cleanedCookies.len() ) {
+			if ( !Len( cleanedCookies ) ) {
 				if ( !resp.isCommitted() ) {
 					_resetHttpResponseWithoutCookies( resp );
 				} else {
 					resp.setHeader( "Set-Cookie", "empty=cookie;HttpOnly" );
 				}
 			} else {
-				for( var i=1; i <= cleanedCookies.len(); i++ ) {
+				for( var i=1; i <= Len( cleanedCookies ); i++ ) {
 					if ( i == 1 ) {
 						resp.setHeader( "Set-Cookie", cleanedCookies[ i ] );
 					} else {
@@ -670,7 +670,7 @@ component {
 
 		if ( anyCookiesChanged ) {
 			resp.setHeader( "Set-Cookie", "" );
-			for( var i=1; i <= cleanedCookies.len(); i++ ) {
+			for( var i=1; i <= Len( cleanedCookies ); i++ ) {
 				if ( i == 1 ) {
 					resp.setHeader( "Set-Cookie", cleanedCookies[ i ] );
 				} else {
@@ -688,7 +688,7 @@ component {
 		var existingCookies = {};
 		var anyCleared      = false;
 
-		for( var i=arguments.cookieSet.len(); i>0; i-- ) {
+		for( var i=Len( arguments.cookieSet ); i>0; i-- ) {
 			var cookieName = ListFirst( arguments.cookieSet[ i ], "=" );
 
 			if ( StructKeyExists( existingCookies, cookieName ) ) {

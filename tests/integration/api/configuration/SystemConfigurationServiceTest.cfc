@@ -83,7 +83,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase"{
 
 				var log = mockDao.$callLog().insertData;
 
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( [ { category=category, setting="mysetting", value="this is the value of my setting", site="", tenant_id="" } ] );
 			} );
 
@@ -107,10 +107,10 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase"{
 				);
 
 				var log = mockDao.$callLog().insertData;
-				expect( log.len() ).toBe( 0 );
+				expect( Len( log ) ).toBe( 0 );
 
 				log = mockDao.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 			} );
 
 			it( "should insert a new db record with site ID when site id passed", function(){
@@ -135,7 +135,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase"{
 
 				var log = mockDao.$callLog().insertData;
 
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( [ { category=category, setting="mysetting", value="this is the value of my setting", site=siteId, tenant_id="" } ] );
 			} );
 
@@ -162,7 +162,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase"{
 
 				var log = mockCache.$callLog().clearByKeySnippet;
 
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  keySnippet = "^setting\.#category#\."
 					, regex      = true
@@ -193,7 +193,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase"{
 
 				var log = mockDao.$callLog().insertData;
 
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( [ { category=category, setting="mysetting", value="this is the value of my setting", site="", tenant_id=customTenantId } ] );
 			} );
 

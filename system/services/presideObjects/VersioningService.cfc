@@ -390,7 +390,7 @@ component {
 	}
 
 	public boolean function dataHasChanged() {
-		return getChangedFields( argumentCollection=arguments ).len() > 0;
+		return Len( getChangedFields( argumentCollection=arguments ) ) > 0;
 	}
 
 	public numeric function getLatestVersionNumber(

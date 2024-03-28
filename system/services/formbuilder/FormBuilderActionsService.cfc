@@ -263,7 +263,7 @@ component {
 		var actionDao    = $getPresideObject( "formbuilder_formaction" );
 		var updatedCount = 0;
 
-		for( var i=1; i<=arguments.actions.len(); i++ ){
+		for( var i=1; i<=Len( arguments.actions ); i++ ){
 			var id = arguments.actions[ i ];
 
 			if ( IsSimpleValue( id ) && Len( Trim( id) ) ) {

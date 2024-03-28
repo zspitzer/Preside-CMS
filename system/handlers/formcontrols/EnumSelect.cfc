@@ -8,7 +8,7 @@ component {
 		args.labels       = [ "" ];
 		args.values       = [ "" ];
 
-		if ( !items.len() ) {
+		if ( !Len( items ) ) {
 		    return "";
 		}
 

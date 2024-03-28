@@ -30,7 +30,7 @@ component {
 	private string function _queryString( required string querystring, struct args={} ) {
 		var extraQs = args.queryString ?: "";
 
-		if ( extraQs.len() ) {
+		if ( Len( extraQs ) ) {
 			return arguments.queryString & "&" & extraQs;
 		}
 

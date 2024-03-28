@@ -1,7 +1,7 @@
 component {
 	private string function getDefaultLinkText( event, rc, prc, args={} ) {
 		var assetId = args.asset ?: "";
-		if ( assetId.len() ) {
+		if ( Len( assetId ) ) {
 			return renderLabel( "asset", assetId );
 		}
 

@@ -5,7 +5,7 @@ component {
 	public string function index( event, rc, prc, args={} ) {
 		var objectName = args.exportObject ?: ( prc.record.object_name ?: ( rc.object ?: "" ) );
 
-		if ( !objectName.len() ) {
+		if ( !Len( objectName ) ) {
 			return "";
 		}
 

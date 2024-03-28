@@ -9,11 +9,11 @@ component {
 	private string function renderConfiguredField( string value="", struct config={} ) {
 		var ids = value.trim().listToArray();
 
-		if ( !ids.len() ) {
+		if ( !Len( ids ) ) {
 			return config.defaultLabel ?: "";
 		}
 
-		if ( ids.len() == 1 ) {
+		if ( Len( ids ) == 1 ) {
 			return renderLabel( objectName="asset", recordId=ids[1] );
 		}
 

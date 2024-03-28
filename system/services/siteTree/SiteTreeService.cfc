@@ -205,7 +205,7 @@ component {
 		var extra  = Duplicate( arguments.extraFilters );
 		var params = {};
 
-		if ( arguments.ids.len() ) {
+		if ( Len( arguments.ids ) ) {
 			extra.append( { filter={ "page.id"=arguments.ids } } );
 		}
 		if ( Len( Trim( arguments.searchQuery ) ) ) {
@@ -347,7 +347,7 @@ component {
 		}
 
 		if ( arguments.cascading ) {
-			for( var i=arguments.ancestors.len(); i >= 1; i-- ){
+			for( var i=Len( arguments.ancestors ); i >= 1; i-- ){
 				value = getPageProperty(
 					  propertyName = arguments.propertyName
 					, page         = arguments.ancestors[i]
@@ -363,7 +363,7 @@ component {
 			}
 		}
 
-		if ( collectedValue.len() ) {
+		if ( Len( collectedValue ) ) {
 			return collectedValue;
 		}
 
@@ -583,7 +583,7 @@ component {
 			var result   = [];
 			var extraFilters = [];
 
-			if ( disallowedPageTypes.len() ) {
+			if ( Len( disallowedPageTypes ) ) {
 				extraFilters.append({
 					  filter = "page_type not in (:page_type)"
 					, filterParams = { page_type = arguments.disallowedPageTypes }
@@ -1679,7 +1679,7 @@ component {
 		var args            = { filter={}, selectFields=[ "page.id" ] };
 		var currentLanguage = $getColdbox().getRequestContext().getLanguage();
 
-		for( var i=1; i<=slugPieces.len(); i++ ) {
+		for( var i=1; i<=Len( slugPieces ); i++ ) {
 			args.filter       = "( IfNull( _translations.slug, page.slug ) = :page.slug and ( _translations.slug is null or _translations._translation_language = :_translations._translation_language ) ) and page.parent_page = :page.parent_page"
 			args.filterParams = {
 				  "page.slug"                           = slugPieces[ i ]

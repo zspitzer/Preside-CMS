@@ -119,7 +119,7 @@ component extends="coldbox.system.web.services.ModuleService" output=false {
 			} );
 
 			// Register module routing entry point pre-pended to routes
-			if( mConfig.entryPoint.len() ){
+			if( Len( mConfig.entryPoint ) ){
 				var parentEntryPoint 		= "";
 				var visitParentEntryPoint 	= function( parent ){
 					var moduleConfig 	= modules[ arguments.parent ];
@@ -169,7 +169,7 @@ component extends="coldbox.system.web.services.ModuleService" output=false {
 				// Process Module Router
 				mConfig.router.getRoutes().each( function( item ){
 					// Incorporate module context
-					if( !item.module.len() ){
+					if( !Len( item.module ) ){
 						item.module = moduleName;
 					}
 					// Add to App Router

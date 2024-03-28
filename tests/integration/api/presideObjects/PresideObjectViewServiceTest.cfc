@@ -27,7 +27,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase"{
 
 				log = mockPresideObjectService.$callLog().selectData;
 
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 
 				expect( log[1].objectName   ?: "" ).toBe( expectedArguments.objectName );
 				expect( log[1].selectFields ?: "" ).toBe( expectedArguments.selectFields );
@@ -68,7 +68,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase"{
 
 				log = mockPresideObjectService.$callLog().selectData;
 
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 
 				actualForwardedArgs = log[1];
 				actualForwardedArgNames = StructKeyArray( actualForwardedArgs );
@@ -106,7 +106,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase"{
 
 				log = mockRendererPlugin.$callLog().renderView;
 
-				expect( log.len() ).toBe( mockData.recordCount );
+				expect( Len( log ) ).toBe( mockData.recordCount );
 
 				for( var i=1; i lte mockData.recordCount; i++ ){
 					expect( log[i].view                ).toBe( "preside-objects/object_b/full" );

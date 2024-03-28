@@ -297,7 +297,7 @@ component extends="preside.system.base.AdminHandler" {
 		var folderId      = rc.toFolder   ?: "";
 		var fromFolder    = rc.fromFolder ?: "";
 
-		if ( assetIds.len() ) {
+		if ( len( assetIds ) ) {
 			if ( !Len( Trim( fromFolder ) ) ) {
 				var asset = assetmanagerService.getAsset( assetIds[1] );
 				fromFolder = asset.asset_folder ?: "";
@@ -1045,7 +1045,7 @@ component extends="preside.system.base.AdminHandler" {
 		var pageSize = 10;
 		var startRow = ( ( pageSize * page ) + 1 ) - pageSize;
 
-		if ( allowedTypes.len() ){
+		if ( Len( allowedTypes ) ){
 			assetFilter.asset_type = allowedTypes;
 		}
 

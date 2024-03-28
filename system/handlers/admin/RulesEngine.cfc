@@ -62,11 +62,11 @@ component extends="preside.system.base.AdminHandler" {
 		var validFilterObjects = [];
 		for( var validContext in validContexts ) {
 			var filterObject = rulesEngineContextService.getContextObject( validContext );
-			if ( filterObject.len() ) {
+			if ( Len( filterObject ) ) {
 				validFilterObjects.append( filterObject );
 			}
 		}
-		if ( validFilterObjects.len() ) {
+		if ( Len( validFilterObjects ) ) {
 			contextAndObjectFilter.filter &= " or rules_engine_condition.filter_object in ( :rules_engine_condition.filter_object )"
 			contextAndObjectFilter.filterParams[ "rules_engine_condition.filter_object" ] = validFilterObjects;
 		}
@@ -140,7 +140,7 @@ component extends="preside.system.base.AdminHandler" {
 			) );
 		}
 
-		if ( objectName.len() ) {
+		if ( Len( objectName ) ) {
 			try {
 				var count = rulesEngineFilterService.getMatchingRecordCount(
 					  objectName      = objectName
@@ -208,7 +208,7 @@ component extends="preside.system.base.AdminHandler" {
 		_checkPermissions( argumentCollection=arguments, key="add" );
 
 		if ( !_conditionToFilterCheck( argumentCollection=arguments, action="quickadd", formData=formData, ajax=true ) ) {
-			if ( ( rc.convertAction ?: "" ) == "filter" && ( rc.filter_object ?: "" ).len() ) {
+			if ( ( rc.convertAction ?: "" ) == "filter" && Len( rc.filter_object ?: "" ) ) {
 				rc.context = "";
 
 				formName = "preside-objects.#object#.admin.quickadd.filter";
@@ -251,7 +251,7 @@ component extends="preside.system.base.AdminHandler" {
 		var formData = event.getCollectionForForm( formName );
 
 		if ( Len( Trim( record.filter_object ) ) || !_conditionToFilterCheck( argumentCollection=arguments, action="quickedit", formData=formData, ajax=true ) ) {
-			if ( Len( Trim( record.filter_object ) ) || ( rc.convertAction ?: "" ) == "filter" && ( rc.filter_object ?: "" ).len() ) {
+			if ( Len( Trim( record.filter_object ) ) || ( rc.convertAction ?: "" ) == "filter" && Len( rc.filter_object ?: "" ) ) {
 				rc.context = "";
 
 				formName = "preside-objects.#object#.admin.quickedit.filter";
@@ -590,7 +590,7 @@ component extends="preside.system.base.AdminHandler" {
 		}
 		var objectsFilterable = rulesEngineConditionService.listObjectsFilterableByCondition( expressionArray );
 
-		if ( objectsFilterable.len() == 1 ) {
+		if ( Len( objectsFilterable ) == 1 ) {
 			if ( arguments.ajax ) {
 				var objectName      = renderContent( "objectName", objectsFilterable[ 1 ] );
 				var response = { success=false, convertPrompt=renderView( view="/admin/datamanager/rules_engine_condition/convertConditionToFilter", args={

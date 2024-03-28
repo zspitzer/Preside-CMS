@@ -115,7 +115,7 @@ component displayName="Website user action service" {
 			filter[ "website_user_action.visitor" ] = _getWebsiteVisitorService().getVisitorId();
 		}
 
-		if ( arguments.identifiers.len() ) {
+		if ( Len( arguments.identifiers ) ) {
 			filter[ "website_user_action.identifier" ] = arguments.identifiers;
 		}
 
@@ -171,7 +171,7 @@ component displayName="Website user action service" {
 			});
 		}
 
-		if ( arguments.identifiers.len() ) {
+		if ( Len( arguments.identifiers ) ) {
 			filter[ "website_user_action.identifier" ] = arguments.identifiers;
 		}
 
@@ -221,7 +221,7 @@ component displayName="Website user action service" {
 			});
 		}
 
-		if ( arguments.identifiers.len() ) {
+		if ( Len( arguments.identifiers ) ) {
 			filter[ "website_user_action.identifier" ] = arguments.identifiers;
 		}
 
@@ -245,7 +245,7 @@ component displayName="Website user action service" {
 		,          numeric qty
 		,          string  qtyOperator        = "gt"
 	) {
-		if ( arguments.identifiers.len() > 1 && arguments.allIdentifiers ) {
+		if ( Len( arguments.identifiers ) > 1 && arguments.allIdentifiers ) {
 			var filters = [];
 
 			for( var identifier in arguments.identifiers ) {
@@ -272,7 +272,7 @@ component displayName="Website user action service" {
 			subqueryFilter &= " and actions.datecreated <= :dateto#paramSuffix#";
 			params[ "dateto#paramSuffix#" ] = { type="cf_sql_timestamp", value=arguments.dateto };
 		}
-		if ( arguments.identifiers.len() ) {
+		if ( Len( arguments.identifiers ) ) {
 			subqueryFilter &= " and actions.identifier in ( :identifiers#paramSuffix# )";
 			params[ "identifiers#paramSuffix#" ] = { type="cf_sql_varchar", value=arguments.identifiers.toList(), list=true };
 		}

@@ -23,7 +23,7 @@ component {
 				data     = arguments.batchedRecordIterator();
 				dataCols = ListToArray( data.columnList );
 
-				if ( !row.len() ) {
+				if ( !Len( row ) ) {
 					for( var field in dataCols ) {
 						row.append( arguments.fieldTitles[ field ] ?: field );
 					}

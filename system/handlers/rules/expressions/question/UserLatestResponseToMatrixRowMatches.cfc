@@ -23,7 +23,7 @@ component {
 	) {
 		var userId = payload.user.id ?: "";
 
-		if ( !userId.len() ) {
+		if ( !Len( userId ) ) {
 			return false;
 		}
 

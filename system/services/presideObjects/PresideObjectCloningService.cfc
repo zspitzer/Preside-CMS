@@ -269,7 +269,7 @@ component {
 			return false;
 		}
 
-		return listCloneableFields( arguments.objectName ).len() > 0;
+		return listCloneableFields( Len( arguments.objectName) ) > 0;
 	}
 
 	/**

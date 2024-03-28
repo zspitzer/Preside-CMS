@@ -17,7 +17,7 @@ component extends="preside.system.base.AdminHandler" {
 	public void function index( event, rc, prc ) {
 		prc.apis = presideRestService.listApis();
 
-		for( var i=prc.apis.len(); i>0; i-- ) {
+		for( var i=Len( prc.apis ); i>0; i-- ) {
 			if ( IsTrue( prc.apis[ i ].hideFromManager ?: "" ) ) {
 				prc.apis.deleteAt( i );
 			}

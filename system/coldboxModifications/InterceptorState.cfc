@@ -30,7 +30,7 @@ component {
 	public any function unregister( required string interceptorKey ) {
 		var unregistered = false;
 
-		for( var i=instance.pool.len(); i>0; i-- ) {
+		for( var i=Len( instance.pool ); i>0; i-- ) {
 			if ( instance.pool[ i ].key == arguments.interceptorKey ) {
 				ArrayDeleteAt( instance.pool, i );
 				unregistered = true;

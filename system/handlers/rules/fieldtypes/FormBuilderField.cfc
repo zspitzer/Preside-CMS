@@ -9,7 +9,7 @@ component {
 	private string function renderConfiguredField( string value="", struct config={} ) {
 		var id = Trim( arguments.value );
 
-		if ( !id.len() ) {
+		if ( !Len( id ) ) {
 			return config.defaultLabel ?: "";
 		}
 

@@ -104,7 +104,7 @@ component displayName="Admin permissions service" {
 
 		} else if ( Len( Trim( arguments.user ) ) ) {
 			return _getUserPermissions( arguments.user );
-		} else if ( arguments.filter.len() ) {
+		} else if ( Len( arguments.filter ) ) {
 			return _filterPermissions( arguments.filter );
 		}
 
@@ -144,7 +144,7 @@ component displayName="Admin permissions service" {
 			hasPermission = false;
 		} else if ( arguments.userId == _getLoginService().getLoggedInUserId() && _getLoginService().isSystemUser() ) {
 			hasPermission = true;
-		} else if ( Len( Trim( arguments.context ) ) && arguments.contextKeys.len() ) {
+		} else if ( Len( Trim( arguments.context ) ) && Len( arguments.contextKeys ) ) {
 			var contextPerm = _getContextPermission( argumentCollection=arguments );
 			if ( !IsNull( local.contextPerm ) && IsBoolean( contextPerm ) ) {
 				hasPermission = contextPerm;
@@ -194,7 +194,7 @@ component displayName="Admin permissions service" {
 					result[ key ] = true;
 				}
 			} else {
-				if ( Len( Trim( arguments.context ) ) && arguments.contextKeys.len() ) {
+				if ( Len( Trim( arguments.context ) ) && Len( arguments.contextKeys ) ) {
 					var contextPerms = _getMultiContextPermissions( argumentCollection=arguments );
 					for( var key in result ) {
 						if ( StructKeyExists( contextPerms, key ) ) {
@@ -205,7 +205,7 @@ component displayName="Admin permissions service" {
 					}
 				}
 
-				if ( keysWithoutContext.len() ) {
+				if ( Len( keysWithoutContext ) ) {
 					request._userPermissionKeys = request._userPermissionKeys ?: listPermissionKeys( user=arguments.userId );
 					for( var key in keysWithoutContext ) {
 						local.result[ key ] = ArrayContainsNoCase( request._userPermissionKeys, key );
@@ -325,7 +325,7 @@ component displayName="Admin permissions service" {
 			};
 		}
 
-		if ( arguments.contextKeys.len() ) {
+		if ( Len( arguments.contextKeys ) ) {
 			dbData = _getContextPermDao().selectData(
 				  selectFields = [ "granted", "permission_key", "security_group", "security_group.label as group_name" ]
 				, filter       = {

@@ -14,11 +14,11 @@ component extends="preside.system.base.SystemPresideObject" {
 	public string function generateToken() {
 		var chars       = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789=";
 		var token       = "";
-		var charsLength = chars.len();
+		var charsLength = Len( chars );
 
 		do {
 			token &= chars[ RandRange( 1, charsLength ) ];
-		} while( token.len() < 32 )
+		} while( Len( token ) < 32 )
 
 		return token;
 	}

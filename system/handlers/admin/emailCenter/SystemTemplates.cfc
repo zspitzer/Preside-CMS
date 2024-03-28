@@ -126,10 +126,10 @@ component extends="preside.system.base.AdminHandler" {
 			, content  = ( formData.text_body ?: "" )
 		);
 
-		if ( missingHtmlParams.len() ) {
+		if ( Len( missingHtmlParams ) ) {
 			validationResult.addError( "html_body", "cms:emailcenter.variables.missing.validation.error", [ missingHtmlParams.toList( ", " ) ] );
 		}
-		if ( missingTextParams.len() ) {
+		if ( Len( missingTextParams ) ) {
 			validationResult.addError( "text_body", "cms:emailcenter.variables.missing.validation.error", [ missingTextParams.toList( ", " ) ] );
 		}
 

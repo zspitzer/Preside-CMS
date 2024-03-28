@@ -130,14 +130,14 @@ component displayName="RulesEngine Context Service" {
 		var objects    = [];
 
 		if ( arguments.includeChildContexts ) {
-			if ( mainObject.len() ) {
+			if ( Len( mainObject ) ) {
 				objects.append( mainObject );
 			}
 
 			var subContexts  = contexts[ arguments.context ].subcontexts ?: [];
 			for( var subContext in subContexts ) {
 				var subobjects = getContextObject( subContext, true );
-				if ( subobjects.len() ) {
+				if ( Len( subobjects ) ) {
 					objects.append( subobjects, true );
 				}
 			}

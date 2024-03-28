@@ -140,7 +140,7 @@ component {
 		for( var objName in unMergedObjects ) {
 			merged[ objName ] = unMergedObjects[ objName ][ 1 ];
 
-			for( var i=2; i lte unMergedObjects[ objName ].len(); i++ ) {
+			for( var i=2; i lte Len( unMergedObjects[ objName ] ); i++ ) {
 				merged[ objName ] = new Merger().mergeObjects( merged[ objName ], unMergedObjects[ objName ][ i ] );
 			}
 
@@ -280,7 +280,7 @@ component {
 				prop.dbtype = "none";
 			}
 
-			if ( ( prop.formula ?: "" ).len() || ( prop.relationship ?: "" ) == "select-data-view" ) {
+			if ( Len( prop.formula ?: "" ) || ( prop.relationship ?: "" ) == "select-data-view" ) {
 				prop.dbtype = "none";
 				prop.control = "none";
 			}
@@ -349,7 +349,7 @@ component {
 				arguments.meta.properties[ idField ] = defaults[ "id" ];
 				ArrayPrepend( arguments.meta.propertyNames, idField );
 			}
-			if ( idField.len() && idField != "id" && !arguments.meta.propertyNames.containsNoCase( "id" ) ) {
+			if ( Len( idField ) && idField != "id" && !arguments.meta.propertyNames.containsNoCase( "id" ) ) {
 				arguments.meta.properties[ idField ].aliases = ( arguments.meta.properties[ idField ].aliases ?: "" ).listAppend( "id" );
 			}
 		}
@@ -361,7 +361,7 @@ component {
 				arguments.meta.properties[ dateCreatedField ] = defaults[ "dateCreated" ];
 				ArrayAppend( arguments.meta.propertyNames, dateCreatedField );
 			}
-			if ( dateCreatedField.len() && dateCreatedField != "dateCreated" && !arguments.meta.propertyNames.containsNoCase( "dateCreated" ) ) {
+			if ( Len( dateCreatedField ) && dateCreatedField != "dateCreated" && !arguments.meta.propertyNames.containsNoCase( "dateCreated" ) ) {
 				arguments.meta.properties[ dateCreatedField ].aliases = ( arguments.meta.properties[ dateCreatedField ].aliases ?: "" ).listAppend( "dateCreated" );
 			}
 		}
@@ -373,7 +373,7 @@ component {
 				arguments.meta.properties[ dateModifiedField ] = defaults[ "datemodified" ];
 				ArrayAppend( arguments.meta.propertyNames, dateModifiedField );
 			}
-			if ( dateModifiedField.len() && dateModifiedField != "dateModified" && !arguments.meta.propertyNames.containsNoCase( "dateModified" ) ) {
+			if ( Len( dateModifiedField ) && dateModifiedField != "dateModified" && !arguments.meta.propertyNames.containsNoCase( "dateModified" ) ) {
 				arguments.meta.properties[ dateModifiedField ].aliases = ( arguments.meta.properties[ dateModifiedField ].aliases ?: "" ).listAppend( "dateModified" );
 			}
 		}

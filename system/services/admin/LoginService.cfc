@@ -96,7 +96,7 @@ component displayName="Admin login service" {
 	public boolean function isPasswordCorrect( required string password ) {
 		var userId = getLoggedInUserId();
 
-		if ( !userId.len() ) {
+		if ( !Len( userId ) ) {
 			return false;
 		}
 

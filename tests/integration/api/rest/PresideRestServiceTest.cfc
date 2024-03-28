@@ -61,7 +61,7 @@ component extends="testbox.system.BaseSpec"{
 				restService.onRestRequest( "/blah", mockRequestContext );
 
 				var log = restService.$callLog()._announceInterception;
-				expect( log.len() > 0 ).toBe( true );
+				expect( Len( log ) > 0 ).toBe( true );
 				expect( log[2] ).toBe([ "onRestRequest", { restRequest=restRequest, restResponse=restResponse } ]);
 			} );
 
@@ -179,7 +179,7 @@ component extends="testbox.system.BaseSpec"{
 				restService.processRequest( restRequest=restRequest, restResponse=restResponse, requestContext=mockRequestContext );
 
 				var log = restResponse.$callLog().setError;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  errorCode = 404
 					, title     = "REST API Resource not found"
@@ -205,7 +205,7 @@ component extends="testbox.system.BaseSpec"{
 				restService.processRequest( restRequest=restRequest, restResponse=restResponse, requestContext=mockRequestContext );
 
 				var log = restResponse.$callLog().setError;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  errorCode = 405
 					, title     = "REST API Method not supported"

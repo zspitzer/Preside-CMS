@@ -12,7 +12,7 @@ component {
 	private string function renderConfiguredField( string value="", struct config={} ) {
 		var extensions = ListToArray( Trim( value ) );
 
-		if ( !extensions.len() ) {
+		if ( !Len( extensions ) ) {
 			return config.defaultLabel ?: "";
 		}
 

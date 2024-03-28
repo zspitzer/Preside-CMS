@@ -17,7 +17,7 @@ component {
 			}
 		}
 
-		if ( labels.len() ) {
+		if ( Len( labels ) ) {
 			return labels.toList( ", " );
 		}
 

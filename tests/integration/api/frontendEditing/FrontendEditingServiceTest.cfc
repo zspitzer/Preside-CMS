@@ -21,7 +21,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase" {
 				) ).toBeTrue();
 
 				var log = mockPresideObjectService.$callLog().updateData;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  objectName = objectName
 					, data       = { someProperty=content }
@@ -48,7 +48,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase" {
 				) ).toBeTrue();
 
 				var log = mockSiteTreeService.$callLog().editPage;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  id      = recordId
 					, isDraft = true
@@ -75,7 +75,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase" {
 				) ).toBeTrue();
 
 				var log = mockSiteTreeService.$callLog().editPage;
-				expect( log.len() ).toBe( 1 );
+				expect( Len( log ) ).toBe( 1 );
 				expect( log[1] ).toBe( {
 					  id      = recordId
 					, isDraft = true

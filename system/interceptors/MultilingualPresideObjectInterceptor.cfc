@@ -26,7 +26,7 @@ component extends="coldbox.system.Interceptor" {
 	public void function postPrepareTableJoins( event, interceptData ) {
 		if ( featureService.isFeatureEnabled( "multilingual" ) && StructKeyExists( interceptData, "tableJoins" ) && StructKeyExists( interceptData, "preparedFilter" ) ) {
 			var language = event.getLanguage();
-			if ( language.len() ){
+			if ( Len( language ) ){
 				multilingualPresideObjectService.addLanguageClauseToTranslationJoins(
 					  argumentCollection = interceptData
 					, language           = language
@@ -38,7 +38,7 @@ component extends="coldbox.system.Interceptor" {
 	public void function postPrepareVersionSelect( event, interceptData ) {
 		if ( featureService.isFeatureEnabled( "multilingual" ) ) {
 			var language = event.getLanguage();
-			if ( language.len() ){
+			if ( Len( language ) ){
 				multilingualPresideObjectService.addVersioningClausesToTranslationJoins( selectDataArgs=interceptData );
 			}
 		}
@@ -47,7 +47,7 @@ component extends="coldbox.system.Interceptor" {
 	public void function onCreateSelectDataCacheKey( event, interceptData ) {
 		if ( featureService.isFeatureEnabled( "multilingual" ) ) {
 			var language = event.getLanguage();
-			if ( language.len() ){
+			if ( Len( language ) ){
 				interceptData.cacheKey = interceptData.cacheKey ?: "";
 				interceptData.cacheKey &= "_" & language;
 				interceptData.cacheKey &= "_" & loginService.isLoggedIn();

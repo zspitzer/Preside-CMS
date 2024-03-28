@@ -264,7 +264,7 @@ component extends="preside.system.base.adminHandler" {
 		var exportFileName  = task.result.exportFileName ?: "";
 		var mimetype        = task.result.mimetype       ?: "";
 
-		if ( task.isEmpty() || !localExportFile.len() || !FileExists( localExportFile ) ) {
+		if ( task.isEmpty() || !Len( localExportFile ) || !FileExists( localExportFile ) ) {
 			event.notFound();
 		}
 

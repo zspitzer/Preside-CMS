@@ -81,7 +81,7 @@ component singleton=true {
 		var sql    = "";
 		var params = [];
 
-		if ( existingHash.len() ) {
+		if ( Len( existingHash ) ) {
 			var sql    = "update _preside_generated_entity_versions set version_hash = ?, date_modified = ? where entity_type = ? and entity_name = ? and parent_entity_name ";
 			var params = [
 				  { value=arguments.version   , type="cf_sql_varchar" }
@@ -131,7 +131,7 @@ component singleton=true {
 			return [];
 		}
 
-		if ( existingHash.len() ) {
+		if ( Len( existingHash ) ) {
 			sql = "update _preside_generated_entity_versions set version_hash = '#arguments.version#', date_modified = #nowFn# where entity_type = '#arguments.entityType#' and entity_name = '#arguments.entityName#' and parent_entity_name ";
 
 			if ( StructKeyExists( arguments, "parentEntity" ) ) {

@@ -17,17 +17,17 @@ component {
 	}
 
 	private string function localePicker( event, rc, prc, args={} ) {
-		args.locales = adminLanguages.len() ? adminLanguages : Duplicate( resourceBundleService.listLocales() );
+		args.locales = Len( adminLanguages ) ? adminLanguages : Duplicate( resourceBundleService.listLocales() );
 
-		if ( args.locales.len() ) {
+		if ( Len( args.locales ) ) {
 			var defaultLocale = i18n.getDefaultLocale();
 			var currentLocale = i18n.getfwLocale();
 
-			if ( !adminLanguages.len() && !args.locales.containsNoCase( "en" ) ) {
+			if ( !Len( adminLanguages ) && !args.locales.containsNoCase( "en" ) ) {
 				args.locales.append( "en" );
 			}
 
-			if ( args.locales.len() > 1 ) {
+			if ( Len( args.locales ) > 1 ) {
 				args.locales = args.locales.map( function( locale ){
 					var language = ListFirst( locale, "_" );
 					var country  = ListLen( locale, "_" ) > 1 ? ListRest( locale, "_" ) : "";

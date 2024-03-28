@@ -30,7 +30,7 @@ component {
 		var logArray = ListToArray( arguments.log, Chr(10) );
 		var outputArray = [];
 
-		for( var i=arguments.fetchAfterLines+1; i <= logArray.len(); i++ ){
+		for( var i=arguments.fetchAfterLines+1; i <= Len( logArray ); i++ ){
 			var line          = logArray[ i ];
 			var logClass      = LCase( ReReplace( line, '^\[(.*?)\].*$', '\1' ) );
 			var dateTimeRegex = "(\[20[0-9]{2}\-[0-9]{2}\-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\])";

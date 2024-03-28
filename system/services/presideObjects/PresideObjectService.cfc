@@ -554,10 +554,10 @@ component displayName="Preside Object Service" {
 			}
 		}
 
-		if ( dateCreatedField.len() && StructKeyExists( obj.properties, dateCreatedField ) && !StructKeyExists( cleanedData, dateCreatedField ) ) {
+		if ( Len( dateCreatedField ) && StructKeyExists( obj.properties, dateCreatedField ) && !StructKeyExists( cleanedData, dateCreatedField ) ) {
 			cleanedData[ dateCreatedField ] = rightNow;
 		}
-		if ( dateModifiedField.len() && StructKeyExists( obj.properties, dateModifiedField ) && !StructKeyExists( cleanedData, dateModifiedField ) ) {
+		if ( Len( dateModifiedField ) && StructKeyExists( obj.properties, dateModifiedField ) && !StructKeyExists( cleanedData, dateModifiedField ) ) {
 			cleanedData[ dateModifiedField ] = rightNow;
 		}
 		if ( ListFindNoCase( obj.dbFieldList, idField ) && StructKeyExists( obj.properties, idField ) ) {
@@ -1205,7 +1205,7 @@ component displayName="Preside Object Service" {
 		if ( not ArrayLen( selectDataArgs.selectFields ) ) {
 			var dbAdapter = getDbAdapterForObject( relatedTo );
 			selectDataArgs.selectFields = ListToArray( obj.meta.dbFieldList );
-			for( var i=1; i <= selectDataArgs.selectFields.len(); i++ ) {
+			for( var i=1; i <= Len( selectDataArgs.selectFields ); i++ ) {
 				selectDataArgs.selectFields[i] = arguments.propertyName & "." & selectDataArgs.selectFields[i];
 			}
 		}
@@ -1302,7 +1302,7 @@ component displayName="Preside Object Service" {
 					}
 				}
 
-				anythingChanged = anythingChanged || newAddedRecords.len();
+				anythingChanged = anythingChanged || Len( newAddedRecords );
 
 				if ( anythingChanged && !arguments.isDraft ) {
 					deleteData(
@@ -1311,7 +1311,7 @@ component displayName="Preside Object Service" {
 					);
 
 
-					for( var i=1; i <=newRecords.len(); i++ ) {
+					for( var i=1; i <=Len( newRecords ); i++ ) {
 						insertData(
 							  objectName    = pivotTable
 							, useVersioning = false
@@ -1380,7 +1380,7 @@ component displayName="Preside Object Service" {
 			var filter = "#targetObjectName#.#LCase( targetFk )# = :#targetObjectName#.#targetFk#";
 			var params = { "#targetObjectName#.#targetFk#"=arguments.sourceId };
 
-			if ( records.len() ) {
+			if ( Len( records ) ) {
 				filter &= " and #targetObjectName#.id not in (:#targetObjectName#.id)";
 				params[ "#targetObjectName#.id" ] = records;
 			}
@@ -1390,7 +1390,7 @@ component displayName="Preside Object Service" {
 				, data         = { "#targetFk#" = "" }
 			);
 		}
-		if ( records.len() ) {
+		if ( Len( records ) ) {
 			targetObject.updateData(
 				  filter = { id=records }
 				, data   = { "#targetFk#" = arguments.sourceId }
@@ -1451,7 +1451,7 @@ component displayName="Preside Object Service" {
 			}
 		}
 
-		if ( existingIds.len() ) {
+		if ( Len( existingIds ) ) {
 			extraFilters.append({
 				  filter       = "#targetObjectName#.#targetIdField# not in ( :#targetObjectName#.#targetIdField# )"
 				, filterParams = { "#targetObjectName#.#targetIdField#"=existingIds }
@@ -1517,7 +1517,7 @@ component displayName="Preside Object Service" {
 		var manyToManyData = {};
 
 		for( var prop in props ) {
-			if ( ( !arguments.selectFields.len() || arguments.selectFields.containsNoCase( prop ) ) ) {
+			if ( ( !Len( arguments.selectFields ) || arguments.selectFields.containsNoCase( prop ) ) ) {
 				if ( isManyToManyProperty( arguments.objectName, prop ) ) {
 
 					var idField        = getIdField( props[ prop ].relatedTo ?: "" );
@@ -2210,7 +2210,7 @@ component displayName="Preside Object Service" {
 				return "oneToManyManager";
 		}
 
-		if ( arguments.enum.len() ) {
+		if ( Len( arguments.enum ) ) {
 			return "enumSelect";
 		}
 
@@ -2406,7 +2406,7 @@ component displayName="Preside Object Service" {
 			}
 		}
 
-		for( var i=1; i <=fields.len(); i++ ){
+		for( var i=1; i <=Len( fields ); i++ ){
 			var objName = "";
 			var match   = ReFindNoCase( "([\S]+\.)?\$\{labelfield\}", fields[i], 1, true );
 
@@ -2455,7 +2455,7 @@ component displayName="Preside Object Service" {
 		if ( arguments.includeAllFormulaFields ) {
 			arguments.extraSelectFields.append( listToArray( obj.formulaFieldList ?: "" ), true );
 		}
-		if ( arguments.extraSelectFields.len() ) {
+		if ( Len( arguments.extraSelectFields ) ) {
 			var extraFields = parseSelectFields(
 				  objectName   = arguments.objectName
 				, selectFields = arguments.extraSelectFields
@@ -2600,7 +2600,7 @@ component displayName="Preside Object Service" {
 			formula = _optimiseAggregateFunctions( formula );
 
 			if ( formula.findNoCase( "${prefix}" ) ) {
-				if ( prefix.len() ) {
+				if ( Len( prefix ) ) {
 					formula = formula.reReplaceNoCase( "\$\{prefix\}(\S+)?\.", "${prefix}$\1.", "all" );
 					formula = formula.reReplaceNoCase( "\$\{prefix\}([^\$])" , "${prefix}.\1", "all" );
 				} else {
@@ -2614,13 +2614,13 @@ component displayName="Preside Object Service" {
 				formula = formula & "{#Len( prefix ) ? prefix : "-"#}{#propertyName#}";
 			}
 
-			if ( arguments.includeAlias && !alias.len() ) {
+			if ( arguments.includeAlias && !Len( alias ) ) {
 				expanded = formula & " as #dbAdapter.escapeEntity( propertyName )#";
 			} else {
 				expanded = formula;
 			}
 
-			if ( alias.len() ) {
+			if ( Len( alias ) ) {
 				expanded &= " #alias#";
 			}
 		}
@@ -3169,7 +3169,7 @@ component displayName="Preside Object Service" {
 		}
 
 		if ( StructKeyExists( arguments, "selectFields" ) ) {
-			for( var i=1; i<=arguments.selectFields.len(); i++ ) {
+			for( var i=1; i<=Len(arguments.selectFields); i++ ) {
 				arguments.selectFields[ i ] = _simpleReplacer( arguments.selectFields[ i ], arguments.objectName, true );
 			}
 		}
@@ -3231,7 +3231,7 @@ component displayName="Preside Object Service" {
 		var results = [];
 
 		if ( StructKeyExists( matches, "$1" ) ) {
-			for( var i=1; i<=matches.$1.len(); i++ ) {
+			for( var i=1; i<=Len(matches.$1); i++ ) {
 				var fullMatch   = matches.$1[i] & matches.$2[i] & matches.$6[i] & "." & matches.$7[i] & matches.$8[i] & matches.$9[i];
 				var objPath     = matches.$2[i];
 				var propName    = matches.$8[i];
@@ -3285,7 +3285,7 @@ component displayName="Preside Object Service" {
 		for( var r in fAndRResult ){
 			replaced = replaced.replace( r.fullMatch, r.replaceWith, "all" );
 		}
-		if ( addAsAlias && fAndRResult.len() && !plainString.containsNoCase( " as " ) ) {
+		if ( addAsAlias && Len(fAndRResult) && !plainString.containsNoCase( " as " ) ) {
 			replaced &= " as " & fAndRResult[1].aliasProperty;
 		}
 
@@ -3569,7 +3569,7 @@ component displayName="Preside Object Service" {
 			}
 		}
 
-		if ( manyToManyObjects.len() ) {
+		if ( Len( manyToManyObjects ) ) {
 			for( var join in arguments.joins ){
 				if ( Len( join.joinFromObject ?: "" ) && StructKeyExists( manyToManyObjects, join.joinFromObject ) ) {
 					join.joinFromObject = getVersionObjectName( join.joinFromObject );
@@ -3590,7 +3590,7 @@ component displayName="Preside Object Service" {
 		var convertedArray = [];
 		var escapedAlias = dbAdapter.escapeEntity( arguments.tableAlias );
 
-		for( var i=1; i <= fieldArray.len(); i++ ){
+		for( var i=1; i <= Len( fieldArray ); i++ ){
 			var fieldName = escapedAlias & "." & dbAdapter.escapeEntity( fieldArray[i] );
 			if( !ArrayContains( convertedArray, fieldName ) ){
 				convertedArray.append( fieldName );
@@ -3821,7 +3821,7 @@ component displayName="Preside Object Service" {
 			, filterParams = Duplicate( arguments.filterParams )
 			, having       = Duplicate( arguments.having )
 		};
-		if ( IsStruct( result.filter ) && ( arguments.extraFilters.len() || arguments.savedFilters.len() ) ) {
+		if ( IsStruct( result.filter ) && ( Len( arguments.extraFilters ) || Len( arguments.savedFilters ) ) ) {
 			result.filterParams.append( Duplicate( result.filter ) );
 		}
 
@@ -3871,7 +3871,7 @@ component displayName="Preside Object Service" {
 			);
 		}
 
-		if ( !IsStruct( result.filter ) || result.having.len() ) {
+		if ( !IsStruct( result.filter ) || Len( result.having ) ) {
 			for( var key in result.filterParams ) {
 				var aliasedKey = _autoPrefixBareProperty( objectName=arguments.objectName, propertyName=key, dbAdapter=arguments.adapter, escapeEntities=false );
 				if ( aliasedKey != key ) {

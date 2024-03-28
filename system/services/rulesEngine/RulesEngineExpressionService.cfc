@@ -73,7 +73,7 @@ component displayName="RulesEngine Expression Service" {
 			if ( filterOnContext && !(contexts.containsNoCase( "global" ) || contexts.containsNoCase( arguments.context ) ) ) {
 				continue;
 			}
-			if ( filterOnObject && !( ( allExpressions[ expressionId ].filterObjects ?: [] ).len() && allExpressions[ expressionId ].filterObjects.containsNoCase( arguments.filterObject ) ) ) {
+			if ( filterOnObject && !( Len( allExpressions[ expressionId ].filterObjects ?: [] ) && allExpressions[ expressionId ].filterObjects.containsNoCase( arguments.filterObject ) ) ) {
 				continue;
 			}
 
@@ -390,7 +390,7 @@ component displayName="RulesEngine Expression Service" {
 			return false;
 		}
 
-		if ( arguments.filterObject.len() ) {
+		if ( Len( arguments.filterObject ) ) {
 			if ( !expression.filterObjects.containsNoCase( arguments.filterObject ) ) {
 				arguments.validationResult.setGeneralMessage( "The [#arguments.expressionId#] expression cannot be used to filter the [#arguments.filterObject#] object" );
 				return false;
@@ -489,7 +489,7 @@ component displayName="RulesEngine Expression Service" {
 	public string function translateExpressionCategory( required string category ){
 		var defaultTranslation = $translateResource( "rules.categories:#arguments.category#", "" );
 
-		if ( defaultTranslation.len() ) {
+		if ( Len( defaultTranslation ) ) {
 			return defaultTranslation;
 		}
 
@@ -620,7 +620,7 @@ component displayName="RulesEngine Expression Service" {
 		}
 		if ( Len( Trim( arguments.context ) ) ) {
 			var contextObjects = contextService.getContextObject( arguments.context, true );
-			if ( contextObjects.len() ) {
+			if ( Len( contextObjects ) ) {
 				objects.append( contextObjects, true );
 			}
 		}
@@ -628,7 +628,7 @@ component displayName="RulesEngine Expression Service" {
 		for( var objectName in objects ) {
 			if ( !StructKeyExists( variables._lazyLoadDone, objectName ) ) {
 				var expressions = _getAutoExpressionGenerator().getAutoExpressionsForObject( objectName );
-				if ( expressions.len() ) {
+				if ( Len( expressions ) ) {
 					contextService.addContext( id="presideobject_" & objectName, object=objectName, visible=false );
 					for( var expression in expressions ) {
 						addExpression( argumentCollection=expression );

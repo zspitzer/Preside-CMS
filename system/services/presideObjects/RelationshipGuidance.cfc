@@ -366,7 +366,7 @@ component singleton=true {
 			var relationship = _findColumnRelationship( currentSource, relationshipPiece );
 
 			if ( not StructCount( relationship ) ) {
-				return pathPieces.len() == 1 ? pathPieces[1] : "";
+				return Len( pathPieces ) == 1 ? pathPieces[1] : "";
 				break;
 			}
 
