@@ -2,7 +2,7 @@
 	linkTypes = prc.linkTypes ?: [];
 	linkType  = LCase( rc.type ?: ( linkTypes[ 1 ] ?: "" ) );
 
-	if ( !ArrayFind( linkTypes, linkType ) ) {
+	if ( !ArrayContains( linkTypes, linkType ) ) {
 		linkType = linkTypes[ 1 ] ?: "";
 	}
 

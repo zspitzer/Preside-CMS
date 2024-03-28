@@ -855,7 +855,7 @@ component displayName="Preside Object Service" {
 					if ( StructCount( manyToManyData ) && ArrayLen( versionedManyToManyFields ) ) {
 						var oldManyToManySelectFields = [];
 						for( var field in manyToManyData ) {
-							if ( ArrayFind( versionedManyToManyFields, field ) ) {
+							if ( ArrayContains( versionedManyToManyFields, field ) ) {
 								ArrayAppend( oldManyToManySelectFields, field );
 							}
 						}
@@ -2514,7 +2514,7 @@ component displayName="Preside Object Service" {
 							arrayAppend( fieldsToCheck, "${labelfield} as #field#" );
 						}
 
-						if( !ArrayFindNoCase( selectFields, field ) ) {
+						if( !ArrayContainsNoCase( selectFields, field ) ) {
 							field = "#arguments.objectName#.#field#";
 						}
 					}
@@ -2535,7 +2535,7 @@ component displayName="Preside Object Service" {
 						} else {
 							var newFieldName = Replace( unescapedField, ".", "_" );
 							filter.having = ReReplace( filter.having, "(^|\s)#Replace( field, "$", "\$" )#(\s)", " #newFieldName# " );
-							if ( !ArrayFindNoCase( selectFields, newFieldName ) ) {
+							if ( !ArrayContainsNoCase( selectFields, newFieldName ) ) {
 								ArrayAppend( selectFields, "#field# as #newFieldName#" );
 								continue;
 							}
@@ -2551,7 +2551,7 @@ component displayName="Preside Object Service" {
 					var appendField = true;
 
 					for ( var fieldToCheck in fieldsToCheck ) {
-						if ( arrayFindNoCase( selectFields, fieldToCheck ) ) {
+						if ( ArrayContainsNoCase( selectFields, fieldToCheck ) ) {
 							appendField = false;
 							break;
 						}
@@ -3144,14 +3144,14 @@ component displayName="Preside Object Service" {
 		}
 
 		for( var field in arguments ) {
-			if ( ArrayFindNoCase( ignoreFields, field ) ) {
+			if ( ArrayContainsNoCase( ignoreFields, field ) ) {
 				continue;
 			}
 
-			if ( ArrayFindNoCase( arrayAppendFields, field ) ) {
+			if ( ArrayContainsNoCase( arrayAppendFields, field ) ) {
 				args[ field ] = args[ field ] ?: [];
 				ArrayAppend( args[ field ], arguments[ field ], true );
-			} else if ( ArrayFindNoCase( structAppendFields, field ) ) {
+			} else if ( ArrayContainsNoCase( structAppendFields, field ) ) {
 				args[ field ] = args[ field ] ?: {};
 
 				StructAppend( args[ field ], arguments[ field ] );
@@ -3405,7 +3405,7 @@ component displayName="Preside Object Service" {
 			var propertyName     = parts[ 4 ];
 			var alias            = parts[ 6 ];
 
-			if ( !ArrayFind( allowedMethods, aggregateMethod ) ) {
+			if ( !ArrayContains( allowedMethods, aggregateMethod ) ) {
 				throw( "Aggregate method [ #aggregateMethod# ] is not valid. Method must be one of [ #ArrayToList( allowedMethods, ", " )# ]" );
 			}
 
@@ -3419,7 +3419,7 @@ component displayName="Preside Object Service" {
 			var aggregateByProperty = listLast( listFirst( suppliedProperty, "." ), "$" );
 			var relationship        = props[ aggregateByProperty ].relationship;
 
-			if ( !ArrayFind( [ "one-to-many", "many-to-many", "select-data-view" ], relationship ) ) {
+			if ( !ArrayContains( [ "one-to-many", "many-to-many", "select-data-view" ], relationship ) ) {
 				throw( "Aggregate functions are only permitted on one-to-many, many-to-many and select-data-view relationships" );
 			}
 
@@ -3592,13 +3592,13 @@ component displayName="Preside Object Service" {
 
 		for( var i=1; i <= fieldArray.len(); i++ ){
 			var fieldName = escapedAlias & "." & dbAdapter.escapeEntity( fieldArray[i] );
-			if( !arrayFind( convertedArray, fieldName ) ){
+			if( !ArrayContains( convertedArray, fieldName ) ){
 				convertedArray.append( fieldName );
 			}
 			var prop = getObjectProperty( tableAlias, fieldArray[i] );
 			for( var alias in ( prop.aliases ?: "" ).listToArray() ) {
 				var aliasName = fieldName & " as " & dbAdapter.escapeEntity( alias );
-				if( !arrayFind( convertedArray, aliasName ) ){
+				if( !ArrayContains( convertedArray, aliasName ) ){
 					convertedArray.append( aliasName );
 				}
 			}
@@ -4117,7 +4117,7 @@ component displayName="Preside Object Service" {
 					];
 
 					for( var field in groupBy ) {
-						if ( ArrayFindNoCase( idFieldPatterns, field ) ) {
+						if ( ArrayContainsNoCase( idFieldPatterns, field ) ) {
 							return field;
 						}
 					}

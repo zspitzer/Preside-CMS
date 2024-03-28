@@ -105,7 +105,7 @@ component {
 		}
 
 		for( var t in arguments.expectedTimes ) {
-			if ( !arguments.valuesOnly && !ArrayFind( fullTimeSeries.labels, t ) ) {
+			if ( !arguments.valuesOnly && !ArrayContains( fullTimeSeries.labels, t ) ) {
 				ArrayAppend( fullTimeSeries.labels, t );
 			}
 

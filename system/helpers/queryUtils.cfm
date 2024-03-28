@@ -71,12 +71,12 @@
 		var obj     = getSingleton( "presideObjectService" ).getObject( objectName=arguments.objectName );
 		var objCols = valueArray( getSingleton( "dbInfoService" ).getTableColumns( tableName=obj.getTablename(), dsn=obj.getDsn() ), "column_name" );
 
-		if ( arrayFindNoCase( objCols, arguments.fieldName ) ) {
+		if ( ArrayContainsNoCase( objCols, arguments.fieldName ) ) {
 			return arguments.fieldName;
 		}
 
 		var deprecatedName = "__deprecated__" & arguments.fieldName;
-		if ( arrayFindNoCase( objCols, deprecatedName ) ) {
+		if ( ArrayContainsNoCase( objCols, deprecatedName ) ) {
 			return deprecatedName;
 		}
 

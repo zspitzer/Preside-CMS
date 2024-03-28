@@ -45,7 +45,7 @@ component displayName="Document metadata service" {
 	public struct function getImageMetaDataFromFilePath( required string filePath ) {
 		var imageExtensions = [ "png", "jpg", "tiff", "jpeg", "gif", "webp" ];
 
-		if ( ArrayFind( imageExtensions, LCase( ListLast( arguments.filePath, "." ) ) ) ) {
+		if ( ArrayContains( imageExtensions, LCase( ListLast( arguments.filePath, "." ) ) ) ) {
 			return JavaImageMetaReader::readMeta( arguments.filePath );
 		}
 

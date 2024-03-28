@@ -2299,7 +2299,7 @@
 			super.assertEquals( 4, multiRecords.recordCount );
 			for( var record in multiRecords ){
 				super.assertEquals( newId, record.an_object_with_versioning );
-				super.assert( ArrayFind( catIds, record.a_category_object ) );
+				super.assert( ArrayContains( catIds, record.a_category_object ) );
 				ArrayDelete( catIds, record.a_category_object );
 			}
 		</cfscript>
@@ -2341,7 +2341,7 @@
 			for( var record in versionRecords ){
 				super.assertEquals( "changed", record.label );
 				super.assertEquals( 8, record._version_number );
-				super.assert( ArrayFind( catIds, record.id ) );
+				super.assert( ArrayContains( catIds, record.id ) );
 				ArrayDelete( catIds, record.id );
 			}
 		</cfscript>
@@ -2420,7 +2420,7 @@
 			super.assertEquals( catIds.len(), versionedRecords.recordCount );
 			for( var record in versionedRecords ){
 				super.assertEquals( newId, record.an_object_with_versioning );
-				super.assert( ArrayFind( catIds, record.a_category_object ) );
+				super.assert( ArrayContains( catIds, record.a_category_object ) );
 				ArrayDelete( catIds, record.a_category_object );
 			}
 		</cfscript>
@@ -2467,7 +2467,7 @@
 			super.assertEquals( 2, versionedRecords.recordCount );
 			for( var record in versionedRecords ){
 				super.assertEquals( newId, record.an_object_with_versioning );
-				super.assert( ArrayFind( catIds, record.a_category_object ) );
+				super.assert( ArrayContains( catIds, record.a_category_object ) );
 				ArrayDelete( catIds, record.a_category_object );
 			}
 		</cfscript>
@@ -2518,7 +2518,7 @@
 			super.assertEquals( catIds.len(), versionedRecords.recordCount );
 			for( var record in versionedRecords ){
 				super.assertEquals( newId, record.an_object_with_versioning );
-				super.assert( ArrayFind( catIds, record.a_category_object ) );
+				super.assert( ArrayContains( catIds, record.a_category_object ) );
 				ArrayDelete( catIds, record.a_category_object );
 			}
 		</cfscript>

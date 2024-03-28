@@ -10,7 +10,7 @@
 	trashCount          = prc.trashCount ?: 0;
 	validTabs           = [ "sitetree", "listing" ];
 	activeTab           = rc.tab ?: "sitetree";
-	if ( !ArrayFindNoCase( validTabs, activeTab ) ) {
+	if ( !ArrayContainsNoCase( validTabs, activeTab ) ) {
         activeTab = "sitetree";
     }
 </cfscript>

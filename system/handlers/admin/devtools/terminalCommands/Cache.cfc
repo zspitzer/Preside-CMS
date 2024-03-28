@@ -10,7 +10,7 @@ component hint="Interact with and report on system caches" extends="preside.syst
 
 		params = IsArray( params.commandLineArgs ?: "" ) ? params.commandLineArgs : [];
 
-		if ( !ArrayLen( params ) || !ArrayFindNoCase( validOperations, params[1] ) ) {
+		if ( !ArrayLen( params ) || !ArrayContainsNoCase( validOperations, params[1] ) ) {
 			var message = newLine();
 
 			message &= writeText( text="Usage: ", type="help", bold=true );

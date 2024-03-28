@@ -36,7 +36,7 @@
 											<i class="fa fa-pencil"></i>
 										</a>
 
-										<cfif ArrayFind( resettableBody, variants.id )>
+										<cfif ArrayContains( resettableBody, variants.id )>
 											<a href="#Replace( baseResetLink, "{templateId}", variants.id )#" title="#resetTitle#">
 												<i class="fa fa-refresh"></i>
 											</a>

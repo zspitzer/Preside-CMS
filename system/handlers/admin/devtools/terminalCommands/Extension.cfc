@@ -10,10 +10,10 @@ component hint="Manage Preside extensions" extends="preside.system.base.Command"
 
 		params = IsArray( params.commandLineArgs ?: "" ) ? params.commandLineArgs : [];
 
-		if ( !ArrayLen( params ) || !ArrayFindNoCase( subCommands, params[1] ) ) {
+		if ( !ArrayLen( params ) || !ArrayContainsNoCase( subCommands, params[1] ) ) {
 			var message = newLine();
 
-			if ( ArrayLen( params ) && ArrayFindNoCase( deprecatedCommands, params[ 1 ] ) ) {
+			if ( ArrayLen( params ) && ArrayContainsNoCase( deprecatedCommands, params[ 1 ] ) ) {
 				return message & writeText( text="The '#params[ 1 ]#' sub-command is no longer in use (as of Preside 10.9.0). Extensions are enabled automatically by the system. To disable an extension, simply remove it from your application.", type="error", bold=true, newline=true );
 			}
 

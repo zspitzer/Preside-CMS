@@ -18,8 +18,8 @@ component {
 					var valuesArrLength = arrayLen( args.values );
 
 					args.values.each( function( item, index ) {
-						if ( isTrue( arrayFind( savedValueArray, item ) ) ) {
-							var savedArrIndex = arrayFind( savedValueArray, item );
+						if ( isTrue( ArrayContains( savedValueArray, item ) ) ) {
+							var savedArrIndex = ArrayContains( savedValueArray, item );
 							    savedArrIndex = ( savedArrIndex > valuesArrLength ) ? valuesArrLength : savedArrIndex;
 
 							args.values.swap( savedArrIndex, index );

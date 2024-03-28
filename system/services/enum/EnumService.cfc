@@ -51,7 +51,7 @@ component {
 		var enumProps = {};
 
 		for( var key in enumKeys ) {
-			if ( !ArrayLen( restrictToKeys ) || ArrayFindNoCase( restrictToKeys, key ) ) {
+			if ( !ArrayLen( restrictToKeys ) || ArrayContainsNoCase( restrictToKeys, key ) ) {
 				var enumValue = {};
 				for( var propName in arguments.properties ) {
 					enumValue[ propName ] = $translateResource(

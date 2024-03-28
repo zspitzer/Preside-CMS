@@ -115,7 +115,7 @@ component extends="testbox.system.BaseSpec"{
 		var expectedDirs = [ "anotherExtension", "someExtension", "untracked" ];
 
 		for( var dir in dirs ){
-			if ( dir.type == "Dir" && !ArrayFind( expectedDirs, dir.name ) ) {
+			if ( dir.type == "Dir" && !ArrayContains( expectedDirs, dir.name ) ) {
 				DirectoryDelete( "/tests/resources/extensionManager/extensions/" & dir.name, true );
 			}
 		}

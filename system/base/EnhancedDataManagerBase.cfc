@@ -213,7 +213,7 @@ component extends="preside.system.base.AdminHandler" {
 			}
 		}
 
-		var activeTab        = ArrayFind( args.availableTabs, args.currentTab ) ? args.currentTab : firstTab;
+		var activeTab        = ArrayContains( args.availableTabs, args.currentTab ) ? args.currentTab : firstTab;
 		var activeTabContent = renderViewlet( event="admin.datamanager.#objectName#._#activeTab#Tab", args=args );
 
 		if ( ArrayLen( sidebarMenuItems ) ) {
@@ -455,7 +455,7 @@ component extends="preside.system.base.AdminHandler" {
 	private boolean function _permissionExists( required string key ) {
 		var allKeys = permissionService.listPermissionKeys();
 
-		return ArrayFindNoCase( allKeys, arguments.key );
+		return ArrayContainsNoCase( allKeys, arguments.key );
 	}
 
 }

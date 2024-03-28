@@ -273,7 +273,7 @@ component {
 	private string function _cfToVipsQuality( required string quality, required string fileExtension ) {
 		var pngExtensions = [ "gif", "png" ];
 
-		if ( ArrayFindNoCase( [ "gif", "png" ], arguments.fileExtension ) ) {
+		if ( ArrayContainsNoCase( [ "gif", "png" ], arguments.fileExtension ) ) {
 			switch( arguments.quality ) {
 				case "highestQuality":
 					return "compression=3";

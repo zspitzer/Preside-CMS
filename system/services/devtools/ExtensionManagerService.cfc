@@ -39,7 +39,7 @@ component {
 				}
 
 				var extension = _parseManifest( manifestFile, appMapping );
-				if ( !ArrayFindNoCase( arguments.ignoreExtensions, extension.id ) ) {
+				if ( !ArrayContainsNoCase( arguments.ignoreExtensions, extension.id ) ) {
 					ArrayAppend( extensions, extension );
 				}
 			}

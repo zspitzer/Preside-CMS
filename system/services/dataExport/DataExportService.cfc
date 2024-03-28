@@ -254,7 +254,7 @@ component {
 							fieldName = _nestedFieldName( ListFirst( fieldName, "." ), ListLast( fieldName, "." ) );
 						}
 
-						if ( ArrayFindNoCase( columns, fieldName ) ) {
+						if ( ArrayContainsNoCase( columns, fieldName ) ) {
 							results[ fieldName ][ i ] = simpleFormatField( fieldName, results[ fieldName ][ i ] );
 						}
 					}
@@ -412,7 +412,7 @@ component {
 
 				var prop = objectProperties[ propId ];
 
-				if ( ArrayFindNoCase( defaultExcludeFields, propId ) || ( IsBoolean( prop.excludeDataExport ?: "" ) && prop.excludeDataExport ) ) {
+				if ( ArrayContainsNoCase( defaultExcludeFields, propId ) || ( IsBoolean( prop.excludeDataExport ?: "" ) && prop.excludeDataExport ) ) {
 					continue;
 				}
 
@@ -436,7 +436,7 @@ component {
 
 								if ( ArrayLen( linkedFields.selectFields ?: [] ) ) {
 									for ( var field in linkedFields.selectFields ) {
-										if ( ArrayLen( expandFields ) && !ArrayFindNoCase( expandFields, field ) ) {
+										if ( ArrayLen( expandFields ) && !ArrayContainsNoCase( expandFields, field ) ) {
 											continue;
 										}
 
@@ -517,9 +517,9 @@ component {
 				continue;
 			}
 
-			var shouldInclude = !ArrayFindNoCase( defaultExcludeFields, prop ) && !$helpers.isTrue( props[ prop ].excludeDataExport ?: "" );
+			var shouldInclude = !ArrayContainsNoCase( defaultExcludeFields, prop ) && !$helpers.isTrue( props[ prop ].excludeDataExport ?: "" );
 			if ( ArrayLen( defaultIncludeFields ) ) {
-				shouldInclude = shouldInclude && ArrayFindNoCase( shouldInclude, prop );
+				shouldInclude = shouldInclude && ArrayContainsNoCase( shouldInclude, prop );
 			}
 
 			if ( shouldInclude && arguments.isNested ) {
@@ -558,7 +558,7 @@ component {
 						var relatedI18nUri  = poService.getResourceBundleUriRoot( objectName=relatedObjName );
 
 						for ( var field in relatedObjProps ) {
-							if ( ArrayLen( expandFields ) && !ArrayFindNoCase( expandFields, field ) ) {
+							if ( ArrayLen( expandFields ) && !ArrayContainsNoCase( expandFields, field ) ) {
 								continue;
 							}
 
@@ -704,7 +704,7 @@ component {
 			var fieldRelationship = objectProperties[fieldName].relationship ?: "";
 			var dir               = ListLen( el, " " ) > 1 ? LCase( Trim( ListRest( el, " " ) ) ) : "asc";
 
-			if ( !ArrayFind( validDirections, dir ) ) {
+			if ( !ArrayContains( validDirections, dir ) ) {
 				validatedOrderBy = "";
 				break;
 			}

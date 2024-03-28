@@ -746,7 +746,7 @@ component {
 		};
 
 		for( var field in extra ) {
-			if ( ArrayFind( fieldsToAddFromExtraData, LCase( field ) ) ) {
+			if ( ArrayContains( fieldsToAddFromExtraData, LCase( field ) ) ) {
 				data[ field ] = extra[ field ];
 				extra.delete( field );
 			}
@@ -889,7 +889,7 @@ component {
 		} else {
 			var allowedDomains = $getColdbox().getSetting( "allowedDomains" );
 
-			if ( IsArray( allowedDomains ) && ArrayFindNoCase( allowedDomains, domain ) ) {
+			if ( IsArray( allowedDomains ) && ArrayContainsNoCase( allowedDomains, domain ) ) {
 				return true;
 			}
 		}
@@ -1075,7 +1075,7 @@ component {
 		}
 
 		var ignoredActivities = [ "honeypotclick", "resend" ];
-		if ( ArrayFind( ignoredActivities, arguments.activity ) ) {
+		if ( ArrayContains( ignoredActivities, arguments.activity ) ) {
 			return;
 		}
 

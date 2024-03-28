@@ -154,7 +154,7 @@ component {
 
 		var stats = { dates = dates };
 		for( var stat in statMappings ) {
-			if ( !ArrayLen( arguments.stats ) || ArrayFindNoCase( arguments.stats, stat ) ) {
+			if ( !ArrayLen( arguments.stats ) || ArrayContainsNoCase( arguments.stats, stat ) ) {
 				stats[ stat ] = timeSeriesUtils.getTimeSeriesData( argumentCollection=commonArgs, aggregateOver=statMappings[ stat ] );
 			}
 		}
@@ -536,7 +536,7 @@ component {
 			, "bot_click_count"
 		];
 
-		if ( ArrayFind( validFields, arguments.field ) ) {
+		if ( ArrayContains( validFields, arguments.field ) ) {
 			return arguments.field;
 		}
 

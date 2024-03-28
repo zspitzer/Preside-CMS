@@ -61,7 +61,7 @@ component {
 
 		for( var address in addresses ) {
 			var domain = _getDomainFromEmail( address.from_address );
-			if ( !ArrayFindNoCase( domains, domain ) ) {
+			if ( !ArrayContainsNoCase( domains, domain ) ) {
 				if ( isBoolean( address.is_system_email ?: "" ) && address.is_system_email &&
 					!_getSystemEmailTemplateService().templateExists( address.id )
 				) {
@@ -96,7 +96,7 @@ component {
 				continue;
 			}
 			var domain   = _getDomainFromEmail( sendFrom );
-			if ( !ArrayFindNoCase( domains, domain ) && !ArrayFindNoCase( badaddresses, sendFrom ) ) {
+			if ( !ArrayContainsNoCase( domains, domain ) && !ArrayContainsNoCase( badaddresses, sendFrom ) ) {
 				ArrayAppend( badaddresses, sendFrom );
 			}
 		}

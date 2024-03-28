@@ -152,7 +152,7 @@ component displayName="Admin permissions service" {
 		}
 
 		if ( IsNull( local.hasPermission ) ) {
-			hasPermission = ArrayFind( listPermissionKeys( user=arguments.userId ), LCase( arguments.permissionKey ) ) > 0;
+			hasPermission = ArrayContains( listPermissionKeys( user=arguments.userId ), LCase( arguments.permissionKey ) ) > 0;
 		}
 
 		_getCacheProvider().set( cacheKey, hasPermission )
@@ -208,7 +208,7 @@ component displayName="Admin permissions service" {
 				if ( keysWithoutContext.len() ) {
 					request._userPermissionKeys = request._userPermissionKeys ?: listPermissionKeys( user=arguments.userId );
 					for( var key in keysWithoutContext ) {
-						local.result[ key ] = ArrayFindNoCase( request._userPermissionKeys, key );
+						local.result[ key ] = ArrayContainsNoCase( request._userPermissionKeys, key );
 					}
 				}
 			}
@@ -422,7 +422,7 @@ component displayName="Admin permissions service" {
 	 * @permissionKey.hint The permission key you wish to check, e.g. blog.share
 	 */
 	public boolean function permissionExists( required string permissionkey ) {
-		return ArrayFindNoCase( _getPermissions(), arguments.permissionKey );
+		return ArrayContainsNoCase( _getPermissions(), arguments.permissionKey );
 	}
 
 // PRIVATE HELPERS
@@ -468,7 +468,7 @@ component displayName="Admin permissions service" {
 		for( var group in listUserGroups( arguments.user ) ){
 			var groupPerms = _getGroupPermissions( group );
 			for( var perm in groupPerms ) {
-				if ( !ArrayFind( perms, LCase( perm ) ) ) {
+				if ( !ArrayContains( perms, LCase( perm ) ) ) {
 					ArrayAppend( perms, LCase( perm ) );
 				}
 			}

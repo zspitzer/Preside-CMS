@@ -762,7 +762,7 @@ component {
 
 		for( var propName in ListToArray( arguments.relatedObjectPath, "." ) ) {
 			var prop    = poService.getObjectProperty( currentObjectName, propName );
-			var isValid = Len( prop.relatedTo ?: "" ) && ArrayFindNoCase( supportedRelationships, prop.relationship ?: "" );
+			var isValid = Len( prop.relatedTo ?: "" ) && ArrayContainsNoCase( supportedRelationships, prop.relationship ?: "" );
 
 			if ( !isValid ) {
 				return [];

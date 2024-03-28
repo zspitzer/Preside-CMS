@@ -1730,7 +1730,7 @@ component displayName="AssetManager Service" {
 		arrayAppend( arguments.selectFields, "asset_derivative.retry_count" );
 
 		for( var selectItem in [ "asset_derivative.id","asset_derivative.asset_type","asset_derivative.storage_path", "asset_derivative.datecreated" ] ){
-			if( !arrayFind( arguments.selectFields, selectItem ) ){
+			if( !ArrayContains( arguments.selectFields, selectItem ) ){
 				arrayAppend( arguments.selectFields, selectItem );
 			}
 		}
@@ -2701,7 +2701,7 @@ component displayName="AssetManager Service" {
 			for( var derivativeName in derivatives ) {
 				var autoQueueTypes = derivatives[ derivativeName ].autoQueue ?: [];
 
-				if ( ArrayFindNoCase( autoQueueTypes, arguments.type ) || ArrayFindNoCase( autoQueueTypes, arguments.typeGroup ) ) {
+				if ( ArrayContainsNoCase( autoQueueTypes, arguments.type ) || ArrayContainsNoCase( autoQueueTypes, arguments.typeGroup ) ) {
 					_getAssetQueueService().queueAssetGeneration(
 						  assetId        = arguments.assetId
 						, derivativeName = derivativeName

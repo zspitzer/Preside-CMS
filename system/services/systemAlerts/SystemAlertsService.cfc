@@ -354,11 +354,11 @@ component {
 	}
 
 	private boolean function _isValidAlertType( required string type ) {
-		return ArrayFindNoCase( getAlertTypes(), arguments.type ) ? true : false;
+		return ArrayContainsNoCase( getAlertTypes(), arguments.type ) ? true : false;
 	}
 
 	private boolean function _isValidAlertLevel( required string level ) {
-		return ArrayFindNoCase( _getValidAlertLevels(), arguments.level ) ? true : false;
+		return ArrayContainsNoCase( _getValidAlertLevels(), arguments.level ) ? true : false;
 	}
 
 	private void function _logCheck(

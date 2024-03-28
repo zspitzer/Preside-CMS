@@ -38,7 +38,7 @@ component extends="preside.system.base.AutoObjectExpressionHandler" {
 
 		if ( !isEmpty( fieldEnumName ) ) {
 			var enumFilterSql = "";
-			var enumDelim     = ArrayFind( [ "neq", "notcontains", "notstartswith", "notendsWith", "noneof" ], arguments._stringOperator ) ? "and" : "or";
+			var enumDelim     = ArrayContains( [ "neq", "notcontains", "notstartswith", "notendsWith", "noneof" ], arguments._stringOperator ) ? "and" : "or";
 			var items         = enumService.listItems( fieldEnumName );
 
 			for ( var item in items ) {

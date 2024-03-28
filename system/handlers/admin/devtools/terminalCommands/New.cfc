@@ -9,7 +9,7 @@ component hint="Create various preside system entities such as widgets and page 
 
 		params = IsArray( params.commandLineArgs ?: "" ) ? params.commandLineArgs : [];
 
-		if ( !ArrayLen( params ) || !ArrayFindNoCase( validTargets, params[1] ) ) {
+		if ( !ArrayLen( params ) || !ArrayContainsNoCase( validTargets, params[1] ) ) {
 			var message = newLine();
 
 			message &= writeText( text="Usage: ", type="help", bold=true );

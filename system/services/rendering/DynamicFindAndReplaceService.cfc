@@ -28,7 +28,7 @@ component {
 			var fullText = matcher.group( 0 );
 
 			if ( !StructKeyExists( simpleCache, fullText ) ) {
-				if ( ArrayFindNoCase( arguments.recursionChain, fullText ) ) {
+				if ( ArrayContainsNoCase( arguments.recursionChain, fullText ) ) {
 					simpleCache[ fullText ] = "";
 				} else {
 					var captureGroups = [];

@@ -1112,14 +1112,14 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 
 		if ( !limitData || limitRc.len() ) {
 			for( var key in rc ) {
-				if ( !isNull( rc[ key ] ) && (!limitData || ArrayFind( limitRc, key ) ) && !ArrayFind( unCacheableKeys, LCase( key ) ) && isCacheable( rc[ key ] ) ) {
+				if ( !isNull( rc[ key ] ) && (!limitData || ArrayContains( limitRc, key ) ) && !ArrayContains( unCacheableKeys, LCase( key ) ) && isCacheable( rc[ key ] ) ) {
 					cacheableVars.rc[ key ] = Duplicate( rc[ key ] );
 				}
 			}
 		}
 		if ( !limitData || limitPrc.len() ) {
 			for( var key in prc ) {
-				if ( !isNull( prc[ key ] ) && ( !limitData || ArrayFind( limitPrc, key ) ) && isCacheable( prc[ key ] ) ) {
+				if ( !isNull( prc[ key ] ) && ( !limitData || ArrayContains( limitPrc, key ) ) && isCacheable( prc[ key ] ) ) {
 					cacheableVars.prc[ key ] = Duplicate( prc[ key ] );
 				}
 			}

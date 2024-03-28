@@ -660,7 +660,7 @@ component {
 		).valueArray( "field_id" );
 
 		for( var field in dataToStore ) {
-			if ( ArrayFind( fileFields, field ) ) {
+			if ( ArrayContains( fileFields, field ) ) {
 				StructDelete( dataToStore, field );
 			}
 		}

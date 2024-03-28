@@ -173,7 +173,7 @@ component {
 			}
 
 			for ( var selectedElem in selectedElements ) {
-				var index = ArrayFind( elems, selectedElem );
+				var index = ArrayContains( elems, selectedElem );
 				if ( !index ) {
 					ArrayAppend( elems, selectedElem );
 					ArrayAppend( elemStyles, StructNew( "linked" ) );

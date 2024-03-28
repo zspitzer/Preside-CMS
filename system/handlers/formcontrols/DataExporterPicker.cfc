@@ -8,7 +8,7 @@ component {
 
 		if ( ArrayLen( allowedExporters ) ) {
 			for( var i=ArrayLen( args.exporters ); i>0; i-- ) {
-				if ( !ArrayFindNoCase( allowedExporters, args.exporters[ i ].id ) ) {
+				if ( !ArrayContainsNoCase( allowedExporters, args.exporters[ i ].id ) ) {
 					ArrayDeleteAt( args.exporters, i );
 				}
 			}

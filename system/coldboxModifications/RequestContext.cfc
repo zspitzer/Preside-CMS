@@ -647,7 +647,7 @@ component serializable=false accessors=true extends="coldbox.system.web.context.
 		// param incoming rc.format to "html"
 		paramValue( "format", "html" );
 		// try to match the incoming format with the ones defined, if not defined then throw an exception
-		if( arrayFindNoCase( arguments.formats, getContext().format )  ){
+		if( ArrayContainsNoCase( arguments.formats, getContext().format )  ){
 			// Cleanup of formats
 			arguments.formats = "";
 			// Determine view from incoming or implicit

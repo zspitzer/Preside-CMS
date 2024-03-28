@@ -558,7 +558,7 @@ component extends="preside.system.base.AdminHandler" {
 			event.adminAccessDenied();
 		}
 
-		if ( arrayFindNoCase( [ "edit","delete" ], key ) && Len( rc.id ?: "" ) ) {
+		if ( ArrayContainsNoCase( [ "edit","delete" ], key ) && Len( rc.id ?: "" ) ) {
 			var args = { objectName="rules_engine_condition"
 				, recordCountOnly = true
 				, selectFields    = [ "rules_engine_condition.id" ]

@@ -523,7 +523,7 @@ component singleton=true {
 		var i18nProps    = StructNew( "ordered" );
 		var topics       = _getConfiguredTopics();
 
-		if( arrayFindNoCase( topics, arguments.notificationId ) ){
+		if( ArrayContainsNoCase( topics, arguments.notificationId ) ){
 			throw( type="scaffoldwidget.notification.exists", message="The '#arguments.notificationId#' notification already exists" );
 		}
 

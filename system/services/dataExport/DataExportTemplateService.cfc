@@ -20,7 +20,7 @@ component {
 
 // PUBLIC API METHODS
 	public boolean function templateExists( required string templateId ) {
-		return ArrayFindNoCase( _getTemplates(), arguments.templateId );
+		return ArrayContainsNoCase( _getTemplates(), arguments.templateId );
 	}
 
 	/**
@@ -35,7 +35,7 @@ component {
 
 		ArrayAppend( settings.enum.dataExportTemplate, "default" );
 		for( var template in _getTemplates() ) {
-			if ( !ArrayFindNoCase( settings.enum.dataExportTemplate, template ) ) {
+			if ( !ArrayContainsNoCase( settings.enum.dataExportTemplate, template ) ) {
 				ArrayAppend( settings.enum.dataExportTemplate, template );
 			}
 		}

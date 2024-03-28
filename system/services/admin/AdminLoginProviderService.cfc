@@ -31,7 +31,7 @@ component {
 	public boolean function isProviderEnabled( required string provider ) {
 		var providers = listProviders();
 
-		return ArrayFindNoCase( providers, arguments.provider );
+		return ArrayContainsNoCase( providers, arguments.provider );
 	}
 
 	public array function listProviders() {

@@ -97,7 +97,7 @@ component displayName="Preside Object View Service" {
 		]
 
 		for( var argName in arguments ) {
-			if ( !ArrayFindNoCase( nonSelectArgs, argName ) ) {
+			if ( !ArrayContainsNoCase( nonSelectArgs, argName ) ) {
 				selectDataArgs[ argName ] = arguments[ argName ];
 			}
 		}
@@ -320,7 +320,7 @@ component displayName="Preside Object View Service" {
 		var ignoreKeys = [ "cacheAutoKey", "cacheTimeout", "cacheLastAccessTimeout", "cacheSuffix", "cacheProvider", "value" ];
 
 		for( var argName in arguments ) {
-			if ( !ArrayFindNoCase( ignoreKeys, argName ) && ( IsSimpleValue( arguments[ argName ] ) || IsStruct( arguments[ argName ] ) || IsArray( arguments[ argName ] ) ) ) {
+			if ( !ArrayContainsNoCase( ignoreKeys, argName ) && ( IsSimpleValue( arguments[ argName ] ) || IsStruct( arguments[ argName ] ) || IsArray( arguments[ argName ] ) ) ) {
 				keyArgs[ argName ] = arguments[ argName ];
 			}
 		}

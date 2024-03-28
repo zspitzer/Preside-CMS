@@ -54,7 +54,7 @@ component displayName="Validation Engine" {
 		for( rule in rules ){
 			var expandedFieldName = arguments.fieldNamePrefix & rule.fieldName & arguments.fieldNameSuffix;
 
-			if ( ( arguments.ignoreMissing && !StructKeyExists( arguments.data, rule.fieldName ) ) || ( arrayLen( arguments.suppressFields ) && arrayFind( arguments.suppressFields, rule.fieldName ) ) ) {
+			if ( ( arguments.ignoreMissing && !StructKeyExists( arguments.data, rule.fieldName ) ) || ( arrayLen( arguments.suppressFields ) && ArrayContains( arguments.suppressFields, rule.fieldName ) ) ) {
 				continue;
 			}
 			if ( !result.fieldHasError( rule.fieldName ) && _evaluateConditionalRule( rule, data ) ) {

@@ -12,7 +12,7 @@ component {
 			return;
 		}
 
-		var isPrivateFilter = ArrayFindNoCase( [ "group", "individual" ], scope );
+		var isPrivateFilter = ArrayContainsNoCase( [ "group", "individual" ], scope );
 
 		if ( isPrivateFilter || Len( groups ) ) {
 			return event.getAdminUserId();
@@ -29,7 +29,7 @@ component {
 			return;
 		}
 
-		var isPrivateFilter = ArrayFindNoCase( [ "group", "individual" ], scope );
+		var isPrivateFilter = ArrayContainsNoCase( [ "group", "individual" ], scope );
 
 		return !isPrivateFilter && !Len( groups );
 	}
