@@ -677,7 +677,7 @@ component {
 		}
 
 		for( var fieldName in [ "_version_number", "_version_author", "_version_changed_fields", "_version_is_latest", "_version_is_draft", "_version_has_drafts", "_version_is_latest_draft" ] ) {
-			if ( ( useDrafts || !Find(fieldName, "draft" ) ) && !ListFindNoCase( objMeta.dbFieldList, fieldName ) ) {
+			if ( ( useDrafts || !fieldName.contains( "draft" ) ) && !ListFindNoCase( objMeta.dbFieldList, fieldName ) ) {
 				objMeta.dbFieldList = objMeta.dbFieldList.listAppend( fieldName );
 			}
 		}
