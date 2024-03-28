@@ -27,7 +27,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, propertyDefinition = propertyDef
 				);
 
-				expect( expressions.find( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.contains( expectedExpr ) > 0 ).toBe( true );
 
 			} );
 
@@ -56,7 +56,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, propertyDefinition = propertyDef
 				);
 
-				expect( expressions.find( expectedExpr ) ).toBe( 0 );
+				expect( expressions.contains( expectedExpr ) ).toBe( 0 );
 
 			} );
 
@@ -85,7 +85,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, propertyDefinition = propertyDef
 				);
 
-				expect( expressions.find( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.contains( expectedExpr ) > 0 ).toBe( true );
 
 			} );
 
@@ -114,7 +114,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, propertyDefinition = propertyDef
 				);
 
-				expect( expressions.find( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.contains( expectedExpr ) > 0 ).toBe( true );
 
 			} );
 
@@ -143,7 +143,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, propertyDefinition = propertyDef
 				);
 
-				expect( expressions.find( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.contains( expectedExpr ) > 0 ).toBe( true );
 
 			} );
 
@@ -172,7 +172,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, propertyDefinition = propertyDef
 				);
 
-				expect( expressions.find( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.contains( expectedExpr ) > 0 ).toBe( true );
 
 			} );
 
@@ -203,7 +203,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, propertyDefinition = propertyDef
 				);
 				expect( expressions[1] ).toBe( expectedExpr );
-				expect( expressions.findNoCase( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.containsNoCase( expectedExpr ) > 0 ).toBe( true );
 			} );
 
 			it( "should return a configured 'numeric comparison' expression for a numeric property", function(){
@@ -230,7 +230,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					  objectName         = objectName
 					, propertyDefinition = propertyDef
 				);
-				expect( expressions.findNoCase( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.containsNoCase( expectedExpr ) > 0 ).toBe( true );
 			} );
 
 			it( "should return a configured 'outdatedtranslation' expression for the _translations property of a multilingual object", function(){
@@ -258,7 +258,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					  objectName         = objectName
 					, propertyDefinition = propertyDef
 				);
-				expect( expressions.findNoCase( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.containsNoCase( expectedExpr ) > 0 ).toBe( true );
 			} );
 
 			it( "should return a configured 'translationexists' expression for the _translations property of a multilingual object", function(){
@@ -286,7 +286,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, propertyDefinition = propertyDef
 				);
 
-				expect( expressions.findNoCase( expectedExpr ) > 0 ).toBe( true );
+				expect( expressions.containsNoCase( expectedExpr ) > 0 ).toBe( true );
 			} );
 
 			it( "should NOT return 'onetomanymatch' and 'onetomanycount' expressions for the _translations property of a multilingual object", function(){
@@ -304,8 +304,8 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
    					return expr.id;
 				} );
 
-				expect( exprIds.find( "presideobject_onetomanycount_#objectName#.#propertyDef.name#" ) > 0 ).toBe( false );
-				expect( exprIds.find( "presideobject_onetomanymatch_#objectName#.#propertyDef.name#" ) > 0 ).toBe( false );
+				expect( exprIds.contains( "presideobject_onetomanycount_#objectName#.#propertyDef.name#" ) > 0 ).toBe( false );
+				expect( exprIds.contains( "presideobject_onetomanymatch_#objectName#.#propertyDef.name#" ) > 0 ).toBe( false );
 
 			} );
 		} );

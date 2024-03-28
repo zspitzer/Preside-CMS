@@ -19,7 +19,7 @@ component output="false" displayname=""  {
 			locales.append( defaultLocale );
 			if ( adminLocales && adminLanguages.len() ) {
 				for( var i=locales.len(); i>0; i-- ) {
-					if ( !adminLanguages.findNoCase( locales[ i ] ) ) {
+					if ( !adminLanguages.containsNoCase( locales[ i ] ) ) {
 						locales.deleteAt( i );
 					}
 				}

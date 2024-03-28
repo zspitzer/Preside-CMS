@@ -28,7 +28,7 @@ component extends="coldbox.system.Interceptor" {
 		param name="arguments.meta.properties.page" default={};
 		StructAppend( arguments.meta.properties.page, defaultConfiguration, false );
 
-		if ( not arguments.meta.propertyNames.find( "page" ) ) {
+		if ( not arguments.meta.propertyNames.contains( "page" ) ) {
 			ArrayAppend( arguments.meta.propertyNames, "page" );
 		}
 	}

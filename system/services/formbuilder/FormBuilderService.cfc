@@ -91,7 +91,7 @@ component {
 		);
 
 		for( var item in items ) {
-			if ( !itemTypes.len() || itemTypes.findNoCase( item.item_type ) ) {
+			if ( !itemTypes.len() || itemTypes.containsNoCase( item.item_type ) ) {
 				var preparedItem = {
 					  id            = item.id
 					, formId        = item.form

@@ -120,7 +120,7 @@ component displayName="Website permissions service" {
 			}
 		}
 
-		return arguments.forceGrantByDefault || listPermissionKeys( user=arguments.userId ).findNoCase( arguments.permissionKey );
+		return arguments.forceGrantByDefault || listPermissionKeys( user=arguments.userId ).containsNoCase( arguments.permissionKey );
 	}
 
 	/**
@@ -151,7 +151,7 @@ component displayName="Website permissions service" {
 		do {
 			comboFound = false;
 			for( var comboBenefit in comboBenefits ){
-				if ( userBenefits.findNoCase( comboBenefit.id ) ) {
+				if ( userBenefits.containsNoCase( comboBenefit.id ) ) {
 					continue;
 				}
 
@@ -159,12 +159,12 @@ component displayName="Website permissions service" {
 				var hasComboBenefit = !inclusive;
 				for( var benefitId in ListToArray( comboBenefit.combined_benefits ) ){
 					if ( inclusive ) {
-						if ( userBenefits.findNoCase( benefitId ) ) {
+						if ( userBenefits.containsNoCase( benefitId ) ) {
 							hasComboBenefit = true;
 							break;
 						}
 					} else {
-						if ( !userBenefits.findNoCase( benefitId ) ) {
+						if ( !userBenefits.containsNoCase( benefitId ) ) {
 							hasComboBenefit = false;
 							break;
 						}
@@ -368,7 +368,7 @@ component displayName="Website permissions service" {
 
 			for ( var perm in benefitPerms ) {
 				if ( perm.granted ) {
-					if ( !perms.findNoCase( perm.permission_key ) ) {
+					if ( !perms.containsNoCase( perm.permission_key ) ) {
 						perms.append( perm.permission_key );
 					}
 				} else {
@@ -386,7 +386,7 @@ component displayName="Website permissions service" {
 
 		for ( var perm in userPerms ) {
 			if ( perm.granted ) {
-				if ( !perms.findNoCase( perm.permission_key ) ) {
+				if ( !perms.containsNoCase( perm.permission_key ) ) {
 					perms.append( perm.permission_key );
 				}
 			} else {
@@ -409,11 +409,11 @@ component displayName="Website permissions service" {
 
 				} else if ( permissionKey contains "*" ) {
 					( _expandWildCardPermissionKey( permissionKey ) ).each( function( expandedKey ){
-						if ( !filtered.findNoCase( expandedKey ) ) {
+						if ( !filtered.containsNoCase( expandedKey ) ) {
 							filtered.append( expandedKey );
 						}
 					} );
-				} else if ( allPerms.findNoCase( permissionKey ) && !filtered.findNoCase( permissionKey ) ) {
+				} else if ( allPerms.containsNoCase( permissionKey ) && !filtered.containsNoCase( permissionKey ) ) {
 					filtered.append( permissionKey );
 				}
 			}
@@ -535,7 +535,7 @@ component displayName="Website permissions service" {
 		var benefits        = [];
 
 		for( var role in roles ){
-			if ( roles[ role ].findNoCase( arguments.permissionKey ) ) {
+			if ( roles[ role ].containsNoCase( arguments.permissionKey ) ) {
 				rolesWithPerm[ role ] = 1;
 			}
 		}

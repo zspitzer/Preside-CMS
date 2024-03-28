@@ -194,7 +194,7 @@ component {
 
 					arguments.meta.properties[ prop.name ] = _readProperty( prop, arguments.meta.properties[ prop.name ] );
 
-					if ( !arguments.meta.propertyNames.find( prop.name ) ) {
+					if ( !arguments.meta.propertyNames.contains( prop.name ) ) {
 						arguments.meta.propertyNames.append( prop.name );
 					}
 				}
@@ -261,7 +261,7 @@ component {
 
 		for( var propName in arguments.meta.properties ){
 			var prop           = arguments.meta.properties[ propName ];
-			var isCoreProperty = corePropertyNames.findNoCase( propName );
+			var isCoreProperty = corePropertyNames.containsNoCase( propName );
 			var createFkIndex  = ( prop.createFkIndex ?: !dbAdapterSupportsFkIndexes );
 
 			if ( ( prop.type ?: "" ) == "any" ) {
@@ -276,7 +276,7 @@ component {
 				prop.relatedTo = propName;
 			}
 
-			if ( [ "many-to-many", "one-to-many" ].find( prop.relationship ?: "" ) ) {
+			if ( [ "many-to-many", "one-to-many" ].contains( prop.relationship ?: "" ) ) {
 				prop.dbtype = "none";
 			}
 
@@ -334,7 +334,7 @@ component {
 		};
 
 		if ( labelField == "label" ) {
-			if ( arguments.meta.propertyNames.find( "label" ) ) {
+			if ( arguments.meta.propertyNames.contains( "label" ) ) {
 				StructAppend( arguments.meta.properties.label, defaults.label, false );
 			} else if ( !arguments.meta.noLabel ) {
 				arguments.meta.properties[ "label" ] = defaults[ "label" ];
@@ -343,43 +343,43 @@ component {
 		}
 
 		if ( !arguments.meta.noId ) {
-			if ( arguments.meta.propertyNames.find( idField ) ) {
+			if ( arguments.meta.propertyNames.contains( idField ) ) {
 				StructAppend( arguments.meta.properties[ idField ], defaults.id, false );
 			} else {
 				arguments.meta.properties[ idField ] = defaults[ "id" ];
 				ArrayPrepend( arguments.meta.propertyNames, idField );
 			}
-			if ( idField.len() && idField != "id" && !arguments.meta.propertyNames.findNoCase( "id" ) ) {
+			if ( idField.len() && idField != "id" && !arguments.meta.propertyNames.containsNoCase( "id" ) ) {
 				arguments.meta.properties[ idField ].aliases = ( arguments.meta.properties[ idField ].aliases ?: "" ).listAppend( "id" );
 			}
 		}
 
 		if ( !arguments.meta.noDateCreated ) {
-			if ( arguments.meta.propertyNames.find( dateCreatedField ) ) {
+			if ( arguments.meta.propertyNames.contains( dateCreatedField ) ) {
 				StructAppend( arguments.meta.properties[ dateCreatedField ], defaults.dateCreated, false );
 			} else {
 				arguments.meta.properties[ dateCreatedField ] = defaults[ "dateCreated" ];
 				ArrayAppend( arguments.meta.propertyNames, dateCreatedField );
 			}
-			if ( dateCreatedField.len() && dateCreatedField != "dateCreated" && !arguments.meta.propertyNames.findNoCase( "dateCreated" ) ) {
+			if ( dateCreatedField.len() && dateCreatedField != "dateCreated" && !arguments.meta.propertyNames.containsNoCase( "dateCreated" ) ) {
 				arguments.meta.properties[ dateCreatedField ].aliases = ( arguments.meta.properties[ dateCreatedField ].aliases ?: "" ).listAppend( "dateCreated" );
 			}
 		}
 
 		if ( !arguments.meta.noDateModified ) {
-			if ( arguments.meta.propertyNames.find( dateModifiedField ) ) {
+			if ( arguments.meta.propertyNames.contains( dateModifiedField ) ) {
 				StructAppend( arguments.meta.properties[ dateModifiedField ], defaults.datemodified, false );
 			} else {
 				arguments.meta.properties[ dateModifiedField ] = defaults[ "datemodified" ];
 				ArrayAppend( arguments.meta.propertyNames, dateModifiedField );
 			}
-			if ( dateModifiedField.len() && dateModifiedField != "dateModified" && !arguments.meta.propertyNames.findNoCase( "dateModified" ) ) {
+			if ( dateModifiedField.len() && dateModifiedField != "dateModified" && !arguments.meta.propertyNames.containsNoCase( "dateModified" ) ) {
 				arguments.meta.properties[ dateModifiedField ].aliases = ( arguments.meta.properties[ dateModifiedField ].aliases ?: "" ).listAppend( "dateModified" );
 			}
 		}
 
 		if ( arguments.meta.flagEnabled ) {
-			if ( arguments.meta.propertyNames.find( flagField ) ) {
+			if ( arguments.meta.propertyNames.contains( flagField ) ) {
 				StructAppend( arguments.meta.properties[ flagField ], defaults.flag, false );
 			} else {
 				arguments.meta.properties[ flagField ] = defaults[ "flag" ];

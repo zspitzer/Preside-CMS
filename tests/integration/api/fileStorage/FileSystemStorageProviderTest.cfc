@@ -294,7 +294,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase" {
 				expect( actual.recordCount ).toBe( expected.len() );
 
 				for( var record in actual ) {
-					expect( expected.find( function( item ){
+					expect( expected.contains( function( item ){
 						return item.name == record.name;
 					} ) ).toBeTrue();
 				}
@@ -310,7 +310,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase" {
 				expect( actual.recordCount ).toBe( expected.len() );
 
 				for( var record in actual ) {
-					expect( expected.find( function( item ){
+					expect( expected.contains( function( item ){
 						return item.name == record.name;
 					} ) ).toBeTrue();
 				}

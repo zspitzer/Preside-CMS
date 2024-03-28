@@ -29,7 +29,7 @@ component {
 		var benefitsToMatch  = arguments.benefits.trim().listToArray();
 		var userBenefits     = websitePermissionService.listUserBenefits( payload.user.id );
 		var matchingBenefits = userBenefits.filter( function( benefit ){
-			return benefits.findNoCase( benefit );
+			return benefits.containsNoCase( benefit );
 		} );
 
 

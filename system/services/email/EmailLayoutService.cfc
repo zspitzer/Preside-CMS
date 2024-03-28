@@ -80,7 +80,7 @@ component {
 	 *
 	 */
 	public boolean function layoutExists( required string layout ) {
-		return _getLayouts().findNoCase( arguments.layout ) > 0;
+		return _getLayouts().containsNoCase( arguments.layout ) > 0;
 	}
 
 	/**
@@ -119,7 +119,7 @@ component {
 		var viewletArgs  = {};
 
 		for( var key in arguments ) {
-			if ( ![ "layout", "type", "emailTemplate", "blueprint", "customLayout", "templateDetail" ].findNoCase( key ) ) {
+			if ( ![ "layout", "type", "emailTemplate", "blueprint", "customLayout", "templateDetail" ].containsNoCase( key ) ) {
 				viewletArgs[ key ] = arguments[ key ];
 			}
 		}

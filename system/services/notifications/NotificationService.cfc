@@ -196,7 +196,7 @@ component autodoc=true displayName="Notification Service" {
 		var sortColumn = ListFirst( arguments.orderBy, " " );
 		var sortDir    = ListLen( arguments.orderBy, " " ) > 1 ? ListRest( arguments.orderBy, " " ) : "asc";
 
-		if ( !Len( Trim( sortColumn ) ) || !sortableFields.findNoCase( sortColumn ) ) {
+		if ( !Len( Trim( sortColumn ) ) || !sortableFields.containsNoCase( sortColumn ) ) {
 			sortColumn = "datecreated";
 			sortDir    = "desc";
 		}
@@ -330,7 +330,7 @@ component autodoc=true displayName="Notification Service" {
 
 		var userGroups = _getPermissionService().listUserGroups( arguments.userId );
 		for( var topicGroup in topicGroups ) {
-			if ( userGroups.find( topicGroup ) ) {
+			if ( userGroups.contains( topicGroup ) ) {
 				return true;
 			}
 		}
@@ -434,7 +434,7 @@ component autodoc=true displayName="Notification Service" {
 		var subscriptionDao = _getSubscriptionDao();
 		var forDeletion     = [];
 
-		if ( arguments.topics.find( "all" ) ) {
+		if ( arguments.topics.contains( "all" ) ) {
 			arguments.topics = listTopics();
 
 			_getUserDao().updateData( id=arguments.userId, data={ subscribed_to_all_notifications=true } );
@@ -447,7 +447,7 @@ component autodoc=true displayName="Notification Service" {
 			var currentSubscriptions = getUserSubscriptions( arguments.userId );
 
 			for( var topic in currentSubscriptions ) {
-				if ( !arguments.topics.find( topic ) ) {
+				if ( !arguments.topics.contains( topic ) ) {
 					forDeletion.append( topic );
 				}
 			}
@@ -456,7 +456,7 @@ component autodoc=true displayName="Notification Service" {
 			}
 
 			for( var topic in arguments.topics ) {
-				if ( !currentSubscriptions.find( topic ) ) {
+				if ( !currentSubscriptions.contains( topic ) ) {
 					subscriptionDao.insertData({
 						  security_user = arguments.userId
 						, topic         = topic
@@ -620,20 +620,20 @@ component autodoc=true displayName="Notification Service" {
 		}
 
 		for( var notificationId in notificationIds ){
-			if ( !configuredTopics.findNoCase( notificationId ) ) {
+			if ( !configuredTopics.containsNoCase( notificationId ) ) {
 				configuredTopics.append( notificationId );
 			}
 		}
 
 		for( var topic in existingTopics ) {
-			if ( !configuredTopics.findNoCase( topic.topic ) ) {
+			if ( !configuredTopics.containsNoCase( topic.topic ) ) {
 				topicsToDelete.append( topic.id );
 			}
 		}
 
 		existingTopics = ValueArray( existingTopics.topic );
 		for( var topic in configuredTopics ) {
-			if ( !existingTopics.findNoCase( topic ) ) {
+			if ( !existingTopics.containsNoCase( topic ) ) {
 				topicsToInsert.append( topic );
 			}
 		}

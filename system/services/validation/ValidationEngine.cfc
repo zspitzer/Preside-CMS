@@ -406,7 +406,7 @@ component displayName="Validation Engine" {
 	}
 
 	private string function _generateClientCondition( required string condition ) {
-		var parsed = Trim( ReReplace( arguments.condition, "\$\{([a-zA-Z1-9_\$]+)\}", '$( this.form ).find( "[name=''\1'']" )', "all" ) );
+		var parsed = Trim( ReReplace( arguments.condition, "\$\{([a-zA-Z1-9_\$]+)\}", '$( this.form ).contains( "[name=''\1'']" )', "all" ) );
 
 		if ( Left( parsed, 8 ) eq "function" ) {
 			return parsed;

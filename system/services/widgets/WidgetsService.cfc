@@ -346,7 +346,7 @@ component {
 		}
 
 		for( var widgetCategory in widgetCategories ) {
-			if ( arguments.categories.findNoCase( widgetCategory ) ) {
+			if ( arguments.categories.containsNoCase( widgetCategory ) ) {
 				return true;
 			}
 		}

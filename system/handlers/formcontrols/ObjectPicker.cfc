@@ -88,7 +88,7 @@ component {
 		).columnData( "id" );
 
 		var cleanedValues = initialValues.filter( function( value ){
-			return validValues.find( value );
+			return validValues.contains( value );
 		} );
 
 		return cleanedValues.toList();

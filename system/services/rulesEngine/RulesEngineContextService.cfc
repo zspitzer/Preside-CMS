@@ -67,7 +67,7 @@ component displayName="RulesEngine Context Service" {
 			return true;
 		}
 
-		if ( _getDisabledContexts().find( LCase( arguments.context ) ) ) {
+		if ( _getDisabledContexts().contains( LCase( arguments.context ) ) ) {
 			return false;
 		}
 
@@ -108,7 +108,7 @@ component displayName="RulesEngine Context Service" {
 			for ( var contextName in configuredContexts ) {
 				var subContexts = configuredContexts[ contextName ].subcontexts ?: [];
 
-				if ( subContexts.findNoCase( sourceContext ) && !expanded.findNoCase( contextName ) ) {
+				if ( subContexts.containsNoCase( sourceContext ) && !expanded.containsNoCase( contextName ) ) {
 					expanded.append(  expandContexts( [ contextName ] ), true );
 				}
 			}

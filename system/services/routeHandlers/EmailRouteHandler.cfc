@@ -52,7 +52,7 @@ component  {
 			, "email.tracking.honeypot"
 		];
 
-		return acceptedEvents.findNoCase( linkTo ) && StructKeyExists( buildArgs, "queryString" ) && buildArgs.queryString.findNoCase( "mid=" );
+		return acceptedEvents.containsNoCase( linkTo ) && StructKeyExists( buildArgs, "queryString" ) && buildArgs.queryString.containsNoCase( "mid=" );
 	}
 
 	public string function build( required struct buildArgs, required any event ) {

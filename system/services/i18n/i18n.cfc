@@ -138,7 +138,7 @@ component extends="preside.system.modules.cbi18n.models.i18n" {
 
 	public any function setfwLocale( required string locale ) output=false {
 		var event = controller.getRequestService().getContext();
-		if ( event.isAdminRequest() && adminLanguages.len() && !adminLanguages.findNoCase( arguments.locale ) ) {
+		if ( event.isAdminRequest() && adminLanguages.len() && !adminLanguages.containsNoCase( arguments.locale ) ) {
 			if ( adminLanguages.len() == 1 ) {
 				arguments.locale = adminLanguages[ 1 ];
 			} else {
@@ -159,7 +159,7 @@ component extends="preside.system.modules.cbi18n.models.i18n" {
 
 			var event = controller.getRequestService().getContext();
 
-			if ( event.isAdminRequest() && adminLanguages.len() && !adminLanguages.findNoCase( request._cbfwlocale ) ) {
+			if ( event.isAdminRequest() && adminLanguages.len() && !adminLanguages.containsNoCase( request._cbfwlocale ) ) {
 				if ( adminLanguages.len() == 1 ) {
 					request._cbfwlocale = adminLanguages[ 1 ];
 				} else {

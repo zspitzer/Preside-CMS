@@ -84,7 +84,7 @@
 		selected          = rc.selected ?: "";
 		selectedAncestors = prc.selectedAncestors ?: [];
 		isSelected        = args.id == selected;
-		isOpen            = !isSelected && selectedAncestors.find( args.id );
+		isOpen            = !isSelected && selectedAncestors.contains( args.id );
 
 		dataImage            = Len( Trim( args.main_image ) ) ? 'data-image="#event.buildLink( assetId = args.main_image, derivative = 'pageThumbnail'  )#"' : "";
 

@@ -165,10 +165,10 @@ component output="false" extends="tests.resources.HelperObjects.PresideTestCase"
 					expected &= '"field1" : { ';
 						expected &= '"normalizer" : function(value) { return $.trim(value); }, ';
 						expected &= '"required" : { param : [] }, ';
-						expected &= '"validator3" : { param : [], depends : function( el ){ return $( this.form ).find( "[name=''field1'']" ).val() === ''whatever''; } } ';
+						expected &= '"validator3" : { param : [], depends : function( el ){ return $( this.form ).contains( "[name=''field1'']" ).val() === ''whatever''; } } ';
 					expected &= '}, ';
 					expected &= '"field2" : { ';
-						expected &= '"validator1" : { param : [true], depends : function( element ){ return $( this.form ).find( "[name=''field1'']" ).val() === ''test''; } } ';
+						expected &= '"validator1" : { param : [true], depends : function( element ){ return $( this.form ).contains( "[name=''field1'']" ).val() === ''test''; } } ';
 					expected &= '}, ';
 					expected &= '"field3" : { ';
 						expected &= '"validator2" : { param : ["test",false] } ';

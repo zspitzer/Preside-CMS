@@ -292,7 +292,7 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 
 			for( var field in formFields ){
 				var fieldName = arguments.fieldNamePrefix & field & arguments.fieldNameSuffix;
-				if ( ( arguments.autoTrim && !autoTrimFields.disabled.find( field ) ) || autoTrimFields.enabled.find( field ) ) {
+				if ( ( arguments.autoTrim && !autoTrimFields.disabled.contains( field ) ) || autoTrimFields.enabled.contains( field ) ) {
 					collection[ field ] = trim( rc[ fieldName ] ?: "" );
 				} else {
 					collection[ field ] = ( rc[ fieldName ] ?: "" );

@@ -293,7 +293,7 @@ component {
 
 	private void function _ensureCaseSensitiveStructSettingsAreActive() {
 		var check         = { sensiTivity=true };
-		var caseSensitive = check.keyArray().find( "sensiTivity" );
+		var caseSensitive = check.keyArray().contains( "sensiTivity" );
 
 		if ( !caseSensitive ) {
 			var luceeCompilerSettings = "";
@@ -495,11 +495,11 @@ component {
 		var sessionsEnabled      = IsBoolean( request._sessionSettings.sessionManagement ) && request._sessionSettings.sessionManagement;
 		if ( sessionsEnabled ) {
 			for( var key in session ) {
-				if ( ignoreKeys.findNoCase( key ) ) {
+				if ( ignoreKeys.containsNoCase( key ) ) {
 					continue;
 				}
 
-				if ( keysToBeEmptyStructs.findNoCase( key ) && IsStruct( session[ key ] ) && session[ key ].isEmpty() ) {
+				if ( keysToBeEmptyStructs.containsNoCase( key ) && IsStruct( session[ key ] ) && session[ key ].isEmpty() ) {
 					continue;
 				}
 
@@ -643,7 +643,7 @@ component {
 				continue;
 			}
 
-			if ( sessionCookies.findNoCase( cooky.listFirst( "=" ) ) ) {
+			if ( sessionCookies.containsNoCase( cooky.listFirst( "=" ) ) ) {
 				cooky = _stripExpiryDateFromCookieToMakeASessionCookie( cooky );
 				anyCookiesChanged = true;
 			}

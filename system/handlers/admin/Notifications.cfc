@@ -126,7 +126,7 @@ component extends="preside.system.base.AdminHandler" {
 		var isTopicForm = Len( Trim( rc.topic ?: "" ) );
 		if ( isTopicForm ) {
 			prc.subscription = notificationService.getUserTopicSubscriptionSettings( userId=event.getAdminUserId(), topic=rc.topic );
-			if ( prc.subscription.isEmpty() && !prc.subscriptions.find( "all" ) ) {
+			if ( prc.subscription.isEmpty() && !prc.subscriptions.contains( "all" ) ) {
 				setNextEvent( url=event.buildAdminLink( linkTo="notifications.preferences" ) );
 			}
 		}

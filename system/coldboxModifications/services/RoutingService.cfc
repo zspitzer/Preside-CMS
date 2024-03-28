@@ -254,7 +254,7 @@ component extends="coldbox.system.web.services.RoutingService" accessors=true {
 			}
 		} else {
 			var allowedDomains = controller.getSetting( "allowedDomains" );
-			var allowed = !allowedDomains.len() || allowedDomains.find( domain );
+			var allowed = !allowedDomains.len() || allowedDomains.contains( domain );
 
 			if ( !allowed ) {
 				redirectUrl = controller.getSetting( "forcessl" ) ? "https" : ( ( cgi.https ?: "" ) == "on" ? "https" : "http" );

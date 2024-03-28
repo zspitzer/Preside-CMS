@@ -30,7 +30,7 @@ component {
 		var valuesToMatch   = arguments.value.listToArray();
 
 		for( var valueToMatch in valuesToMatch ) {
-			var found = submittedValues.findNoCase( valueToMatch );
+			var found = submittedValues.containsNoCase( valueToMatch );
 
 			if ( found && !arguments._all ) {
 				return true;

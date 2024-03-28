@@ -12,7 +12,7 @@ component {
 		var items = enumService.listItems( config.enum ?: "" );
 
 		for( var item in items ) {
-			if ( values.findNoCase( item.id ) ) {
+			if ( values.containsNoCase( item.id ) ) {
 				labels.append( item.label );
 			}
 		}

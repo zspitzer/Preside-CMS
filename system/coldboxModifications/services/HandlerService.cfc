@@ -244,7 +244,7 @@ component extends="coldbox.system.web.services.HandlerService" {
 
 	private numeric function _getHandlerIndex( required array handlers, required string handlerName, required string actionName ) {
 		for( var i=1; i <= arguments.handlers.len(); i++ ){
-			if ( arguments.handlers[i].name == arguments.handlerName && arguments.handlers[i].actions.findNoCase( arguments.actionName ) ) {
+			if ( arguments.handlers[i].name == arguments.handlerName && arguments.handlers[i].actions.containsNoCase( arguments.actionName ) ) {
 				return i;
 			}
 		}

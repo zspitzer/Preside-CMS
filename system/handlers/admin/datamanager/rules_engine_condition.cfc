@@ -51,8 +51,8 @@ component extends="preside.system.base.AdminHandler" {
 		var alwaysDisallowed = [ "manageContextPerms" ];
 		var operationMapped  = [ "add", "edit", "delete", "clone" ];
 		var permissionKey    = "#permissionBase#.#args.key#"
-		var hasPermission    = !alwaysDisallowed.find( args.key )
-		                    && ( !operationMapped.find( args.key ) || allowedOps.find( args.key ) )
+		var hasPermission    = !alwaysDisallowed.contains( args.key )
+		                    && ( !operationMapped.contains( args.key ) || allowedOps.contains( args.key ) )
 		                    && hasCmsPermission( permissionKey );
 
 		if ( !hasPermission && IsTrue( args.throwOnError ?: "" ) ) {

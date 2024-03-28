@@ -1293,7 +1293,7 @@ component displayName="Preside Object Service" {
 				);
 
 				for( var record in currentRecords ) {
-					if ( newRecords.find( record.targetId ) && ( !hasSortOrder || newRecords.find( record.targetId ) == record[ sortOrderField ] ) ) {
+					if ( newRecords.contains( record.targetId ) && ( !hasSortOrder || newRecords.contains( record.targetId ) == record[ sortOrderField ] ) ) {
 						ArrayDelete( newAddedRecords, record.targetId );
 						ArrayAppend( existingRecords, record.targetId );
 					} else {
@@ -1517,7 +1517,7 @@ component displayName="Preside Object Service" {
 		var manyToManyData = {};
 
 		for( var prop in props ) {
-			if ( ( !arguments.selectFields.len() || arguments.selectFields.findNoCase( prop ) ) ) {
+			if ( ( !arguments.selectFields.len() || arguments.selectFields.containsNoCase( prop ) ) ) {
 				if ( isManyToManyProperty( arguments.objectName, prop ) ) {
 
 					var idField        = getIdField( props[ prop ].relatedTo ?: "" );
@@ -2599,7 +2599,7 @@ component displayName="Preside Object Service" {
 		if ( Len( Trim( formula ) ) ) {
 			formula = _optimiseAggregateFunctions( formula );
 
-			if ( formula.findNoCase( "${prefix}" ) ) {
+			if ( formula.containsNoCase( "${prefix}" ) ) {
 				if ( prefix.len() ) {
 					formula = formula.reReplaceNoCase( "\$\{prefix\}(\S+)?\.", "${prefix}$\1.", "all" );
 					formula = formula.reReplaceNoCase( "\$\{prefix\}([^\$])" , "${prefix}.\1", "all" );
@@ -3285,7 +3285,7 @@ component displayName="Preside Object Service" {
 		for( var r in fAndRResult ){
 			replaced = replaced.replace( r.fullMatch, r.replaceWith, "all" );
 		}
-		if ( addAsAlias && fAndRResult.len() && !plainString.findNoCase( " as " ) ) {
+		if ( addAsAlias && fAndRResult.len() && !plainString.containsNoCase( " as " ) ) {
 			replaced &= " as " & fAndRResult[1].aliasProperty;
 		}
 
@@ -3950,7 +3950,7 @@ component displayName="Preside Object Service" {
 		for( var propName in props ){
 			var prop = props[ propName ];
 
-			if ( genOps.findNoCase( prop.generate ?: "" ) ) {
+			if ( genOps.containsNoCase( prop.generate ?: "" ) ) {
 				if ( arguments.operation == "insert" && Len( Trim( arguments.data[ propName ] ?: "" ) ) ) {
 					continue;
 				}

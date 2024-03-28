@@ -49,7 +49,7 @@ component {
 		var known_as   = args.known_as          ?: "";
 		var userLink   = '<a href="#args.userLink#">#args.known_as#</a>';
 		var recordId   = args.record_id         ?: "";
-		var type       = action.find( "_group" ) ? "group" : "user";
+		var type       = action.contains( "_group" ) ? "group" : "user";
 		var labelField = type == "group" ? "label" : "known_as";
 		var label      = args.detail[ labelField ] ?: "unknown";
 		var recordUrl  = event.buildAdminLink( linkTo="usermanager.#( type == 'group' ? 'editGroup' : 'editUser' )#", queryString="id=" & recordId );

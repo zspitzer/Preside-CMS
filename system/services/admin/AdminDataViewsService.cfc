@@ -201,7 +201,7 @@ component {
 				, poService.getDateModifiedField( args.objectName )
 			];
 
-			if ( systemProps.findNoCase( args.propertyName ) ) {
+			if ( systemProps.containsNoCase( args.propertyName ) ) {
 				return "system";
 			}
 

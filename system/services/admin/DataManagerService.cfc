@@ -184,7 +184,7 @@ component {
 		var dao                  = _getPresideObjectService().getObject( objectName );
 		var forbiddenFields      = [ dao.getIdField(), dao.getLabelField(), dao.getDateCreatedField(), dao.getDateModifiedField(), dao.getFlagField() ];
 		var isFieldBatchEditable = function( propertyName, attributes ) {
-			if ( forbiddenFields.findNoCase( propertyName ) ) {
+			if ( forbiddenFields.containsNoCase( propertyName ) ) {
 				return false
 			}
 			if ( attributes.relationship == "one-to-many" ) {
@@ -226,7 +226,7 @@ component {
 			return IsBoolean( result ?: "" ) && result;
 		}
 
-		return getAllowedOperationsForObject( arguments.objectName ).findNoCase( arguments.operation );
+		return getAllowedOperationsForObject( arguments.objectName ).containsNoCase( arguments.operation );
 	}
 
 	public array function getAllowedOperationsForObject( required string objectName ) {
@@ -238,7 +238,7 @@ component {
 			disallowedOperations = ListToArray( disallowedOperations );
 
 			for( var disallowedOp in disallowedOperations ) {
-				var index = operations.findNoCase( disallowedOp );
+				var index = operations.containsNoCase( disallowedOp );
 				if ( index ) { operations.deleteAt( index ); }
 			}
 
@@ -969,18 +969,18 @@ component {
 			sqlFields.append( "#objName#.#idField# as id" );
 		}
 
-		if ( !labelFieldIsRelationship && ListLen( labelField, "." ) < 2 && sqlFields.find( labelField ) ) {
+		if ( !labelFieldIsRelationship && ListLen( labelField, "." ) < 2 && sqlFields.contains( labelField ) ) {
 			sqlFields.delete( labelField );
 			sqlFields.append( replacedLabelField );
 		}
 
-		if ( dateCreatedField != "datecreated" && sqlFields.findNoCase( "dateCreated" ) ) {
-			sqlFields.deleteAt( sqlFields.findNoCase( "datecreated" ) );
+		if ( dateCreatedField != "datecreated" && sqlFields.containsNoCase( "dateCreated" ) ) {
+			sqlFields.deleteAt( sqlFields.containsNoCase( "datecreated" ) );
 			sqlFields.append( "#objName#.#dateCreatedField# as datecreated" );
 		}
 
-		if ( dateModifiedField != "dateModified" && sqlFields.findNoCase( "dateModified" ) ) {
-			sqlFields.deleteAt( sqlFields.findNoCase( "datemodified" ) );
+		if ( dateModifiedField != "dateModified" && sqlFields.containsNoCase( "dateModified" ) ) {
+			sqlFields.deleteAt( sqlFields.containsNoCase( "datemodified" ) );
 			sqlFields.append( "#objName#.#dateModifiedField# as datemodified" );
 		}
 
@@ -998,7 +998,7 @@ component {
 		];
 		for( i=ArrayLen( sqlFields ); i gt 0; i-- ){
 			field = sqlFields[i];
-			if ( ignore.findNoCase( field ) ) {
+			if ( ignore.containsNoCase( field ) ) {
 				continue;
 			}
 			if ( !StructKeyExists( props, field ) ) {
@@ -1053,7 +1053,7 @@ component {
 				var foreignObjectLabelField = _getPresideObjectService().getLabelField(       objectProps[ orderByField ].relatedTo );
 
 				if ( !structKeyExists( foreignObject[ foreignObjectLabelField ], "formula" ) ) {
-					var delim = relatedLabelField.find( "$" ) ? "$" : ".";
+					var delim = relatedLabelField.contains( "$" ) ? "$" : ".";
 
 					relatedLabelField = orderByField & delim & ListRest( relatedLabelField, delim );
 				}

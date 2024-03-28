@@ -12,7 +12,7 @@
 
 		<cfif ( args.inheritedPerms.len() + args.savedPerms.len() )>
 			<cfloop array="#args.inheritedPerms#" index="i" item="perm">
-				<span class="inherited-perm<cfif args.savedOpposites.find( perm )> overrided</cfif>">
+				<span class="inherited-perm<cfif args.savedOpposites.contains( perm )> overrided</cfif>">
 					#perm.name#</span><cfif i lt args.inheritedPerms.len() || args.savedPerms.len()><span class="inherited-perm">,</span></cfif>
 			</cfloop>
 			<cfloop array="#args.savedPerms#" index="i" item="perm">

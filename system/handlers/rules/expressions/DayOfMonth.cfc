@@ -15,7 +15,7 @@ component {
 		,          boolean _is = true
 	) {
 		var currentDayOfMonth = Day( Now() );
-		var isMatched         = arguments.days.listToArray().find( currentDayOfMonth );
+		var isMatched         = arguments.days.listToArray().contains( currentDayOfMonth );
 
 		return _is ? isMatched : !isMatched;
 	}

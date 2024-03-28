@@ -70,10 +70,10 @@ component displayName="RulesEngine Expression Service" {
 			if ( hasExclusions && _findListItemInArray( tags, arguments.excludeTags ) ) {
 				continue;
 			}
-			if ( filterOnContext && !(contexts.findNoCase( "global" ) || contexts.findNoCase( arguments.context ) ) ) {
+			if ( filterOnContext && !(contexts.containsNoCase( "global" ) || contexts.containsNoCase( arguments.context ) ) ) {
 				continue;
 			}
-			if ( filterOnObject && !( ( allExpressions[ expressionId ].filterObjects ?: [] ).len() && allExpressions[ expressionId ].filterObjects.findNoCase( arguments.filterObject ) ) ) {
+			if ( filterOnObject && !( ( allExpressions[ expressionId ].filterObjects ?: [] ).len() && allExpressions[ expressionId ].filterObjects.containsNoCase( arguments.filterObject ) ) ) {
 				continue;
 			}
 
@@ -289,7 +289,7 @@ component displayName="RulesEngine Expression Service" {
 
 		var contexts   = expression.contexts ?: [];
 
-		if ( !contexts.findNoCase( arguments.context ) && !contexts.findNoCase( "global" ) ) {
+		if ( !contexts.containsNoCase( arguments.context ) && !contexts.containsNoCase( "global" ) ) {
 			throw(
 				  type    = "preside.rule.expression.invalid.context"
 				, message = "The expression [#arguments.expressionId#] cannot be used in the [#arguments.context#] context."
@@ -334,7 +334,7 @@ component displayName="RulesEngine Expression Service" {
 		var expression    = _getRawExpression( expressionid );
 		var filterObjects = expression.filterObjects ?: [];
 
-		if ( !filterObjects.findNoCase( arguments.objectName ) ) {
+		if ( !filterObjects.containsNoCase( arguments.objectName ) ) {
 			throw(
 				  type    = "preside.rule.expression.invalid.filter.object"
 				, message = "The expression [#arguments.expressionId#] cannot be used to filter the [#arguments.objectName#] object."
@@ -391,12 +391,12 @@ component displayName="RulesEngine Expression Service" {
 		}
 
 		if ( arguments.filterObject.len() ) {
-			if ( !expression.filterObjects.findNoCase( arguments.filterObject ) ) {
+			if ( !expression.filterObjects.containsNoCase( arguments.filterObject ) ) {
 				arguments.validationResult.setGeneralMessage( "The [#arguments.expressionId#] expression cannot be used to filter the [#arguments.filterObject#] object" );
 				return false;
 			}
 		} else {
-			if ( !expression.contexts.findNoCase( arguments.context ) && !expression.contexts.findNoCase( "global" ) ) {
+			if ( !expression.contexts.containsNoCase( arguments.context ) && !expression.contexts.containsNoCase( "global" ) ) {
 				arguments.validationResult.setGeneralMessage( "The [#arguments.expressionId#] expression cannot be used in the [#arguments.context#] context" );
 				return false;
 			}
@@ -588,7 +588,7 @@ component displayName="RulesEngine Expression Service" {
 // PRIVATE HELPERS
 	private boolean function _findListItemInArray( required array array, required string list ) {
 		for( var listItem in listToArray( arguments.list ) ) {
-			if ( arguments.array.find( listItem ) ) {
+			if ( arguments.array.contains( listItem ) ) {
 				return true;
 			}
 		}

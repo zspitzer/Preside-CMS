@@ -39,7 +39,7 @@ component displayName="Multilingual Preside Object Service" {
 			return false;
 		}
 
-		return !Len( Trim( arguments.propertyName ) ) || multiLingualObjectReference[ arguments.objectName ].findNoCase( arguments.propertyName );
+		return !Len( Trim( arguments.propertyName ) ) || multiLingualObjectReference[ arguments.objectName ].containsNoCase( arguments.propertyName );
 	}
 
 	/**
@@ -97,14 +97,14 @@ component displayName="Multilingual Preside Object Service" {
 		translationObject.isPageType   = false;
 
 		for( var propertyName in translationProperties ) {
-			if ( !validProperties.findNoCase( propertyName ) ) {
+			if ( !validProperties.containsNoCase( propertyName ) ) {
 				StructDelete( translationProperties, propertyName );
 
-				if ( dbFieldList.findNoCase( propertyName ) ) {
-					ArrayDeleteAt( dbFieldList, dbFieldList.findNoCase( propertyName )  );
+				if ( dbFieldList.containsNoCase( propertyName ) ) {
+					ArrayDeleteAt( dbFieldList, dbFieldList.containsNoCase( propertyName )  );
 				}
-				if ( propertyNames.findNoCase( propertyName ) ) {
-					ArrayDeleteAt( propertyNames, propertyNames.findNoCase( propertyName )  );
+				if ( propertyNames.containsNoCase( propertyName ) ) {
+					ArrayDeleteAt( propertyNames, propertyNames.containsNoCase( propertyName )  );
 				}
 
 				continue;
@@ -172,7 +172,7 @@ component displayName="Multilingual Preside Object Service" {
 		translationObject.indexes       = translationObject.indexes ?: {};
 		for( var indexName in translationObject.indexes ) {
 			for( var indexField in translationObject.indexes[ indexName ].fields.listToArray() ) {
-				if ( !dbFieldList.findNoCase( indexField ) ) {
+				if ( !dbFieldList.containsNoCase( indexField ) ) {
 					translationObject.indexes.delete( indexName );
 					break;
 				}
@@ -332,7 +332,7 @@ component displayName="Multilingual Preside Object Service" {
 
 		for( var record in dbRecords ) {
 			record.default = record.id == defaultLanguage;
-			record.sortOrder = languageIds.find( record.id );
+			record.sortOrder = languageIds.contains( record.id );
 			languages.append( record );
 		}
 
@@ -524,7 +524,7 @@ component displayName="Multilingual Preside Object Service" {
 			var multilingualSettings = $getPresideCategorySettings( "multilingual" );
 			var configuredLanguages  = ListToArray( ListAppend( multilingualSettings.additional_languages ?: "", multilingualSettings.default_language ?: "" ) );
 
-			return configuredLanguages.findNoCase( lang.id ) ? lang : QueryNew( 'id,slug' );
+			return configuredLanguages.containsNoCase( lang.id ) ? lang : QueryNew( 'id,slug' );
 		}
 
 		if ( Len( Trim( arguments.localeSlug ) ) ) {

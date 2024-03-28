@@ -199,7 +199,7 @@
 			dbinfo type="tables" name="tableInfo" datasource=application.dsn;
 
 			for( var table in tableInfo ){
-				var isInReservedSchema = reservedSchemas.find( table.table_schem ?: "" );
+				var isInReservedSchema = reservedSchemas.contains( table.table_schem ?: "" );
 				var isPhysicalTable    = ( table.table_type ?: "table" ) == "table";
 				if ( !isInReservedSchema && isPhysicalTable ) {
 					tables.append( table.table_name );

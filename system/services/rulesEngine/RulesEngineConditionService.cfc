@@ -165,7 +165,7 @@ component displayName="RulesEngine Condition Service" {
 					filterableObjects = objects;
 				} else {
 					for( var n=filterableObjects.len(); n>0; n-- ) {
-						if ( !objects.findNoCase( filterableObjects[n] ) ) {
+						if ( !objects.containsNoCase( filterableObjects[n] ) ) {
 							filterableObjects.deleteAt( n );
 						}
 					}

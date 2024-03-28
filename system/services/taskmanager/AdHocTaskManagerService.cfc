@@ -95,7 +95,7 @@ component displayName="Ad-hoc Task Manager Service" {
 			, disable_cancel         = arguments.disableCancel
 		} );
 
-		if ( arguments.resultUrl.findNoCase( "{taskId}" ) ) {
+		if ( arguments.resultUrl.containsNoCase( "{taskId}" ) ) {
 			setResultUrl( taskId=taskId, resultUrl=arguments.resultUrl.replaceNoCase( "{taskId}", taskId, "all" ) );
 		}
 
@@ -632,7 +632,7 @@ component displayName="Ad-hoc Task Manager Service" {
 	private boolean function _inChildThread() {
 		var currentThreadName = CreateObject( "java", "java.lang.Thread" ).currentThread().getThreadGroup().getName();
 
-		return currentThreadName.findNoCase( "cfthread" );
+		return currentThreadName.containsNoCase( "cfthread" );
 	}
 
 	private date function _now() {

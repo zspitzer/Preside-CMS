@@ -44,7 +44,7 @@ component singleton=true {
 					if ( !_joinExists( join, joins ) ) {
 						target = join.tableAlias ?: ( join.joinToObject ?: join.subQueryAlias );
 						discoveredColumnJoins[ target ] = 1;
-						if ( arguments.joinTargets.findNoCase( target ) ){
+						if ( arguments.joinTargets.containsNoCase( target ) ){
 							discoveredJoins[ target ] = 1;
 						}
 						ArrayAppend( joins, join );

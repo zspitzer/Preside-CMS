@@ -159,7 +159,7 @@ component extends="coldbox.system.web.services.ModuleService" output=false {
 				}
 
 				// Add convention based routing if it does not exist.
-				var conventionsRouteExists = mConfig.router.getRoutes().find( function( item ){
+				var conventionsRouteExists = mConfig.router.getRoutes().contains( function( item ){
 					return ( item.pattern == "/:handler/:action?" || item.pattern == ":handler/:action?" );
 				} );
 				if( conventionsRouteExists == 0 ){

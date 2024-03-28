@@ -15,7 +15,7 @@ component extends="preside.system.base.AdminHandler" {
 
 		if ( !IsEmpty( rc.q ?: "" ) ) {
 			preparedLanguages = preparedLanguages.filter( function( language ){
-				return language.text.findNoCase( rc.q );
+				return language.text.containsNoCase( rc.q );
 			} );
 		}
 

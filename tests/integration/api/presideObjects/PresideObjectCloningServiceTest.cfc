@@ -232,7 +232,7 @@ component extends="tests.resources.HelperObjects.PresideBddTestCase" {
 
 				mockPresideObjectService.$( "selectData" ).$args( objectName=objectName, id=recordId ).$results( oldRecord );
 				for( var prop in cloneableFields ) {
-					if ( prop.findNoCase( "many" ) ) {
+					if ( prop.containsNoCase( "many" ) ) {
 						if ( prop == "many_to_many" ) {
 							mockPresideObjectService.$( "getObjectPropertyAttribute" ).$args( objectName=objectName, propertyName=prop, attributeName="relationship", defaultValue="none" ).$results( "many-to-many" );
 						} else {

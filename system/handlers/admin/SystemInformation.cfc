@@ -22,7 +22,7 @@ component extends="preside.system.base.AdminHandler" {
 		var tab = rc.tab ?: "";
 		var tabs = [ "general", "extensions", "healthchecks", "heartbeats" ];
 
-		if ( !tabs.findNoCase( tab ) ) {
+		if ( !tabs.containsNoCase( tab ) ) {
 			tab = tabs[ 1 ];
 		}
 

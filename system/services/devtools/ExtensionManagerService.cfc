@@ -111,14 +111,14 @@ component {
 					for( var n=i+1; n<=extensionCount; n++ ) {
 						var extC = extensions[ n ];
 
-						if ( extA.dependsOn.findNoCase( extC.id ) ) {
+						if ( extA.dependsOn.containsNoCase( extC.id ) ) {
 							arrayDeleteAt(extensions, n);
 							arrayInsertAt(extensions, i, extC);
 							swapped = true;
 							break;
 						}
 					}
-				} else if ( extA.id > extB.id && !extB.dependsOn.findNoCase( extA.id ) ) {
+				} else if ( extA.id > extB.id && !extB.dependsOn.containsNoCase( extA.id ) ) {
 					var tmp = extB;
 					extensions[ i+1 ] = extA;
 					extensions[ i ]   = tmp;

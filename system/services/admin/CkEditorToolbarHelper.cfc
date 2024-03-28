@@ -33,7 +33,7 @@ component singleton=true {
 			var transformedButtons = [];
 
 			for( var btn in buttons ) {
-				if ( ignoreButtons.find( btn ) || securityService.hasPermission( "ckeditor.button.#btn#" ) ) {
+				if ( ignoreButtons.contains( btn ) || securityService.hasPermission( "ckeditor.button.#btn#" ) ) {
 					transformedButtons.append( btn );
 				}
 			}

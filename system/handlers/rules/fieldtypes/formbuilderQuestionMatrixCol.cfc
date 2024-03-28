@@ -24,7 +24,7 @@ component {
 				var items   = [];
 
 				for( var id in ids ) {
-					var index = values.findNoCase( id );
+					var index = values.containsNoCase( id );
 					if ( index ) {
 						items.append( labels[ index ] ?: values[ index ] );
 					}

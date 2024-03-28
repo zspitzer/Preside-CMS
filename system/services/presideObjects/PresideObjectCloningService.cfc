@@ -228,7 +228,7 @@ component {
 				continue;
 			}
 
-			if ( ignoreFields.findNoCase( propName ) ) {
+			if ( ignoreFields.containsNoCase( propName ) ) {
 				continue;
 			}
 

@@ -17,7 +17,7 @@ component {
 
 // PUBLIC API
 	public numeric function calculatePasswordStrength( required string password ) {
-		if ( _commonPasswords.find( arguments.password ) ) {
+		if ( _commonPasswords.contains( arguments.password ) ) {
 			return 0;
 		}
 

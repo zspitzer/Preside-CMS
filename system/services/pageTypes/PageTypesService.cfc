@@ -243,7 +243,7 @@ component singleton=true {
 		var ext       = ListLast( fileName, "." );
 		var filesInDir = DirectoryList( directory, false, "name", "*.#ext#" );
 
-		return filesInDir.findNoCase( fileName );
+		return filesInDir.containsNoCase( fileName );
 
 	}
 

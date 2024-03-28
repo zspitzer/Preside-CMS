@@ -41,7 +41,7 @@ component singleton=true autodoc=true displayName="Feature service" {
 		var activeSiteTemplate   = Len( Trim( arguments.siteTemplate ) ) ? arguments.siteTemplate : "default";
 		var availableToTemplates = features[ arguments.feature ].siteTemplates ?: [ "*" ];
 
-		return !IsArray( availableToTemplates ) || availableToTemplates.find( "*" ) || availableToTemplates.find( activeSiteTemplate );
+		return !IsArray( availableToTemplates ) || availableToTemplates.contains( "*" ) || availableToTemplates.contains( activeSiteTemplate );
 	}
 
 	/**
@@ -69,7 +69,7 @@ component singleton=true autodoc=true displayName="Feature service" {
 		for( var featureName in features ) {
 			var widgets = features[ featureName ].widgets ?: [];
 
-			if ( IsArray( widgets ) && widgets.findNoCase( arguments.widget ) ) {
+			if ( IsArray( widgets ) && widgets.containsNoCase( arguments.widget ) ) {
 				return featureName;
 			}
 		}

@@ -116,7 +116,7 @@ component {
 
 		if ( arguments.multiple ) {
 			for( var v in ListToArray( arguments.value ) ) {
-				if ( !rawItems.find( v ) ) {
+				if ( !rawItems.contains( v ) ) {
 					return false;
 				}
 			}
@@ -124,7 +124,7 @@ component {
 			return true;
 		}
 
-		return rawItems.find( arguments.value );
+		return rawItems.contains( arguments.value );
 	}
 
 	public string function enum_js() {

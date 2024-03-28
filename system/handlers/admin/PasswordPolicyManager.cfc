@@ -32,7 +32,7 @@ component extends="preside.system.base.AdminHandler" {
 		prc.policyContexts = passwordPolicyService.listContexts();
 		prc.currentContext = rc.context ?: "cms";
 
-		if ( !prc.policyContexts.findNoCase( prc.currentContext ) ) {
+		if ( !prc.policyContexts.containsNoCase( prc.currentContext ) ) {
 			setNextEvent( url=event.buildAdminLink( linkto="passwordPolicyManager" ) );
 		}
 
@@ -45,7 +45,7 @@ component extends="preside.system.base.AdminHandler" {
 		var policyContexts   = passwordPolicyService.listContexts();
 		var context          = rc.context ?: "";
 
-		if ( !policyContexts.findNoCase( context ) ) {
+		if ( !policyContexts.containsNoCase( context ) ) {
 			setNextEvent( url=event.buildAdminLink( linkto="passwordPolicyManager" ) );
 		}
 

@@ -137,7 +137,7 @@ component {
  * Please review the scripts before running.
  */" & newline & newline;
 					for( var script in scriptsToRun ) {
-						if ( !scriptsOutput.findNoCase( script.sql ) ) {
+						if ( !scriptsOutput.containsNoCase( script.sql ) ) {
 							sql &= script.sql & ";" & newline;
 							scriptsOutput.append( script.sql );
 						}
@@ -305,7 +305,7 @@ component {
 		var indexFields = listToArray( arguments.fields );
 
 		for( var fk in arguments.relationships ) {
-			if ( indexFields.find( arguments.relationships[ fk ].fk_column ) ) {
+			if ( indexFields.contains( arguments.relationships[ fk ].fk_column ) ) {
 				foreignKeys.append( fk );
 			}
 		}
@@ -651,7 +651,7 @@ component {
 
 	private boolean function _shouldRecreateForeignKey( required string dbKeyName ) {
 		var fksToRecreate = _getForeignKeysToRecreate();
-		return fksToRecreate.find( arguments.dbKeyName );
+		return fksToRecreate.contains( arguments.dbKeyName );
 	}
 
 	private void function _addForeignKeysToRecreate( required array dbKeyNames ) {

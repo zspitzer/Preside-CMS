@@ -22,7 +22,7 @@ component displayName="TaskManager Logger Wrapper" {
 		var loggingMethods = [ "DEBUG" ,"INFO" ,"WARN" ,"ERROR" ,"FATAL" ,"OFF" ];
 		var logger         = _getLogboxLogger();
 
-		if ( loggingMethods.findNoCase( arguments.methodName ) ) {
+		if ( loggingMethods.containsNoCase( arguments.methodName ) ) {
 			var args = {
 				  message   = arguments.methodArgs[1] ?: ( arguments.methodArgs.message   ?: "" )
 				, extraInfo = arguments.methodArgs[2] ?: ( arguments.methodArgs.extraInfo ?: {} )

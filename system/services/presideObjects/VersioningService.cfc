@@ -344,7 +344,7 @@ component {
 		}
 
 		for( var field in arguments.newData ) {
-			if ( ignoredFields.findNoCase( field ) || !StructKeyExists( properties, field ) ) {
+			if ( ignoredFields.containsNoCase( field ) || !StructKeyExists( properties, field ) ) {
 				continue;
 			}
 
@@ -677,7 +677,7 @@ component {
 		}
 
 		for( var fieldName in [ "_version_number", "_version_author", "_version_changed_fields", "_version_is_latest", "_version_is_draft", "_version_has_drafts", "_version_is_latest_draft" ] ) {
-			if ( ( useDrafts || !fieldName.find( "draft" ) ) && !objMeta.dbFieldList.listFindNoCase( fieldName ) ) {
+			if ( ( useDrafts || !fieldName.contains( "draft" ) ) && !objMeta.dbFieldList.listFindNoCase( fieldName ) ) {
 				objMeta.dbFieldList = objMeta.dbFieldList.listAppend( fieldName );
 			}
 		}

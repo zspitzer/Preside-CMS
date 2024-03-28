@@ -389,7 +389,7 @@ component displayName="AssetManager Service" {
 		var folderQueue    = [ parentFolderId ];
 		var visitedNodes   = [];
 		var folderPassesCriteria = function( id, label ) {
-			return ( !ids.len() || ids.findNoCase( arguments.id ) ) && ( !Len( Trim( searchQuery ) ) || arguments.label.findNoCase( searchQuery ) );
+			return ( !ids.len() || ids.containsNoCase( arguments.id ) ) && ( !Len( Trim( searchQuery ) ) || arguments.label.containsNoCase( searchQuery ) );
 		};
 
 		while( !folderQueue.isEmpty() ) {
@@ -398,7 +398,7 @@ component displayName="AssetManager Service" {
 			var currentFolderId = folderQueue[ 1 ];
 			var currentFolder   = folderStruct[ currentFolderId ];
 
-			if( currentFolderId == arguments.excludeDescendants || visitedNodes.find( currentFolderId ) ) {
+			if( currentFolderId == arguments.excludeDescendants || visitedNodes.contains( currentFolderId ) ) {
 				folderQueue.deleteAt( 1 );
 				continue;
 			};

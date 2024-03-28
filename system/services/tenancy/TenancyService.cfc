@@ -48,7 +48,7 @@ component displayName="Tenancy service" {
 			objectMeta.properties       = objectMeta.properties ?: {};
 			objectMeta.properties[ fk ] = objectMeta.properties[ fk ] ?: {};
 
-			if ( !objectMeta.propertyNames.findNoCase( fk ) ) {
+			if ( !objectMeta.propertyNames.containsNoCase( fk ) ) {
 				objectMeta.propertyNames.append( fk );
 			}
 
@@ -106,7 +106,7 @@ component displayName="Tenancy service" {
 			var prop = props[ propName ];
 			var fkForTenant = ListToArray( prop.fkForTenant ?: "" );
 
-			if ( fkForTenant.findNoCase( arguments.tenant ) ) {
+			if ( fkForTenant.containsNoCase( arguments.tenant ) ) {
 				return propName;
 			}
 		}
@@ -158,7 +158,7 @@ component displayName="Tenancy service" {
 	public string function getTenancyCacheKey( required string objectName, array bypassTenants=[], struct tenantIds={} ) {
 		var tenant = getObjectTenant( arguments.objectName );
 
-		if ( tenant.len() && !arguments.bypassTenants.findNoCase( tenant ) ) {
+		if ( tenant.len() && !arguments.bypassTenants.containsNoCase( tenant ) ) {
 			return "-" & ( arguments.tenantIds[ tenant ] ?: getTenantId( tenant ) );
 		}
 
@@ -173,7 +173,7 @@ component displayName="Tenancy service" {
 		var fields = {};
 		var formData = arguments.formData ?: {};
 
-		if ( tenant.len() && !arguments.bypassTenants.findNoCase( tenant ) ) {
+		if ( tenant.len() && !arguments.bypassTenants.containsNoCase( tenant ) ) {
 			var fk       = getTenantFkForObject( arguments.objectName );
 			var tenantId = "";
 
@@ -192,7 +192,7 @@ component displayName="Tenancy service" {
 	public struct function getTenancyFilter( required string objectName, array bypassTenants=[], struct tenantIds={}, extraFilters=[] ) {
 		var tenant = getObjectTenant( arguments.objectName );
 
-		if ( tenant.len() && !arguments.bypassTenants.findNoCase( tenant ) ) {
+		if ( tenant.len() && !arguments.bypassTenants.containsNoCase( tenant ) ) {
 			var fk            = getTenantFkForObject( arguments.objectName );
 			var tenantId      = arguments.tenantIds[ tenant ] ?: getTenantId( tenant );
 			var config        = _getTenancyConfig();

@@ -17,7 +17,7 @@ component {
 		var sourceLen   = Len( arguments.source );
 		var currentPos  = 1;
 
-		while( matcher.find() ) {
+		while( matcher.contains() ) {
 			var pos = matcher.start() + 1;
 
 			if ( currentPos < pos ) {

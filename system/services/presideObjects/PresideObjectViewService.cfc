@@ -196,7 +196,7 @@ component displayName="Preside Object View Service" {
 
 					if ( fieldName != "false" ) {
 						selectDef = alias eq fieldName ? alias : "#fieldName# as #alias#";
-						if ( not fields.selectFields.find( selectDef ) ) {
+						if ( not fields.selectFields.contains( selectDef ) ) {
 							fields.selectFields.append( selectDef );
 
 							result = ReFindNoCase( rendererRegex, match, 1, true );

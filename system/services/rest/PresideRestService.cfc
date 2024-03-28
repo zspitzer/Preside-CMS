@@ -395,7 +395,7 @@ component {
 	}
 
 	private void function _dealWithEtags( required any restRequest, required any restResponse, required any requestContext ) {
-		if ( [ "HEAD", "GET" ].findNoCase( restRequest.getVerb() ) ) {
+		if ( [ "HEAD", "GET" ].containsNoCase( restRequest.getVerb() ) ) {
 			var etag = setEtag( restResponse );
 
 			if ( Len( Trim( etag ) ) ) {

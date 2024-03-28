@@ -687,7 +687,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					ids.append( expression.id );
 				}
 
-				expect( ids.findNoCase( newExpression.id ) > 0 ).toBe( true );
+				expect( ids.containsNoCase( newExpression.id ) > 0 ).toBe( true );
 			} );
 		} );
 

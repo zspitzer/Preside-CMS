@@ -160,7 +160,7 @@ component extends="testbox.system.BaseSpec"{
 					, diffThanDefault = { fkForTenant="site" }
 				} };
 
-				expect( service.findObjectTenancyForeignKey( "site", meta ) ).toBe( "diffThanDefault" );
+				expect( service.containsObjectTenancyForeignKey( "site", meta ) ).toBe( "diffThanDefault" );
 			} );
 
 			it( "should return the default property name from tenancy configuration when no properties declare themselves the fk", function(){
@@ -170,7 +170,7 @@ component extends="testbox.system.BaseSpec"{
 					, anotherprop = { oi="you" }
 				} };
 
-				expect( service.findObjectTenancyForeignKey( "site", meta ) ).toBe( "site" );
+				expect( service.containsObjectTenancyForeignKey( "site", meta ) ).toBe( "site" );
 			} );
 		} );
 

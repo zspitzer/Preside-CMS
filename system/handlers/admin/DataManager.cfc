@@ -1755,7 +1755,7 @@ component extends="preside.system.base.AdminHandler" {
 		var actionsWithButtons = [ "object", "viewrecord", "addrecord", "editrecord", "managefilters" ];
 		var rendered = "";
 
-		if ( actionsWithButtons.findNoCase( action ) ) {
+		if ( actionsWithButtons.containsNoCase( action ) ) {
 			var actions = customizationService.runCustomization(
 				  objectName     = objectName
 				, action         = "getTopRightButtonsFor#action#"
@@ -2084,7 +2084,7 @@ component extends="preside.system.base.AdminHandler" {
 		var excludedArguments = [ "event", "rc", "prc", "actionsView", "useMultiActions", "isMultilingual", "object" ];
 
 		for( var argument in arguments ) {
-			if ( !excludedArguments.find( argument ) ) {
+			if ( !excludedArguments.contains( argument ) ) {
 				getRecordsArgs[ argument ] = duplicate( arguments[ argument ] );
 			}
 		}
@@ -3340,7 +3340,7 @@ component extends="preside.system.base.AdminHandler" {
 		var draftOperations = [ "addRecord", "addRecordAction", "editRecord", "editRecordAction", "translateRecord", "translateRecordAction" ];
 		var permitted       = true;
 
-		if ( arguments.checkOperations && operations.find( arguments.key ) && !datamanagerService.isOperationAllowed( arguments.object, arguments.key ) ) {
+		if ( arguments.checkOperations && operations.contains( arguments.key ) && !datamanagerService.isOperationAllowed( arguments.object, arguments.key ) ) {
 			permitted = false;
 		} else if ( !hasCmsPermission( permissionKey="datamanager.#arguments.key#", context="datamanager", contextKeys=[ arguments.object ] ) && (!arguments.object.len() || !hasCmsPermission( permissionKey="presideobject.#arguments.object#.#arguments.key#" ) ) ) {
 			permitted = false;
@@ -3352,7 +3352,7 @@ component extends="preside.system.base.AdminHandler" {
 			}
 		}
 
-		if ( permitted && IsTrue( prc.draftsEnabled ?: "" ) && draftOperations.findNoCase( arguments.key ) ) {
+		if ( permitted && IsTrue( prc.draftsEnabled ?: "" ) && draftOperations.containsNoCase( arguments.key ) ) {
 			if ( arguments.key.endsWith( "action" ) ) {
 				var isDraft = ( rc._saveaction ?: "" ) != "publish";
 				permitted = isDraft ? IsTrue( prc.canSaveDraft ?: "" ) : IsTrue( prc.canPublish ?: "" );
@@ -4179,7 +4179,7 @@ component extends="preside.system.base.AdminHandler" {
 			, "exportDataAction"
 		];
 
-		if( onlyCheckForLoginActions.findNoCase( arguments.action ) ){
+		if( onlyCheckForLoginActions.containsNoCase( arguments.action ) ){
 			return;
 		}
 
@@ -4224,7 +4224,7 @@ component extends="preside.system.base.AdminHandler" {
 			_checkObjectExists( argumentCollection=arguments, object=prc.objectName );
 			_checkPermission( argumentCollection=arguments, key="navigate" );
 
-			if ( !useAnyWhereActions.findNoCase( arguments.action ) ) {
+			if ( !useAnyWhereActions.containsNoCase( arguments.action ) ) {
 				_objectCanBeViewedInDataManager( event=event, objectName=prc.objectName, relocateIfNoAccess=true );
 			}
 
@@ -4254,7 +4254,7 @@ component extends="preside.system.base.AdminHandler" {
 			prc.useVersioning         = datamanagerService.isOperationAllowed( prc.objectName, "viewversions" ) && presideObjectService.objectIsVersioned( prc.objectName );
 			prc.canPublish            = prc.draftsEnabled && _checkPermission( argumentCollection=arguments, key="publish"  , object=prc.objectName, throwOnError=false );
 			prc.canSaveDraft          = prc.draftsEnabled && _checkPermission( argumentCollection=arguments, key="savedraft", object=prc.objectName, throwOnError=false );
-			prc.isTranslationAction   = arguments.action.find( "translat" ) > 0;
+			prc.isTranslationAction   = arguments.action.contains( "translat" ) > 0;
 			if ( prc.isMultilingual && ( prc.isTranslationAction || arguments.action == "viewRecord" ) ) {
 				prc.translations = multilingualPresideObjectService.getTranslationStatus( prc.objectName, prc.recordId );
 			}
