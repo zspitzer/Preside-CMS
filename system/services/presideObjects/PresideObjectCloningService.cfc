@@ -228,7 +228,7 @@ component {
 				continue;
 			}
 
-			if ( ignoreFields.containsNoCase( propName ) ) {
+			if ( ArrayContainsNoCase( ignoreFields, propName ) ) {
 				continue;
 			}
 
@@ -269,7 +269,7 @@ component {
 			return false;
 		}
 
-		return listCloneableFields( Len( arguments.objectName) ) > 0;
+		return Len( listCloneableFields( arguments.objectName) ) > 0;
 	}
 
 	/**
