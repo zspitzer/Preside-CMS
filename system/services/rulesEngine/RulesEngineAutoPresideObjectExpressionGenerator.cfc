@@ -71,7 +71,7 @@ component {
 			return [];
 		}
 
-		if ( !isRequired && !( ArrayContainsNoCase([ "many-to-many", "one-to-many" ], relationship ) && !isFormula ) {
+		if ( !isRequired && !( ArrayContainsNoCase([ "many-to-many", "one-to-many" ], relationship ) && !isFormula ) ) {
 			switch( propType ) {
 				case "string":
 				case "numeric":

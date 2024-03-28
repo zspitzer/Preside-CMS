@@ -56,7 +56,8 @@ component displayName="Website permissions service" {
 	 * @filter.hint  An array of filters with which to filter permission keys
 	 *
 	 */
-	public array function ArrayContainsNoCase( ( string benefit="", string user="", array , f ( Len( Trim( arguments.benefit ) ) ) {
+	public array function listPermissionKeys( string benefit="", string user="", array filter=[] ) {
+		if ( Len( Trim( arguments.benefit ) ) ) {
 			return _getBenefitPermissions( arguments.benefit );
 
 		} else if ( Len( Trim( arguments.user ) ) ) {

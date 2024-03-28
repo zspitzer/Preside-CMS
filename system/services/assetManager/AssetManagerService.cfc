@@ -389,7 +389,7 @@ component displayName="AssetManager Service" {
 		var folderQueue    = [ parentFolderId ];
 		var visitedNodes   = [];
 		var folderPassesCriteria = function( id, label ) {
-			return ( !Len( ids ) ) || ArrayContainsNoCase( ids, arguments.id ) ) && ( !Len( Trim( searchQuery ) ) || arguments.label.containsNoCase( searchQuery ) );
+			return ( !Len( ids ) || ArrayContainsNoCase( ids, arguments.id ) ) && ( !Len( Trim( searchQuery ) ) || arguments.label.containsNoCase( searchQuery ) );
 		};
 
 		while( !folderQueue.isEmpty() ) {
