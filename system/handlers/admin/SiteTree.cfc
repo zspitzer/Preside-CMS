@@ -89,7 +89,7 @@ component extends="preside.system.base.AdminHandler" {
 		var rendered         = "";
 		var parentId         = rc.parentId ?: "";
 		var parentPage       = siteTreeService.getPage( id=parentId, selectFields=[ "_hierarchy_lineage", "_hierarchy_depth", "access_restriction", "page_type" ] );
-		var managedPageTypes = getManagedChildPageTypes( parentPage.page_type ).listToArray();
+		var managedPageTypes = ListToArray( getManagedChildPageTypes( parentPage.page_type ) );
 		var ancestors        = siteTreeService.getAncestors( id=parentId, selectFields=[ "id", "access_restriction" ] );
 		var tree             = siteTreeService.getTree( trash = false, rootPageId=parentId, maxDepth=0, selectFields=[
 			  "page.id"

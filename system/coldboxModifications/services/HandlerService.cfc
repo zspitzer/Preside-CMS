@@ -28,7 +28,7 @@ component extends="coldbox.system.web.services.HandlerService" {
 
 		variables.registeredHandlers = {};
 		for( var i=1; i<=Len( handlerMappings ); i++ ) {
-			for( var handlerName in _listHandlerNames( handlerMappings[i].handlers ).listToArray() ) {
+			for( var handlerName in ListToArray( _listHandlerNames( handlerMappings[i].handlers ) ) ) {
 				variables.registeredHandlers[ handlerName ] = 1;
 			}
 		}

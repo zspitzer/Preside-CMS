@@ -207,7 +207,7 @@ component {
 		,          boolean _all   = true
 	) {
 		var paramSuffix    = _getRandomFilterParamSuffix();
-		var values         = arguments.value.listToArray();
+		var values         = ListToArray( arguments.value );
 		var params         = {
 			  "question#paramSuffix#" = { value=arguments.question, type="cf_sql_varchar" }
 			, "response#paramSuffix#" = { value=arguments.value   , type="cf_sql_varchar", list=true }
@@ -274,7 +274,7 @@ component {
 	) {
 		var filters        = [];
 		var paramSuffix    = _getRandomFilterParamSuffix();
-		var values         = arguments.value.listToArray();
+		var values         = ListToArray( arguments.value );
 		var subqueryAlias  = "responseCount" & paramSuffix;
 		var overallFilter  = "#subqueryAlias#.response_count >= " & ( arguments._all ? "#values.len()#" : "1" );
 		var subqueryFilter = "question = :question#paramSuffix# and response in (:response#paramSuffix#)";

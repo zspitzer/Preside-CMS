@@ -39,7 +39,7 @@ component {
 	public array function listProviders( boolean includeDisabled=false ) {
 		var rawProviders      = _getConfiguredProviders();
 		var providers         = [];
-		var disabledProviders = $getPresideSetting( "email", "disabledProviders" ).listToArray();
+		var disabledProviders = ListToArray( $getPresideSetting( "email", "disabledProviders" ) );
 
 		for( var providerId in rawProviders ) {
 			if ( arguments.includeDisabled || !ArrayContainsNoCase( disabledProviders, providerId ) ) {
@@ -162,7 +162,7 @@ component {
 	 * @provider.hint ID of the provider whose enabled/disabled status you wish to check
 	 */
 	public boolean function isProviderEnabled( required string provider ) {
-		var disabledProviders = $getPresideSetting( "email", "disabledProviders" ).listToArray();
+		var disabledProviders = ListToArray( $getPresideSetting( "email", "disabledProviders" ) );
 
 		if ( ArrayContainsNoCase( disabledProviders, arguments.provider ) ) {
 			return false;

@@ -7,7 +7,7 @@ component {
 	property name="types" inject="coldbox:setting:websiteusers.actions";
 
 	private string function renderConfiguredField( string value="", struct config={} ) {
-		var actions = arguments.value.trim().listToArray();
+		var actions = ListToArray( Trim( arguments.value ) );
 		var rendered = [];
 
 		for( var action in actions ) {

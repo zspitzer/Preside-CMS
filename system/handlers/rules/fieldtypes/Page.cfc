@@ -8,7 +8,7 @@ component {
 	property name="presideObjectService" inject="presideObjectService";
 
 	private string function renderConfiguredField( string value="", struct config={} ) {
-		var ids = value.trim().listToArray();
+		var ids = ListToArray( Trim( value ) );
 
 		if ( !ids.len() ) {
 			return config.defaultLabel ?: "";

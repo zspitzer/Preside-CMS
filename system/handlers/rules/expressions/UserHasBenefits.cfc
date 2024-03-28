@@ -26,7 +26,7 @@ component {
 			return false;
 		}
 
-		var benefitsToMatch  = arguments.benefits.trim().listToArray();
+		var benefitsToMatch  = ListToArray( Trim( arguments.benefits ) );
 		var userBenefits     = websitePermissionService.listUserBenefits( payload.user.id );
 		var matchingBenefits = userBenefits.filter( function( benefit ){
 			return benefits.containsNoCase( benefit );

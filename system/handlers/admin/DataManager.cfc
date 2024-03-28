@@ -2094,7 +2094,7 @@ component extends="preside.system.base.AdminHandler" {
 		getRecordsArgs.maxRows       = dtHelper.getMaxRows();
 		getRecordsArgs.orderBy       = dtHelper.getSortOrder();
 		getRecordsArgs.searchQuery   = dtHelper.getSearchQuery();
-		getRecordsArgs.gridFields    = getRecordsArgs.gridFields.listToArray();
+		getRecordsArgs.gridFields    = ListToArray( getRecordsArgs.gridFields );
 
 		if ( !isFeatureEnabled( "useDistinctForDatatables" ) ) {
 			getRecordsArgs.distinct = false;
@@ -3429,7 +3429,7 @@ component extends="preside.system.base.AdminHandler" {
 
 	) {
 		var exporterDetail = dataExportService.getExporterDetails( arguments.exporter );
-		var selectFields   = arguments.exportFields.listToArray();
+		var selectFields   = ListToArray( arguments.exportFields );
 		var fullFileName   = arguments.fileName & ".#exporterDetail.fileExtension#";
 		var args           = {
 			  exportTemplate     = exportTemplate
@@ -3454,7 +3454,7 @@ component extends="preside.system.base.AdminHandler" {
 			) );
 		} catch( any e ){}
 
-		for( var filter in arguments.savedFilters.listToArray() ) {
+		for( var filter in ListToArray( arguments.savedFilters ) ) {
 			try {
 				args.extraFilters.append( rulesEngineFilterService.prepareFilter(
 					  objectName = objectName

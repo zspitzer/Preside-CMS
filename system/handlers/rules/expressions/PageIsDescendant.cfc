@@ -15,7 +15,7 @@ component {
 		  required string  pages
 		,          boolean _is = true
 	) {
-		var ancestors    = ( payload.page.ancestorList ?: "" ).listToArray();
+		var ancestors    = ListToArray( payload.page.ancestorList ?: "" );
 		var isDescendant = false;
 
 		for( var ancestor in ancestors ) {
@@ -37,7 +37,7 @@ component {
 		,          boolean _is = true
 	) {
 		var sql       = "";
-		var ancestors = presideObjectService.selectData( objectName="page", filter={ id=pages.listToArray() }, selectFields=["_hierarchy_id"] );
+		var ancestors = presideObjectService.selectData( objectName="page", filter={ id=ListToArray( pages ) }, selectFields=["_hierarchy_id"] );
 		var delim     = "";
 		var params    = {};
 		var prefix    = "page";

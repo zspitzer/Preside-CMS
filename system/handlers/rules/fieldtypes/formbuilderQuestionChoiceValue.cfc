@@ -9,7 +9,7 @@ component {
 	private string function renderConfiguredField( string value="", struct config={} ) {
 		var questionId = config.question ?: ( rc.fbformfield ?: ( rc.fieldid ?: "" ) );
 		var theQuestion  = formBuilderService.getQuestion( questionId );
-		var ids         = arguments.value.trim().listToArray();
+		var ids         = ListToArray( Trim ( arguments.value ) );
 
 		if ( !ids.len() ) {
 			return config.defaultLabel ?: "";

@@ -2437,7 +2437,7 @@ component displayName="AssetManager Service" {
 
 	private array function _getAdhocDerivativeTransformationFromName( required string derivativeName ) {
 		if ( arguments.derivativeName.refind( "^([0-9]+)x([0-9]+)-([a-zA-Z]+)$" ) ) {
-			var derivativeArgs = arguments.derivativeName.listToArray( "x-" );
+			var derivativeArgs = ListToArray( arguments.derivativeName, "x-" );
 			var transformArgs = {
 				  width   = derivativeArgs[ 1 ]
 				, height  = derivativeArgs[ 2 ]

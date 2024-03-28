@@ -124,7 +124,7 @@ component {
 
 				if ( !selector.contains( ":" ) ) { // skip a:hover rules, etc.
 					style = style.reReplace( "([^;])$", "\1;" );
-					var rules = style.listToArray( ";" );
+					var rules = ListToArray( style, ";" );
 					for( var rule in rules ) {
 						rule = rule.trim();
 

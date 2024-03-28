@@ -171,7 +171,7 @@ component displayName="Multilingual Preside Object Service" {
 
 		translationObject.indexes       = translationObject.indexes ?: {};
 		for( var indexName in translationObject.indexes ) {
-			for( var indexField in translationObject.indexes[ indexName ].fields.listToArray() ) {
+			for( var indexField in ListToArray( translationObject.indexes[ indexName ].fields ) ) {
 				if ( !ArrayContainsNoCase( dbFieldList, indexField ) ) {
 					translationObject.indexes.delete( indexName );
 					break;

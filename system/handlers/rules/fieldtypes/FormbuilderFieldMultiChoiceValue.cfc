@@ -10,7 +10,7 @@ component {
 	private string function renderConfiguredField( string value="", struct config={} ) {
 		var formFieldId = config.fbformfield ?: ( rc.fbformfield ?: ( rc.fieldid ?: "" ) );
 		var formField   = formBuilderService.getFormItem( formFieldId );
-		var ids         = arguments.value.trim().listToArray();
+		var ids         = ListToArray( Trim( arguments.value ) );
 
 		if ( !ids.len() ) {
 			return config.defaultLabel ?: "";
@@ -18,7 +18,7 @@ component {
 
 		if ( formField.count() ) {
 			var sourceObject = formField.configuration.datamanagerObject ?: "";
-			var values       = ( formField.configuration.values ?: "" ).listToArray( Chr( 10 ) & Chr( 13 ) );
+			var values       = ListToArray( formField.configuration.values ?: "", Chr( 10 ) & Chr( 13 ) ) ;
 
 			if ( Len( Trim( sourceObject ) ) ) {
 				if ( ids.len() == 1 ) {
@@ -76,7 +76,7 @@ component {
 				);
 			}
 
-			var values = ( formField.configuration.values ?: "" ).listToArray( Chr( 10 ) & Chr( 13 ) );
+			var values = ListToArray( formField.configuration.values ?: "", Chr( 10 ) & Chr( 13 ) );
 			if ( values.len() ) {
 				var labels  = _getLabels( formField.configuration );
 

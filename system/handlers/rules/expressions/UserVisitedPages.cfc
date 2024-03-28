@@ -22,7 +22,7 @@ component {
 		var userId = payload.user.id ?: "";
 
 		if ( pages.listLen() > 1 && _all ) {
-			for( var page in pages.listToArray() ) {
+			for( var page in ListToArray( pages ) ) {
 				var result = websiteUserActionService.hasPerformedAction(
 					  type        = "request"
 					, action      = "pagevisit"
@@ -68,7 +68,7 @@ component {
 			, has            = arguments._has
 			, datefrom       = arguments._pastTime.from ?: ""
 			, dateto         = arguments._pastTime.to   ?: ""
-			, identifiers    = arguments.pages.listToArray()
+			, identifiers    = ListToArray( arguments.pages )
 			, allIdentifiers = arguments._all
 		);
 	}

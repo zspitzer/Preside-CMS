@@ -4,7 +4,7 @@ component {
 
 	public string function index( event, rc, prc, args={} ) {
 		var formId    = args.formId ?: ( rc[ args.formIdField ?: "" ] ?: ( rc.formId ?: ( rc.id ?: "" ) ) );
-		var itemTypes = ( args.itemTypes ?: "" ).listToArray();
+		var itemTypes = ListToArray( args.itemTypes ?: "" );
 		var items     = formBuilderService.getFormItems(
 			  id        = formId
 			, itemTypes = itemTypes

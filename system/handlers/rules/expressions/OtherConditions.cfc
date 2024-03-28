@@ -17,7 +17,7 @@ component {
 	) {
 		var result = _all;
 
-		for( var condition in conditions.listToArray() ) {
+		for( var condition in ListToArray( conditions ) ) {
 			var evaluation = rulesEngineConditionService.evaluateCondition(
 				  conditionId = condition
 				, context     = context ?: "global"

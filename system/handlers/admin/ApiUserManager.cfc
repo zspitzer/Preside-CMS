@@ -60,7 +60,7 @@ component extends="preside.system.base.AdminHandler" {
 				, draftsEnabled     = false
 			}
 		);
-		var apis = ( rc.apis ?: "" ).listToArray();
+		var apis = ListToArray( rc.apis ?: "" );
 		restUserService.syncApiAccessForUser( userId, apis );
 
 		var newRecordLink = event.buildAdminLink( linkto="apiUserManager.edit", queryString="id=" & userId );
@@ -151,7 +151,7 @@ component extends="preside.system.base.AdminHandler" {
 			}
 		);
 
-		var apis = ( rc.apis ?: "" ).listToArray();
+		var apis = ListToArray( rc.apis ?: "" );
 		restUserService.syncApiAccessForUser( id, apis );
 
 		messageBox.info( translateResource( uri="cms:datamanager.recordEdited.confirmation", data=[ translateResource( uri="preside-objects.rest_user:title.singular", defaultValue="rest_user" ) ] ) );

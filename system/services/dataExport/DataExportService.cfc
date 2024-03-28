@@ -381,10 +381,10 @@ component {
 		var poService    = $getPresideObjectService();
 		var uriRoot      = poService.getResourceBundleUriRoot( arguments.objectName );
 		var defaults     = _getDefaultDataExportSettings();
-		var exportFields = poService.getObjectAttribute(
+		var exportFields = ListToArray( poService.getObjectAttribute(
 			  objectName    = arguments.objectName
 			, attributeName = "dataExportFields"
-		).listToArray();
+		));
 
 		if ( !exportFields.len() ) {
 			var defaultIncludeFields        = ListToArray( poService.getObjectAttribute( objectName=arguments.objectName, attributeName="dataExportDefaultIncludeFields" ) );

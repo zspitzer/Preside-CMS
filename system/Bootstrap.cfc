@@ -808,7 +808,7 @@ component {
 	}
 
 	private string function _stripExpiryDateFromCookieToMakeASessionCookie( required string cooky ) {
-		var cookieParts = arguments.cooky.listToArray( ";" );
+		var cookieParts = ListToArray( arguments.cooky, ";" );
 		var stripped    = "";
 
 		for( var part in cookieParts ) {

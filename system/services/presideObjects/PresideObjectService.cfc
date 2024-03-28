@@ -2748,7 +2748,7 @@ component displayName="Preside Object Service" {
 			var obj   = objects[ objName ];
 			var props = obj.meta.properties;
 			for( var propName in props ) {
-				var aliases = Trim( props[ propName ].aliases ?: "" ).listToArray();
+				var aliases = ListToArray( Trim( props[ propName ].aliases ?: "" ) );
 
 				for( var alias in aliases ) {
 					aliasCache[ objName ] = aliasCache[ objName ] ?: {};
@@ -3007,7 +3007,7 @@ component displayName="Preside Object Service" {
 			var matches = _reSearch( fieldRegex, arguments.input );
 			if ( StructKeyExists( matches, "$2" ) ) {
 				for( var match in matches.$2 ){
-					var matchEntities = match.listToArray( "$" );
+					var matchEntities = ListToArray( match, "$" );
 					var matched       = true;
 
 					for( var entity in matchEntities ) {
@@ -3596,7 +3596,7 @@ component displayName="Preside Object Service" {
 				convertedArray.append( fieldName );
 			}
 			var prop = getObjectProperty( tableAlias, fieldArray[i] );
-			for( var alias in ( prop.aliases ?: "" ).listToArray() ) {
+			for( var alias in ListToArray( prop.aliases ?: "" ) ) {
 				var aliasName = fieldName & " as " & dbAdapter.escapeEntity( alias );
 				if( !ArrayContains( convertedArray, aliasName ) ){
 					convertedArray.append( aliasName );
@@ -3660,7 +3660,7 @@ component displayName="Preside Object Service" {
 				for( var propertyName in objects[ objName ].meta.properties ) {
 					var prop = objects[ objName ].meta.properties[ propertyName ];
 
-					for( var alias in ( prop.aliases ?: "" ).listToArray() ) {
+					for( var alias in ListToArray( prop.aliases ?: "" ) ) {
 						entities[ alias ] = 1;
 						aliasEntitiesOnly[ alias ] = 1;
 					}
@@ -3720,7 +3720,7 @@ component displayName="Preside Object Service" {
 	}
 
 	private string function _parseOrderBy( required string orderBy, required string objectName, required any dbAdapter, required struct filterParams, required array extraJoins ) {
-		var items         = arguments.orderBy.listToArray();
+		var items         = ListToArray( arguments.orderBy );
 		var rebuilt       = [];
 		var aliased       = "";
 		var propertyName  = "";

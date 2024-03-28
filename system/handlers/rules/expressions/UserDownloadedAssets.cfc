@@ -21,7 +21,7 @@ component {
 		var userId = payload.user.id ?: "";
 
 		if ( assets.listLen() > 1 && _all ) {
-			for( var page in assets.listToArray() ) {
+			for( var page in ListToArray( assets ) ) {
 				var result = websiteUserActionService.hasPerformedAction(
 					  type        = "asset"
 					, action      = "download"
@@ -67,7 +67,7 @@ component {
 			, has            = arguments._has
 			, datefrom       = arguments._pastTime.from ?: ""
 			, dateto         = arguments._pastTime.to   ?: ""
-			, identifiers    = arguments.assets.listToArray()
+			, identifiers    = ListToArray( arguments.assets )
 			, allIdentifiers = arguments._all
 		);
 	}

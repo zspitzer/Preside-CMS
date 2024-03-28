@@ -1215,7 +1215,7 @@ component {
 	}
 
 	public array function getManagedChildTypesForParentType( required string parentType ) {
-		return _getPageTypesService().getPageType( arguments.parentType ).getManagedChildTypes().listToArray();
+		return ListToArray( _getPageTypesService().getPageType( arguments.parentType ).getManagedChildTypes() );
 	}
 
 	public boolean function arePageSlugsMultilingual() {
@@ -1673,7 +1673,7 @@ component {
 	}
 
 	private string function _getPageIdWithMultilingualSlug( required string slug ) {
-		var slugPieces      = slug.listToArray( "/" );
+		var slugPieces      = ListToArray( slug, "/" );
 		var pageObject      = _getPobj();
 		var page            = getSiteHomepage( selectFields=[ "page.id" ] );
 		var args            = { filter={}, selectFields=[ "page.id" ] };
