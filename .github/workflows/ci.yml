@@ -60,8 +60,11 @@ jobs:
 
       - name: Output Test Results
         run: |
+          pwd
+          ls -l tests
           echo "Test Results" >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
+          cat tests/test-results.txt
           cat tests/test-results.txt >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
 
