@@ -62,11 +62,13 @@ jobs:
         run: |
           pwd
           ls -l tests
+          echo $GITHUB_STEP_SUMMARY
           echo "Test Results" >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
-          cat tests/test-results.txt
-          cat tests/test-results.txt >> $GITHUB_STEP_SUMMARY
-          echo "```" >> $GITHUB_STEP_SUMMARY
+          cat ~/tests/test-results.txt
+          cat ~/tests/test-results.txt >> $GITHUB_STEP_SUMMARY
+          #echo $GITHUB_STEP_SUMMARY
+          #echo "```" >> $GITHUB_STEP_SUMMARY
 
       - name: Build static assets with grunt
         if: "env.PUBLISH_PRESIDE == 'true'"
