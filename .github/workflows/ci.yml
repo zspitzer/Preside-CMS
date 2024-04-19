@@ -58,6 +58,13 @@ jobs:
           name: test-results
           path: tests/test-results.txt
 
+      - name: Output Test Results
+        run: |
+          echo "Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
+          cat tests/test-results.txt >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
+
       - name: Build static assets with grunt
         if: "env.PUBLISH_PRESIDE == 'true'"
         shell: bash
