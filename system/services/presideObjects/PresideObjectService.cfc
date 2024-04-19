@@ -470,6 +470,8 @@ component displayName="Preside Object Service" {
 			formattedParams[ param.name ] = { value=param.value, type=param.type };
 			if ( param.keyExists( "list" ) ) {
 				formattedParams[ param.name ].list = param.list;
+			} else {
+				formattedParams[ param.name ].list = false;
 			}
 			if ( param.keyExists( "separator" ) ) {
 				formattedParams[ param.name ].separator = param.separator;
@@ -2958,6 +2960,8 @@ component displayName="Preside Object Service" {
 				param.value     = ArrayToList( param.value, chr( 31 ) );
 				param.list      = true;
 				param.separator = chr( 31 );
+			} else {
+				param.list      = false;
 			}
 
 			if ( not StructKeyExists( param, "type" ) ) {
@@ -3497,17 +3501,17 @@ component displayName="Preside Object Service" {
 
 		if ( arguments.specificVersion ) {
 			versionFilter = "#arguments.objectName#._version_number = :#arguments.objectName#._version_number";
-			params.append( { name="#arguments.objectName#___version_number", value=arguments.specificVersion, type="cf_sql_int" } );
+			params.append( { name="#arguments.objectName#___version_number", value=arguments.specificVersion, type="cf_sql_int", list=false } );
 
 			if ( !arguments.allowDraftVersions && usesDrafts ) {
 				versionFilter &= " and ( #arguments.objectName#._version_is_draft is null or #arguments.objectName#._version_is_draft = :#arguments.objectName#._version_is_draft )";
-				params.append( { name="#arguments.objectName#___version_is_draft", value=false, type="cf_sql_bit" } );
+				params.append( { name="#arguments.objectName#___version_is_draft", value=false, type="cf_sql_bit", list=false } );
 			}
 
 		} else {
 			var latestVersionField = arguments.allowDraftVersions && usesDrafts ? "_version_is_latest_draft" : "_version_is_latest";
 			versionFilter = "#arguments.objectName#.#latestVersionField# = :#arguments.objectName#.#latestVersionField#";
-			params.append( { name="#arguments.objectName#__#latestVersionField#", value=true, type="cf_sql_boolean" } );
+			params.append( { name="#arguments.objectName#__#latestVersionField#", value=true, type="cf_sql_boolean", list=false } );
 		}
 
 		compiledFilter = mergeFilters( compiledFilter, versionFilter, adapter, arguments.objectName );

@@ -2941,7 +2941,7 @@
 			);
 
 			super.assertEquals( "select count(1) as `record_count` from ( select `obj_a`.`id` from `ptest_obj_a` `obj_a` left join `ptest_obj_a__join__obj_b` `obj_a__join__obj_b` on (`obj_a__join__obj_b`.`obj_a` = `obj_a`.`id`) left join `ptest_obj_b` `lots_of_bees` on (`lots_of_bees`.`id` = `obj_a__join__obj_b`.`obj_b`) group by obj_a.id having (Count( lots_of_bees.id ) >= :bees_count) and (Count( lots_of_bees.id ) = :bees_count_2) ) `original_statement`", result.sql ?: "" );
-			super.assertEquals( [ { name="bees_count", type="cf_sql_int", value=2 }, { name="bees_count_2", type="cf_sql_int", value=4 } ], result.params ?: [] );
+			super.assertEquals( [ { list=false, name="bees_count", type="cf_sql_int", value=2 }, { list=false, name="bees_count_2", type="cf_sql_int", value=4 } ], result.params ?: [] );
 
 		</cfscript>
 	</cffunction>
@@ -2975,7 +2975,7 @@
 			);
 
 			super.assertEquals( "select count(1) as `record_count` from ( select `obj_a`.`id` from `ptest_obj_a` `obj_a` left join `ptest_obj_a__join__obj_b` `obj_a__join__obj_b` on (`obj_a__join__obj_b`.`obj_a` = `obj_a`.`id`) left join `ptest_obj_b` `lots_of_bees` on (`lots_of_bees`.`id` = `obj_a__join__obj_b`.`obj_b`) group by obj_a.id having (Count( lots_of_bees.id ) >= :bees_count) and (Count( lots_of_bees.id ) = :bees_count_2) ) `original_statement`", result.sql ?: "" );
-			super.assertEquals( { bees_count={ type="cf_sql_int", value=2 }, bees_count_2={ type="cf_sql_int", value=4 } }, result.params ?: {} );
+			super.assertEquals( { bees_count={ list=false, type="cf_sql_int", value=2 }, bees_count_2={ list=false, type="cf_sql_int", value=4 } }, result.params ?: {} );
 
 		</cfscript>
 	</cffunction>
@@ -3009,7 +3009,7 @@
 			);
 
 			super.assertEquals( "select count(1) as `record_count` from ( select `obj_a`.`id` from `ptest_obj_a` `obj_a` left join `ptest_obj_a__join__obj_b` `obj_a__join__obj_b` on (`obj_a__join__obj_b`.`obj_a` = `obj_a`.`id`) left join `ptest_obj_b` `lots_of_bees` on (`lots_of_bees`.`id` = `obj_a__join__obj_b`.`obj_b`) group by obj_a.id having (Count( lots_of_bees.id ) >= :test_prefix__bees_count) and (Count( lots_of_bees.id ) = :test_prefix__bees_count_2) ) `original_statement`", result.sql ?: "" );
-			super.assertEquals( [ { name="test_prefix__bees_count", type="cf_sql_int", value=2 }, { name="test_prefix__bees_count_2", type="cf_sql_int", value=4 } ], result.params ?: [] );
+			super.assertEquals( [ { list=false, name="test_prefix__bees_count", type="cf_sql_int", value=2 }, { list=false, name="test_prefix__bees_count_2", type="cf_sql_int", value=4 } ], result.params ?: [] );
 
 		</cfscript>
 	</cffunction>
@@ -3044,7 +3044,7 @@
 			);
 
 			super.assertEquals( "select count(1) as `record_count` from ( select `obj_a`.`id` from `ptest_obj_a` `obj_a` left join `ptest_obj_a__join__obj_b` `obj_a__join__obj_b` on (`obj_a__join__obj_b`.`obj_a` = `obj_a`.`id`) left join `ptest_obj_b` `lots_of_bees` on (`lots_of_bees`.`id` = `obj_a__join__obj_b`.`obj_b`) group by obj_a.id having (Count( lots_of_bees.id ) >= :test_prefix__bees_count) and (Count( lots_of_bees.id ) = :test_prefix__bees_count_2) ) `original_statement`", result.sql ?: "" );
-			super.assertEquals( { test_prefix__bees_count={ type="cf_sql_int", value=2 }, test_prefix__bees_count_2={ type="cf_sql_int", value=4 } }, result.params ?: {} );
+			super.assertEquals( { test_prefix__bees_count={ list=false, type="cf_sql_int", value=2 }, test_prefix__bees_count_2={ list=false, type="cf_sql_int", value=4 } }, result.params ?: {} );
 
 		</cfscript>
 	</cffunction>
