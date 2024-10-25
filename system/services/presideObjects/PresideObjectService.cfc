@@ -449,7 +449,7 @@ component displayName="Preside Object Service" {
 		}
 
 		var obfuscations = _getObfuscationsInSql( sqlAndParams.sql );
-		
+
 		for( param in sqlAndParams.params ) {
 			if ( IsStruct( param ) ) {
 				key        = param.name;
@@ -481,7 +481,7 @@ component displayName="Preside Object Service" {
 		return sqlAndParams;
 	}
 
-	private array function _getObfuscationsInSql( 
+	private array function _getObfuscationsInSql(
 		  required string sql
 	) {
 		var obfuscations = [];
@@ -492,7 +492,7 @@ component displayName="Preside Object Service" {
 			if ( !Len( matched.match[1] ) ) {
 				continue;
 			}
-			
+
 			var decoded = ToString( ToBinary( ReReplace( matched.match[1], obfsPattern, "\1" ) ) );
 			ArrayAppend( obfuscations, {
 				  encoded      = matched.match[1]
@@ -519,8 +519,8 @@ component displayName="Preside Object Service" {
 	private void function _applyNewObfuscatedSql( required struct obfuscation ) {
 		for ( var subObfuscation in arguments.obfuscation.obfuscations ) {
 			_applyNewObfuscatedSql( subObfuscation );
-			
-			arguments.obfuscation.decoded = ReReplaceNoCase( 
+
+			arguments.obfuscation.decoded = ReReplaceNoCase(
 				  arguments.obfuscation.decoded
 				, subObfuscation.encoded
 				, _getSqlRunner().obfuscateSqlForPreside( subObfuscation.decoded )
@@ -3562,7 +3562,7 @@ component displayName="Preside Object Service" {
 
 		if ( arguments.specificVersion ) {
 			versionFilter = "#arguments.objectName#._version_number = :#arguments.objectName#._version_number";
-			params.append( { name="#arguments.objectName#___version_number", value=arguments.specificVersion, type="cf_sql_int" } );
+			params.append( { name="#arguments.objectName#___version_number", value=arguments.specificVersion, type="cf_sql_bigint" } );
 
 			if ( !arguments.allowDraftVersions && usesDrafts ) {
 				versionFilter &= " and ( #arguments.objectName#._version_is_draft is null or #arguments.objectName#._version_is_draft = :#arguments.objectName#._version_is_draft )";
