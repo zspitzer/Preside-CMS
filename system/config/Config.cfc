@@ -290,6 +290,7 @@ component {
 		interceptorSettings.customInterceptionPoints.append( "postGetExtraEditRecordActionButtons"   );
 		interceptorSettings.customInterceptionPoints.append( "postExtraTopRightButtonsForEditRecord" );
 		interceptorSettings.customInterceptionPoints.append( "postGetExtraCloneRecordActionButtons"  );
+		interceptorSettings.customInterceptionPoints.append( "postGetExtraSortRecordsActionButtons"  );
 		interceptorSettings.customInterceptionPoints.append( "postExtraTopRightButtons"              );
 		interceptorSettings.customInterceptionPoints.append( "preValidateForm"		                 );
 		interceptorSettings.customInterceptionPoints.append( "preRenderLabelSelectData"		         );

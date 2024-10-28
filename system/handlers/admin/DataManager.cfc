@@ -1361,17 +1361,17 @@ component extends="preside.system.base.AdminHandler" {
 	}
 
 	public void function sortRecords( event, rc, prc ) {
+		_checkPermission( argumentCollection=arguments, key="edit" );
+
 		var objectName        = prc.objectName        ?: "";
 		var objectTitle       = prc.objectTitle       ?: "";
 		var objectTitlePlural = prc.objectTitlePlural ?: "";
-		var getRecordsArgs    = { objectName = objectName };
+		var getRecordsArgs    = { objectName=objectName };
 
 		if ( !datamanagerService.isSortable( objectName ) ) {
 			messageBox.error( translateResource( uri="cms:datamanager.objectNotSortable.error", data=[ objectTitle  ] ) );
 			setNextEvent( url=event.buildAdminLink( objectName=objectName, operation="listing" ) );
 		}
-
-		_checkPermission( argumentCollection=arguments, key="edit" );
 
 		customizationService.runCustomization(
 			  objectName     = objectName
@@ -1395,15 +1395,28 @@ component extends="preside.system.base.AdminHandler" {
 		}
 
 		var recordsForSorting = datamanagerService.getRecordsForSorting( argumentCollection=getRecordsArgs );
-		prc.records           = recordsForSorting.records;
-		prc.ordered           = recordsForSorting.ordered;
+
+		prc.records               = recordsForSorting.records;
+		prc.ordered               = recordsForSorting.ordered;
+		prc.renderedActionButtons = customizationService.runCustomization(
+			  objectName     = objectName
+			, action         = "sortRecordsActionButtons"
+			, args           = {
+				  objectName = objectName
+				, recordId   = prc.recordId ?: ""
+				, version    = ( rc.version ?: "" )
+				, record     = prc.record
+			  }
+			, defaultHandler = "admin.datamanager._sortRecordsActionButtons"
+		);
+
+		prc.pageIcon   = "sort-amount-asc";
+		prc.pageTitle  = translateResource( uri="cms:datamanager.sortRecords.title", data=[ objectTitlePlural ] );
 
 		event.addAdminBreadCrumb(
 			  title = translateResource( uri="cms:datamanager.sortRecords.breadcrumb.title" )
 			, link  = ""
 		);
-		prc.pageTitle = translateResource( uri="cms:datamanager.sortRecords.title", data=[ objectTitlePlural ] );
-		prc.pageIcon  = "sort-amount-asc";
 	}
 
 	public void function sortRecordsAction( event, rc, prc ) {
@@ -3838,6 +3851,62 @@ component extends="preside.system.base.AdminHandler" {
 		return args.actions;
 	}
 
+	private string function _sortRecordsActionButtons( event, rc, prc, args={} ) {
+		args.actionButtons = customizationService.runCustomization(
+			  objectName     = args.objectName ?: ""
+			, args           = args
+			, action         = "getSortRecordsActionButtons"
+			, defaultHandler = "admin.datamanager._getSortRecordsActionButtons"
+		);
+
+		return renderView( view="/admin/datamanager/_addOrEditRecordActionButtons", args=args );
+	}
+
+	private array function _getSortRecordsActionButtons( event, rc, prc, args={} ) {
+		var objectTitle = translateObjectName( args.objectName );
+
+		args.cancelAction = args.cancelAction ?: event.buildAdminLink( objectName=args.objectName, operation="listing" );
+		args.cancelLabel  = args.cancelLabel  ?: translateResource( "cms:datamanager.cancel.btn" );
+		args.resetLabel   = args.resetLabel   ?: translateResource( uri="cms:datamanager.sort.records.reset.btn", data=[ objectTitle ] )
+		args.sortLabel    = args.sortLabel    ?: translateResource( uri="cms:datamanager.sort.records.sort.btn", data=[ objectTitle ] );
+
+		args.actions = [
+			  {
+				  type      = "link"
+				, href      = args.cancelAction
+				, class     = "btn-default"
+				, globalKey = "c"
+				, iconClass = "fa-reply"
+				, label     = args.cancelLabel
+			  }
+			,
+			  {
+				  type      = "link"
+				, href      = "##"
+				, id        = "reset-order-btn	"
+				, class     = "btn-info"
+				, iconClass = "fa-refresh"
+				, label     = args.resetLabel
+			  }
+			,
+			  {
+				  type      = "button"
+				, class     = "btn-info"
+				, iconClass = "fa-save"
+				, label     = args.sortLabel
+			  }
+		];
+
+		customizationService.runCustomization(
+			  objectName = args.objectName ?: ""
+			, args       = args
+			, action     = "getExtraAddRecordActionButtons"
+		);
+
+		announceInterception( "postGetExtraSortRecordsActionButtons", args );
+
+		return args.actions;
+	}
 
 	private string function _cloneRecordForm( event, rc, prc, args={} ) {
 		var objectName      = args.objectName ?: "";
