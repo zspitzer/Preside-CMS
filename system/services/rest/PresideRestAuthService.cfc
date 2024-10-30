@@ -30,7 +30,7 @@ component {
 		var providerFeature     = configuredProviders[ arguments.provider ].feature ?: "";
 		var coldbox             = $getColdbox();
 
-		if ( providerFeature.len() && !$isFeatureEnabled( providerFeature ) ) {
+		if ( Len( providerFeature ) && !$isFeatureEnabled( providerFeature ) ) {
 			_failRequest( restRequest, restResponse, "Authentication provider [#provider#] is not enabled." );
 			return;
 		}
@@ -47,7 +47,7 @@ component {
 			, eventArguments = { restRequest=restRequest, restResponse=restResponse }
 		);
 
-		if ( IsSimpleValue( userId ?: {} ) && userId.len() ) {
+		if ( IsSimpleValue( userId ?: {} ) && Len( userId ) ) {
 			restRequest.setUser( userId );
 			return;
 		}
@@ -101,7 +101,7 @@ component {
 		, required any    restResponse
 		, required string defaultStatusText
 	) {
-		var statusText = restResponse.getStatusText().len() ? restResponse.getStatusText() : arguments.defaultStatusText;
+		var statusText = Len( restResponse.getStatusText() ) ? restResponse.getStatusText() : arguments.defaultStatusText;
 
 		restRequest.finish();
 		if ( restResponse.getStatusCode() == 200 ) {
