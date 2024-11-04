@@ -720,7 +720,7 @@ component displayName="Forms service" {
 	 * @formData         Submitted form data
 	 * @validationResult A pre-existing validation result to which to append any errors found during preprocessing
 	 */
-	public any function preProcessForm( required string formName, required struct formData, any validationResult=_getValidationEngine().newValidationResult(), array suppressFields= [] ) {
+	public any function preProcessForm( required string formName, required struct formData, any validationResult=_getValidationEngine().newValidationResult(), array suppressFields= [], string fieldNamePrefix="", string fieldNameSuffix="" ) {
 		var formFields       = listFields( formName=arguments.formName, suppressFields=arguments.suppressFields );
 		var fieldValue       = "";
 
@@ -733,6 +733,8 @@ component displayName="Forms service" {
 						, fieldName        = field
 						, fieldValue       = fieldValue
 						, validationResult = validationResult
+						, fieldNamePrefix  = arguments.fieldNamePrefix
+						, fieldNameSuffix  = arguments.fieldNameSuffix
 					);
 				} catch( any e ) {
 					validationResult.addError(
@@ -757,7 +759,7 @@ component displayName="Forms service" {
 	 * @fieldValue The submitted value that will be pre-processed
 	 *
 	 */
-	public any function preProcessFormField( required string formName, required string fieldName, required string fieldValue, required any validationResult ) {
+	public any function preProcessFormField( required string formName, required string fieldName, required string fieldValue, required any validationResult, string fieldNamePrefix="", string fieldNameSuffix="" ) {
 		var field        = getFormField( formName = arguments.formName, fieldName = arguments.fieldName );
 		var preProcessor = _getPreProcessorForField( argumentCollection = field );
 
@@ -768,6 +770,8 @@ component displayName="Forms service" {
 				, private        = true
 				, eventArguments = {
 					  fieldName        = arguments.fieldName
+					, fieldNamePrefix  = arguments.fieldNamePrefix
+					, fieldNameSuffix  = arguments.fieldNameSuffix
 					, preProcessorArgs = field
 					, validationResult = validationResult
 				  }
