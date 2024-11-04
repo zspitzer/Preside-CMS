@@ -35,9 +35,8 @@ component accessors=true extends="preside.system.coldboxModifications.RequestCon
 		instance.presideRenderer                  = instance.wirebox.getInstance( dsl="presideRenderer" );
 		instance.sessionStorage                   = instance.wirebox.getInstance( dsl="sessionStorage" );
 		instance.tenancyService                   = instance.wirebox.getInstance( dsl="tenancyService" );
-		instance.systemConfigurationService       = instance.wirebox.getInstance( dsl="systemConfigurationService" );
 
-
+		instance.systemConfigurationService       = instance.wirebox.getInstance( dsl="featureInjector:admin:systemConfigurationService" );
 		instance.stickerForPreside                = instance.wirebox.getInstance( dsl="featureInjector:sticker:stickerForPreside" );
 		instance.adminObjectLinkBuilderService    = instance.wirebox.getInstance( dsl="featureInjector:admin:adminObjectLinkBuilderService" );
 		instance.auditService                     = instance.wirebox.getInstance( dsl="featureInjector:auditTrail:auditService" );
