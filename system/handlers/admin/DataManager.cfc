@@ -3883,7 +3883,7 @@ component extends="preside.system.base.AdminHandler" {
 			  {
 				  type      = "link"
 				, href      = "##"
-				, id        = "reset-order-btn	"
+				, id        = "reset-order-btn"
 				, class     = "btn-info"
 				, iconClass = "fa-refresh"
 				, label     = args.resetLabel
