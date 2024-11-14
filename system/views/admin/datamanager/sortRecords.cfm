@@ -5,7 +5,9 @@
 	ordered = prc.ordered ?: "";
 	formId  = "sortForm-" & CreateUUID();
 
-	renderedActionButtons = prc.renderedActionButtons ?: "";
+	args.objectName = args.objectName ?: object;
+
+	renderedActionButtons = prc.renderedActionButtons ?: renderViewlet( event="admin.datamanager._sortRecordsActionButtons", args=args );
 </cfscript>
 
 <cfoutput>

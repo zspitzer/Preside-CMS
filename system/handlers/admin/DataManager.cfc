@@ -1404,7 +1404,7 @@ component extends="preside.system.base.AdminHandler" {
 			, args           = {
 				  objectName = objectName
 				, recordId   = prc.recordId ?: ""
-				, version    = ( rc.version ?: "" )
+				, version    = rc.version   ?: ""
 				, record     = prc.record
 			  }
 			, defaultHandler = "admin.datamanager._sortRecordsActionButtons"
