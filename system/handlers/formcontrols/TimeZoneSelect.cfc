@@ -30,10 +30,6 @@ component {
 	private function _getTimezoneName() {
 		var tzInfo = getTimezoneInfo();
 
-		if ( isTrue( tzInfo.isDSTon ?: "" ) ) {
-			return tzInfo.shortNameDST;
-		}
-
-		return tzInfo.shortName;
+		return tzInfo.id;
 	}
 }
