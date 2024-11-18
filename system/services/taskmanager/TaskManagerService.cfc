@@ -748,8 +748,8 @@ component displayName="Task Manager Service" {
 
 // PRIVATE HELPERS
 	private any function _createJavaZonedTimeObject( required date cfmlDateTime ) {
-		var formatted = DateFormat( Now(), "yyyy-mm-dd" ) & "T"
-		              & TimeFormat( Now(), "HH:mm:ss" ) & variables._timezoneOffset;
+		var formatted = DateFormat( arguments.cfmlDateTime, "yyyy-mm-dd" ) & "T"
+		              & TimeFormat( arguments.cfmlDateTime, "HH:mm:ss" ) & variables._timezoneOffset;
 
 		return CreateObject( "java", "java.time.ZonedDateTime" ).parse( formatted );
 	}
