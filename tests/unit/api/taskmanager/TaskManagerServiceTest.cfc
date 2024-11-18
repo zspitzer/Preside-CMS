@@ -630,6 +630,7 @@ component extends="testbox.system.BaseSpec" {
 		mockSiteService      = mockbox.createStub();
 		mockThreadUtil       = mockbox.createStub();
 		mockExecutor         = mockbox.createStub();
+		cronUtil             = new preside.system.services.taskmanager.CronUtil();
 		mockLogger           = _getMockLogger();
 
 		configWrapper.$( "getConfiguredTasks", arguments.dummyConfig );
@@ -662,6 +663,7 @@ component extends="testbox.system.BaseSpec" {
 			, siteService                  = mockSiteService
 			, threadUtil                   = mockThreadUtil
 			, executor                     = mockExecutor
+			, cronUtil                     = cronUtil
 		);
 	}
 

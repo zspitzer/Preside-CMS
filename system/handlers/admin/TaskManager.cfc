@@ -4,6 +4,7 @@
 component extends="preside.system.base.AdminHandler" {
 
 	property name="taskManagerService"         inject="taskManagerService";
+	property name="cronUtil"                   inject="cronUtil";
 	property name="i18n"                       inject="i18n";
 	property name="logRendererUtil"            inject="logRendererUtil";
 	property name="taskHistoryDao"             inject="presidecms:object:taskmanager_task_history";
@@ -106,7 +107,7 @@ component extends="preside.system.base.AdminHandler" {
 		var formName         = "taskmanager.task_configuration";
 		var formData         = event.getCollectionForForm( formName );
 		var validationResult = validateForm( formName, formData );
-		var crontabError     = taskManagerService.getValidationErrorMessageForPotentiallyBadCrontabExpression( formData.crontab_definition ?: "" );
+		var crontabError     = cronUtil.validateExpression( formData.crontab_definition ?: "" );
 
 		if ( Len( Trim( crontabError ) ) ) {
 			validationResult.addError( fieldName="crontab_definition", message=crontabError );
