@@ -4,6 +4,7 @@
 component extends="preside.system.base.AdminHandler" {
 
 	property name="taskManagerService"         inject="taskManagerService";
+	property name="i18n"                       inject="i18n";
 	property name="logRendererUtil"            inject="logRendererUtil";
 	property name="taskHistoryDao"             inject="presidecms:object:taskmanager_task_history";
 	property name="systemConfigurationService" inject="systemConfigurationService";
@@ -23,7 +24,7 @@ component extends="preside.system.base.AdminHandler" {
 
 	public void function index( event, rc, prc ) {
 		prc.activeTaskGroup    = 1;
-		prc.taskGroups         = taskManagerService.getAllTaskDetails();
+		prc.taskGroups         = taskManagerService.getAllTaskDetails( i18n.getFWLanguageCode() );
 		prc.autoRunningEnabled = systemConfigurationService.getSetting( "taskmanager", "scheduledtasks_enabled", false );
 
 		if ( len( rc.tab ?: "" ) ) {

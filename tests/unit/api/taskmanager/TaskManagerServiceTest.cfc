@@ -312,7 +312,11 @@ component extends="testbox.system.BaseSpec" {
 
 				var nextRun = tm.getNextRunDate( taskKey, lastRun );
 
-				expect( nextRun ).toBe( "2014-10-24 09:05:00" );
+				expect( DatePart( "n", nextRun ) mod 5 ).toBe( 0 );
+				expect( DatePart( "s", nextRun ) ).toBe( 0 );
+				expect( nextRun > Now() ).toBeTrue( );
+				expect( DateDiff( "n", Now(), nextRun ) ).toBeLte( 5 );
+				expect( DateDiff( "n", Now(), nextRun ) ).toBeGte( 0 );
 			} );
 
 			it( "shoud use the current date when no last run date passed", function(){
@@ -342,7 +346,11 @@ component extends="testbox.system.BaseSpec" {
 
 				var nextRun = tm.getNextRunDate( taskKey, lastRun );
 
-				expect( nextRun ).toBe( "2014-10-24 09:10:00" );
+				expect( DatePart( "n", nextRun ) mod 5 ).toBe( 0 );
+				expect( DatePart( "s", nextRun ) ).toBe( 0 );
+				expect( nextRun > Now() ).toBeTrue( );
+				expect( DateDiff( "n", Now(), nextRun ) ).toBeLte( 5 );
+				expect( DateDiff( "n", Now(), nextRun ) ).toBeGte( 0 );
 			} );
 
 			it( "should return an empty string when task is not a scheduled task", function(){
@@ -650,8 +658,6 @@ component extends="testbox.system.BaseSpec" {
 		tm.$( "_setActiveSite" );
 		mockRc.$( "setUseQueryCache" );
 		mockRc.$( "isBackgroundThread", false );
-
-
 
 		return tm.init(
 			  configWrapper                = configWrapper

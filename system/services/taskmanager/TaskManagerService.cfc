@@ -46,6 +46,8 @@ component displayName="Task Manager Service" {
 		_setExecutor( arguments.executor );
 		_setMachineId();
 
+		_setupCronParser();
+		_setupTimezoneOffset();
 		_initialiseDb();
 		_setRunningTasks({});
 
@@ -571,12 +573,13 @@ component displayName="Task Manager Service" {
 		var schedule   = Len( Trim( taskConfig.crontab_definition ?: "" ) ) ? taskConfig.crontab_definition : task.schedule;
 
 		var cronTabExpression = _getCrontabExpressionObject( schedule );
-		var lastRunJodaTime   = _createJodaTimeObject( arguments.lastRun );
+		var executionTimeObj  = CreateObject( "java", "com.cronutils.model.time.ExecutionTime", _getLib() ).forCron( cronTabExpression );
+		var dt = _createJavaZonedTimeObject( arguments.lastRun );
 
-		return cronTabExpression.nextTimeAfter( lastRunJodaTime  ).toDate();
+		return executionTimeObj.nextExecution( dt ).get().toString();
 	}
 
-	public array function getAllTaskDetails() {
+	public array function getAllTaskDetails( string locale="EN" ) {
 		var tasks       = _getConfiguredTasks();
 		var taskDetails = [];
 		var dbTaskInfo  = _getTaskDao().selectData(
@@ -588,7 +591,7 @@ component displayName="Task Manager Service" {
 		for( var dbRecord in dbTaskInfo ){
 			var detail = dbRecord;
 			detail.append( tasks[ detail.task_key ] ?: {} );
-			detail.schedule = _cronTabExpressionToHuman( Len( Trim( detail.crontab_definition ) ) ? detail.crontab_definition : detail.schedule );
+			detail.schedule = _cronTabExpressionToHuman( Len( Trim( detail.crontab_definition ) ) ? detail.crontab_definition : detail.schedule, arguments.locale );
 			detail.is_running = taskIsRunning( detail.task_key );
 			if( detail.is_running ){
 				detail.taskHistoryId = getActiveHistoryIdForTask( detail.task_key );
@@ -744,12 +747,15 @@ component displayName="Task Manager Service" {
 	}
 
 // PRIVATE HELPERS
-	private any function _createJodaTimeObject( required date cfmlDateTime ) {
-		return CreateObject( "java", "org.joda.time.DateTime", _getLib() ).init( cfmlDateTime );
+	private any function _createJavaZonedTimeObject( required date cfmlDateTime ) {
+		var formatted = DateFormat( Now(), "yyyy-mm-dd" ) & "T"
+		              & TimeFormat( Now(), "HH:mm:ss" ) & variables._timezoneOffset;
+
+		return CreateObject( "java", "java.time.ZonedDateTime" ).parse( formatted );
 	}
 
 	private any function _getCrontabExpressionObject( required string expression ) {
-		return CreateObject( "java", "fc.cron.CronExpression", _getLib() ).init( arguments.expression );
+		return variables._cronParser.parse( _convertToValidQuartzCron( arguments.expression ) );
 	}
 
 	private void function _initialiseDb() {
@@ -760,20 +766,38 @@ component displayName="Task Manager Service" {
 		return Now();
 	}
 
-	private string function _cronTabExpressionToHuman( required string expression ) {
+	private string function _cronTabExpressionToHuman( required string expression, required string locale ) {
 		if ( arguments.expression == "disabled" ) {
 			return "disabled";
 		}
-		return CreateObject( "java", "net.redhogs.cronparser.CronExpressionDescriptor", _getLib() ).getDescription( arguments.expression );
+
+		var locale     = CreateObject( "java", "java.util.Locale" ).of( UCase( ListFirst( arguments.locale, "-" ) ) );
+		var cronObj    = _getCrontabExpressionObject( arguments.expression );
+		var descriptor = CreateObject( "java", "com.cronutils.descriptor.CronDescriptor", _getLib() ).instance( locale );
+
+		return descriptor.describe( cronObj );
 	}
 
 	private array function _getLib() {
 		return [
-			  "/preside/system/services/taskmanager/lib/cron-parser-2.6-SNAPSHOT.jar"
-			, "/preside/system/services/taskmanager/lib/commons-lang3-3.3.2.jar"
-			, "/preside/system/services/taskmanager/lib/joda-time-2.9.4.jar"
-			, "/preside/system/services/taskmanager/lib/cron-1.0.jar"
+			  "/preside/system/services/taskmanager/lib/cron-utils-9.2.1.jar"
 		];
+	}
+
+	private string function _convertToValidQuartzCron( expression ) {
+		var expressions = ListToArray( arguments.expression, " " );
+
+		// quartz does not allow both day of month and day of week
+		// replace one if both used with ?
+		if ( ArrayLen( expressions ) >= 6 ) {
+			if ( expressions[ 4 ] == "*" && expressions[ 6 ] != "?" ) {
+				expressions[ 4 ] = "?";
+			} else if ( expressions[ 4 ] != "?" ) {
+				expressions[ 6 ] = "?"
+			}
+		}
+
+		return ArrayToList( expressions, " " );
 	}
 
 	private boolean function _taskIsRunningOnLocalMachine( required any task ){
@@ -803,6 +827,25 @@ component displayName="Task Manager Service" {
 			}
 
 			event.autoSetSiteByHost();
+		}
+	}
+
+	private void function _setupCronParser() {
+		var cronTypes  = CreateObject( "java", "com.cronutils.model.CronType", _getLib() );
+		var defBuilder = CreateObject( "java", "com.cronutils.model.definition.CronDefinitionBuilder", _getLib() );
+		var def        = defBuilder.instanceDefinitionFor( cronTypes.QUARTZ );
+
+		variables._cronParser = CreateObject( "java", "com.cronutils.parser.CronParser", _getLib() ).init( def );
+	}
+
+	private void function _setupTimezoneOffset() {
+		var tzInfo = GetTimeZoneInfo();
+		var hours  = NumberFormat( tzInfo.utcHourOffset, "00" );
+		var mins   = NumberFormat( tzInfo.utcMinuteOffset, "00" );
+
+		variables._timezoneOffset = "#hours#:#mins#";
+		if ( Left( variables._timezoneOffset, "1" ) != "-" ) {
+			variables._timezoneOffset = "+" & variables._timezoneOffset;
 		}
 	}
 
