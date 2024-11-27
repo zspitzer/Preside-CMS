@@ -3439,9 +3439,6 @@ component displayName="Preside Object Service" {
 		tableJoins.append( arguments.extraJoins, true );
 
 		for( var savedFilter in arguments.savedFilterList ){
-
-			arguments.preparedFilter.params = arguments.preparedFilter.params ?: [];
-
 			if ( IsArray( savedFilter.extraJoins ?: "" ) ) {
 				tableJoins.append( savedFilter.extraJoins, true );
 			}
@@ -3843,7 +3840,6 @@ component displayName="Preside Object Service" {
 
 	private array function _expandSavedFilters( required array savedFilterList ) {
 		var expanded      = [];
-		/*var filterService = _getFilterService();*/
 
 		for( var savedFilter in arguments.savedFilterList ){
 			expanded.append({
