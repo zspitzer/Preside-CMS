@@ -3,7 +3,6 @@ component extends="coldbox.system.Interceptor" {
 	property name="cache"                         inject="cachebox:PresidePageCache";
 	property name="delayedViewletRendererService" inject="delayedInjector:delayedViewletRendererService";
 	property name="delayedStickerRendererService" inject="delayedInjector:delayedStickerRendererService";
-	property name="loginService"                  inject="delayedInjector:websiteLoginService";
 	property name="websiteUserActionService"      inject="delayedInjector:websiteUserActionService";
 
 // PUBLIC
@@ -87,7 +86,7 @@ component extends="coldbox.system.Interceptor" {
 
 // PRIVATE HELPERS
 	private string function _getCacheKey( event ) {
-		var isLoggedIn = loginService.get().isLoggedIn();
+		var isLoggedIn = isLoggedIn();
 		var fullUrl    = event.getBaseUrl() & event.getCurrentUrl();
 		var isAjax     = event.isAjax();
 
