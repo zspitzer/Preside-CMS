@@ -228,6 +228,14 @@ component displayName="Preside Object Service" {
 			}
 		}
 
+		args.savedFilterList = [];
+
+		var filterService = _getFilterService();
+
+		for( var savedFilter in arguments.savedFilters ){
+			ArrayAppend( args.savedFilterList, filterService.getFilter( savedFilter ) );
+		}
+
 		args.extraFilters.append( _expandSavedFilters( argumentCollection=args ), true );
 
 		if ( args.useCache ) {
@@ -3384,10 +3392,10 @@ component displayName="Preside Object Service" {
 
 	private array function _convertObjectJoinsToTableJoins(
 		  required array  joins
-		,          array  extraJoins   = []
-		,          array  extraFilters = []
-		,          array  savedFilters = []
-		,          struct preparedFilter = {}
+		,          array  extraJoins      = []
+		,          array  extraFilters    = []
+		,          array  savedFilterList = []
+		,          struct preparedFilter  = {}
 	) {
 		var tableJoins = [];
 		var objJoin    = "";
@@ -3430,9 +3438,7 @@ component displayName="Preside Object Service" {
 
 		tableJoins.append( arguments.extraJoins, true );
 
-		for( var savedFilter in arguments.savedFilters ){
-			savedFilter = _getFilterService().getFilter( savedFilter );
-
+		for( var savedFilter in arguments.savedFilterList ){
 			if ( IsArray( savedFilter.extraJoins ?: "" ) ) {
 				tableJoins.append( savedFilter.extraJoins, true );
 			}
@@ -3832,13 +3838,10 @@ component displayName="Preside Object Service" {
 		return _relationshipPathCalcCache[ cacheKey ];
 	}
 
-	private array function _expandSavedFilters( required array savedFilters ) {
+	private array function _expandSavedFilters( required array savedFilterList ) {
 		var expanded      = [];
-		var filterService = _getFilterService();
 
-		for( var savedFilter in arguments.savedFilters ){
-			savedFilter = filterService.getFilter( savedFilter );
-
+		for( var savedFilter in arguments.savedFilterList ){
 			expanded.append({
 				  filter       = savedFilter.filter       ?: {}
 				, filterParams = savedFilter.filterParams ?: {}
