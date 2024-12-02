@@ -312,7 +312,7 @@ component extends="testbox.system.BaseSpec" {
 
 				var nextRun = tm.getNextRunDate( taskKey, lastRun );
 
-				expect( nextRun ).toBe( "2014-10-24 09:05:00" );
+				expect( nextRun ).toBe( "2014-10-24T09:05Z" );
 			} );
 
 			it( "shoud use the current date when no last run date passed", function(){
@@ -342,7 +342,7 @@ component extends="testbox.system.BaseSpec" {
 
 				var nextRun = tm.getNextRunDate( taskKey, lastRun );
 
-				expect( nextRun ).toBe( "2014-10-24 09:10:00" );
+				expect( nextRun ).toBe( "2014-10-24T09:10Z" );
 			} );
 
 			it( "should return an empty string when task is not a scheduled task", function(){
@@ -630,6 +630,7 @@ component extends="testbox.system.BaseSpec" {
 		mockSiteService      = mockbox.createStub();
 		mockThreadUtil       = mockbox.createStub();
 		mockExecutor         = mockbox.createStub();
+		cronUtil             = new preside.system.services.taskmanager.CronUtil();
 		mockLogger           = _getMockLogger();
 
 		configWrapper.$( "getConfiguredTasks", arguments.dummyConfig );
@@ -651,8 +652,6 @@ component extends="testbox.system.BaseSpec" {
 		mockRc.$( "setUseQueryCache" );
 		mockRc.$( "isBackgroundThread", false );
 
-
-
 		return tm.init(
 			  configWrapper                = configWrapper
 			, controller                   = mockColdbox
@@ -664,6 +663,7 @@ component extends="testbox.system.BaseSpec" {
 			, siteService                  = mockSiteService
 			, threadUtil                   = mockThreadUtil
 			, executor                     = mockExecutor
+			, cronUtil                     = cronUtil
 		);
 	}
 
