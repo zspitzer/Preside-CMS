@@ -188,7 +188,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_sent           = ""
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate").$args( template=template, id=templateId , isDraft=true ).$results( templateId );
 				service.$( "_getNow", nowish );
 
@@ -215,7 +215,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = ""
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -245,7 +245,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = ""
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -272,7 +272,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = DateAdd( "ww", -1, nowish )
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -299,7 +299,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = nowish
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -325,7 +325,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = DateAdd( "ww", 4, nowish )
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -353,7 +353,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = nextSendDate
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -379,7 +379,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = DateAdd( "ww", 4, nowish )
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -406,7 +406,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = ""
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -433,7 +433,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = ""
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -461,7 +461,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = ""
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -496,7 +496,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = ""
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -526,7 +526,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_next_send_date = ""
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
@@ -553,7 +553,7 @@ component extends="resources.HelperObjects.PresideBddTestCase" {
 					, schedule_sent           = true
 				};
 
-				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false ).$results( template );
+				service.$( "getTemplate" ).$args( id=templateId, allowDrafts=true, fromVersionTable=false, useRequestCache=false ).$results( template );
 				service.$( "saveTemplate", templateId );
 				service.$( "_getNow", nowish );
 
