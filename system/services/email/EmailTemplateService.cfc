@@ -692,7 +692,13 @@ component {
 	 * @markAsSent.hint Whether or not to mark a 'fixedschedule' template as sent
 	 */
 	public string function updateScheduledSendFields( required string templateId, boolean markAsSent=false ) {
-		var template    = getTemplate( id=arguments.templateId, allowDrafts=true, fromVersionTable=false );
+		var template    = getTemplate(
+			  id               = arguments.templateId
+			, allowDrafts      = true
+			, fromVersionTable = false
+			, useRequestCache  = false
+		);
+
 		var updatedData = { schedule_next_send_date = "" };
 
 		if ( template.sending_method == "scheduled" ) {
